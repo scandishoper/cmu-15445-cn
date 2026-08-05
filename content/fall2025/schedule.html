@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="https://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+        <meta name="author" content="Andy Pavlo" />
+        <meta name="description" content="Course schedule with slides, lecture notes, and videos." />
+    
+    <meta name="keywords" content="" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link href="https://15445.courses.cs.cmu.edu/fall2025/css/style.css" rel="stylesheet" />
+<!--     <link href="https://15445.courses.cs.cmu.edu/fall2025/css/pygment.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <meta property="og:site_name" content="CMU 15-445/645" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Schedule - CMU 15-445/645 :: Intro to Database Systems (Fall 2025)"/>
+    <meta property="og:url" content="https://15445.courses.cs.cmu.edu/fall2025/schedule.html"/>
+    <meta property="article:published_time" content="2025-12-04" />
+    <meta property="og:description" content="Course schedule with slides, lecture notes, and videos." />
+        <meta property="og:image"
+              content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@CMUDB">
+        <meta name="twitter:creator" content="@CMUDB">
+    <meta name="twitter:domain" content="https://15445.courses.cs.cmu.edu/fall2025">
+            <meta property="twitter:image"
+                  content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+    <meta property="twitter:label1" content="Semester" />
+    <meta property="twitter:data1" content="Fall 2025" />
+        
+    
+<!--     <link href="https://db.cs.cmu.edu/favicon.png" rel="icon"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/apple-touch-icon.gif">
+    <link rel="icon" type="image/gif" sizes="32x32" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-32x32.gif">
+    <link rel="icon" type="image/gif" sizes="16x16" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-16x16.gif">
+    <link rel="manifest" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#c41230">
+    <meta name="theme-color" content="#010000">
+
+
+    <title>Schedule | CMU 15-445/645 :: Intro to Database Systems (Fall 2025) </title>
+</head>
+
+<body class="min-vh-100 d-flex flex-column h-100">
+    <!-- BEGIN: header -->
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg bg-black navbar-dark" aria-label="Navigation Menu">
+    <div class="container">
+      <a class="navbar-brand" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025" title="CMU 15-445/645"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmudb-icon-white.svg" width="24"> CMU 15-445/645</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav me-auto mb-0 text-uppercase">
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/assignments.html">Assignments</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/faq.html">FAQ</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link active" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/schedule.html">Schedule</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/syllabus.html">Syllabus</a>
+              </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-0 text-uppercase">
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Youtube" onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5" target="_yt"><i class="fab fa-youtube"></i> Youtube</a>
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Piazza" onclick="javascript:ga('send', 'pageview', '/outgoing/piazza.com');" href="https://piazza.com/cmu/fall2025/15445645" target="_pz"><i class="fas fa-comments"></i> Piazza</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>    <!-- END: header -->
+
+    <main class="flex-shrink-0 page">
+        <!-- BEGIN: banner -->
+<!-- Empty space -->
+<!--<div class="container mt-5">
+    <div class="row">
+    </div>
+</div>-->
+        <!-- END: banner -->
+
+
+<!-- BEGIN: LINK TO NEW COURSE -->
+<style>
+div#new-class-alert {
+/*     position: fixed; */
+    z-index: 9999;
+}
+div#new-class-alert div {
+    margin: auto;
+    font-size: 130%;
+    text-align: center;
+    background-color: var(--link-color) !important;
+}
+div#new-class-alert a {
+  color: white !important;
+}
+</style>
+<div id="new-class-alert"  class="row mt-5 mb-0 mx-auto">
+<div class="p-2 py-3 col-12 col-md-10 col-lg-8 alert alert-danger text-center text-white border-0">
+<i class="fa fa-exclamation-triangle fa-1x"></i>
+<a href="/" title="View latest version of 15-445/645">
+<b>NOTICE:</b> This is an archived version of the course. Click here to view the latest offering.
+</a>
+</div>
+</div>
+<!-- END: LINK TO NEW COURSE -->
+
+        <!-- BEGIN: main -->
+        <div class="container main-content rounded-5 mb-0 mb-lg-5 mt-0 mt-sm-3 mt-md-4 mt-lg-5 py-3 py-md-5 px-md-5 shadow-sm bg-light content">
+<h1 class="page-header mb-3 mb-md-4"><i class="fas fa-calendar-alt"></i> <span class="text-uppercase">Schedule</span>
+    <span class="fw-normal fs-6 float-end mt-2 text-muted published d-none d-lg-inline" style="font-family: sans; letter-spacing: normal; text-shadow: none;">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-12-04 06:47:08.213021-05:00">Last Updated: Dec 04, 2025</time>
+    </span>
+</h1>
+<div class="row pb-3 d-block d-lg-none">
+    <div class="col-12 text-start text-muted published">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-12-04 06:47:08.213021-05:00">Last Updated: Dec 04, 2025</time>
+    </div>
+</div>
+<div class="table-responsive">
+<!-- START SCHEDULE -->
+<!-- AUTO-GENERATED BY GENERATE-SCHEDULE SCRIPT -->
+<!-- ANY MODIFICATIONS WILL BE OVERWRITTEN -->
+
+<table class="table table-striped calendar bg-light" style="max-width:99%;">
+<thead>
+    <tr>
+        <th >Date</th>
+        <th >Topic</th>
+        <th class="d-none d-lg-table-cell">Slides</th>
+        <th class="d-none d-lg-table-cell">Notes</th>
+        <th class="d-none d-lg-table-cell">Video</th>
+    </tr>
+</thead>
+<tbody class="table-group-divider">
+    <tr class="" id="aug-25-2025">
+        <td class="calendar-date" title="Mon Aug 25 2025">Aug 25 <a class="anchor d-none d-lg-inline" href="#aug-25-2025" aria-hidden="true" title="Anchor Link: Aug 25"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#01: Relational Model &amp; Algebra</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/01-relationalmodel.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/01-relationalmodel.pdf" title="SLIDES (Lecture #01)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/01-relationalmodel.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/01-relationalmodel.pdf" title="NOTES (Lecture #01)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=7NPIENPr-zk&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=1" target="_video1" title="VIDEO (Lecture #01)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapters 1-2</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fa fa-bullhorn"></i> Project:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a href="project0/">C++ Primer</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/01-relationalmodel.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/01-relationalmodel.pdf" title="SLIDES (Lecture #01)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/01-relationalmodel.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/01-relationalmodel.pdf" title="NOTES (Lecture #01)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=7NPIENPr-zk&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=1" target="_video1" title="VIDEO (Lecture #01)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="aug-27-2025">
+        <td class="calendar-date" title="Wed Aug 27 2025">Aug 27 <a class="anchor d-none d-lg-inline" href="#aug-27-2025" aria-hidden="true" title="Anchor Link: Aug 27"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#02: Modern SQL</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/02-modernsql.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/02-modernsql.pdf" title="SLIDES (Lecture #02)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/02-modernsql.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/02-modernsql.pdf" title="NOTES (Lecture #02)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=O5gU9NQjCAs&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=2" target="_video2" title="VIDEO (Lecture #02)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-database"></i> Flash Talk:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.linkedin.com');" href="https://www.linkedin.com/in/drewbanin">Drew Banin</a> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/www.getdbt.com');" href="https://www.getdbt.com/">dbt Labs</a>)</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapters 3-5</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-file-signature"></i> Homework:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a href="homework1/">SQL</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/02-modernsql.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/02-modernsql.pdf" title="SLIDES (Lecture #02)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/02-modernsql.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/02-modernsql.pdf" title="NOTES (Lecture #02)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=O5gU9NQjCAs&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=2" target="_video2" title="VIDEO (Lecture #02)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="bg-info" id="sep-01-2025">
+        <td class="calendar-date" title="Mon Sep 01 2025">Sep 01 <a class="anchor d-none d-lg-inline" href="#sep-01-2025" aria-hidden="true" title="Anchor Link: Sep 01"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><em class="text-muted"><span class="lecture-title">Labor Day &mdash; No Class</span></em></td>
+        <td class="d-none d-lg-table-cell calendar-slides"></td>
+        <td class="d-none d-lg-table-cell calendar-notes"></td>
+        <td class="d-none d-lg-table-cell calendar-video"></td>
+    </tr>
+    <tr class="" id="sep-03-2025">
+        <td class="calendar-date" title="Wed Sep 03 2025">Sep 03 <a class="anchor d-none d-lg-inline" href="#sep-03-2025" aria-hidden="true" title="Anchor Link: Sep 03"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#03: Database Storage I</span> <span class="special d-block d-xl-inline">(⚠ No In-Class Lecture)</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/03-storage1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/03-storage1.pdf" title="SLIDES (Lecture #03)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/03-storage1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/03-storage1.pdf" title="NOTES (Lecture #03)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=PRLXdIMJhOg&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=3" target="_video3" title="VIDEO (Lecture #03)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 12.1-12.4, 13.2-13.3</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/03-storage1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/03-storage1.pdf" title="SLIDES (Lecture #03)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/03-storage1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/03-storage1.pdf" title="NOTES (Lecture #03)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=PRLXdIMJhOg&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=3" target="_video3" title="VIDEO (Lecture #03)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="sep-08-2025">
+        <td class="calendar-date" title="Mon Sep 08 2025">Sep 08 <a class="anchor d-none d-lg-inline" href="#sep-08-2025" aria-hidden="true" title="Anchor Link: Sep 08"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#04: Memory Management</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/04-bufferpool.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/04-bufferpool.pdf" title="SLIDES (Lecture #04)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/04-bufferpool.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/04-bufferpool.pdf" title="NOTES (Lecture #04)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=8-2yv4z0VZc&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=4" target="_video4" title="VIDEO (Lecture #04)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 13.2-13.5</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fa fa-bullhorn"></i> Project:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a href="project1/">Buffer Pool Manager</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/04-bufferpool.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/04-bufferpool.pdf" title="SLIDES (Lecture #04)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/04-bufferpool.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/04-bufferpool.pdf" title="NOTES (Lecture #04)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=8-2yv4z0VZc&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=4" target="_video4" title="VIDEO (Lecture #04)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="sep-10-2025">
+        <td class="calendar-date" title="Wed Sep 10 2025">Sep 10 <a class="anchor d-none d-lg-inline" href="#sep-10-2025" aria-hidden="true" title="Anchor Link: Sep 10"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#05: Database Storage II</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/05-storage2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/05-storage2.pdf" title="SLIDES (Lecture #05)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/05-storage2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/05-storage2.pdf" title="NOTES (Lecture #05)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=2_sTdS4h-bY&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=5" target="_video5" title="VIDEO (Lecture #05)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-database"></i> Flash Talk:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.linkedin.com');" href="https://www.linkedin.com/in/joseph-victor-72a44174/">Joseph Victor</a> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/www.singlestore.com');" href="https://www.singlestore.com/">SingleStore</a>)</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 14.8.1, 24.2</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-file-signature"></i> Homework:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/files/hw2-clean.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/files/hw2-clean.pdf">Storage</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/05-storage2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/05-storage2.pdf" title="SLIDES (Lecture #05)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/05-storage2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/05-storage2.pdf" title="NOTES (Lecture #05)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=2_sTdS4h-bY&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=5" target="_video5" title="VIDEO (Lecture #05)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="sep-15-2025">
+        <td class="calendar-date" title="Mon Sep 15 2025">Sep 15 <a class="anchor d-none d-lg-inline" href="#sep-15-2025" aria-hidden="true" title="Anchor Link: Sep 15"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#06: Storage Models &amp; Compression</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/06-storage3.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/06-storage3.pdf" title="SLIDES (Lecture #06)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/06-storage3.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/06-storage3.pdf" title="NOTES (Lecture #06)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=yWnToWrskXE&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=6" target="_video6" title="VIDEO (Lecture #06)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 11.2, 13.6</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/06-storage3.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/06-storage3.pdf" title="SLIDES (Lecture #06)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/06-storage3.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/06-storage3.pdf" title="NOTES (Lecture #06)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=yWnToWrskXE&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=6" target="_video6" title="VIDEO (Lecture #06)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="sep-17-2025">
+        <td class="calendar-date" title="Wed Sep 17 2025">Sep 17 <a class="anchor d-none d-lg-inline" href="#sep-17-2025" aria-hidden="true" title="Anchor Link: Sep 17"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#07: Hash Tables</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/07-hashtables.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/07-hashtables.pdf" title="SLIDES (Lecture #07)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/07-hashtables.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/07-hashtables.pdf" title="NOTES (Lecture #07)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=nuNW8IfgPNU&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=7" target="_video7" title="VIDEO (Lecture #07)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-database"></i> Flash Talk:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.linkedin.com');" href="https://www.linkedin.com/in/kranganathan/">Karthik Ranganathan</a> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/www.yugabyte.com');" href="https://www.yugabyte.com/">YugabyteDB</a>)</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 14.5, 24.5</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/07-hashtables.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/07-hashtables.pdf" title="SLIDES (Lecture #07)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/07-hashtables.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/07-hashtables.pdf" title="NOTES (Lecture #07)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=nuNW8IfgPNU&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=7" target="_video7" title="VIDEO (Lecture #07)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="sep-22-2025">
+        <td class="calendar-date" title="Mon Sep 22 2025">Sep 22 <a class="anchor d-none d-lg-inline" href="#sep-22-2025" aria-hidden="true" title="Anchor Link: Sep 22"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#08: Indexes &amp; Filters I</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/08-indexes1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/08-indexes1.pdf" title="SLIDES (Lecture #08)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/08-indexes1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/08-indexes1.pdf" title="NOTES (Lecture #08)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=u7ii_Lvm9rM&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=8" target="_video8" title="VIDEO (Lecture #08)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 14.1-14.4</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/08-indexes1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/08-indexes1.pdf" title="SLIDES (Lecture #08)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/08-indexes1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/08-indexes1.pdf" title="NOTES (Lecture #08)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=u7ii_Lvm9rM&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=8" target="_video8" title="VIDEO (Lecture #08)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="sep-24-2025">
+        <td class="calendar-date" title="Wed Sep 24 2025">Sep 24 <a class="anchor d-none d-lg-inline" href="#sep-24-2025" aria-hidden="true" title="Anchor Link: Sep 24"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#09: Indexes &amp; Filters II</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/09-indexes2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/09-indexes2.pdf" title="SLIDES (Lecture #09)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/09-indexes2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/09-indexes2.pdf" title="NOTES (Lecture #09)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=PjST2n7abAY&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=9" target="_video9" title="VIDEO (Lecture #09)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 14.1-14.4, 24.1</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-file-signature"></i> Homework:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/files/hw3-clean.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/files/hw3-clean.pdf">Indexes &amp; Filters</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/09-indexes2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/09-indexes2.pdf" title="SLIDES (Lecture #09)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/09-indexes2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/09-indexes2.pdf" title="NOTES (Lecture #09)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=PjST2n7abAY&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=9" target="_video9" title="VIDEO (Lecture #09)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="sep-29-2025">
+        <td class="calendar-date" title="Mon Sep 29 2025">Sep 29 <a class="anchor d-none d-lg-inline" href="#sep-29-2025" aria-hidden="true" title="Anchor Link: Sep 29"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#10: Index Concurrency Control</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/10-indexconcurrency.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/10-indexconcurrency.pdf" title="SLIDES (Lecture #10)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/10-indexconcurrency.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/10-indexconcurrency.pdf" title="NOTES (Lecture #10)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=YgOvfXl6pss&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=10" target="_video10" title="VIDEO (Lecture #10)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 18.10.2</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fa fa-bullhorn"></i> Project:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a href="project2/">Database Index</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/10-indexconcurrency.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/10-indexconcurrency.pdf" title="SLIDES (Lecture #10)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/10-indexconcurrency.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/10-indexconcurrency.pdf" title="NOTES (Lecture #10)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=YgOvfXl6pss&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=10" target="_video10" title="VIDEO (Lecture #10)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="oct-01-2025">
+        <td class="calendar-date" title="Wed Oct 01 2025">Oct 01 <a class="anchor d-none d-lg-inline" href="#oct-01-2025" aria-hidden="true" title="Anchor Link: Oct 01"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#11: Sorting &amp; Aggregations Algorithms</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/11-sorting.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/11-sorting.pdf" title="SLIDES (Lecture #11)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/11-sorting.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/11-sorting.pdf" title="NOTES (Lecture #11)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=LzyKTpeIgts&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=11" target="_video11" title="VIDEO (Lecture #11)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-database"></i> Flash Talk:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.linkedin.com');" href="https://www.linkedin.com/in/boazleskes/">Boaz Leskes</a> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/motherduck.com');" href="https://motherduck.com/">MotherDuck</a>)</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 15.4-15.5</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/11-sorting.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/11-sorting.pdf" title="SLIDES (Lecture #11)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/11-sorting.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/11-sorting.pdf" title="NOTES (Lecture #11)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=LzyKTpeIgts&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=11" target="_video11" title="VIDEO (Lecture #11)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="oct-06-2025">
+        <td class="calendar-date" title="Mon Oct 06 2025">Oct 06 <a class="anchor d-none d-lg-inline" href="#oct-06-2025" aria-hidden="true" title="Anchor Link: Oct 06"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#12: Joins Algorithms</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/12-joins.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/12-joins.pdf" title="SLIDES (Lecture #12)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/12-joins.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/12-joins.pdf" title="NOTES (Lecture #12)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=YIdIaPopfpk&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=12" target="_video12" title="VIDEO (Lecture #12)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 15.4-15.6</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/12-joins.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/12-joins.pdf" title="SLIDES (Lecture #12)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/12-joins.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/12-joins.pdf" title="NOTES (Lecture #12)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=YIdIaPopfpk&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=12" target="_video12" title="VIDEO (Lecture #12)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="bg-danger" id="oct-08-2025">
+        <td class="calendar-date" title="Wed Oct 08 2025"><span class="text-white">Oct 08 <a class="anchor d-none d-lg-inline" href="#oct-08-2025" aria-hidden="true" title="Anchor Link: Oct 08"><i class="fas fa-link anchor-icon text-muted"></i></a></span></td>
+        <td class="calendar-activity"><span class="text-white"><span class="lecture-title">Mid-Term Exam</span></span><span class="text-white"></span></td>
+        <td class="d-none d-lg-table-cell calendar-slides"></td>
+        <td class="d-none d-lg-table-cell calendar-notes"></td>
+        <td class="d-none d-lg-table-cell calendar-video"></td>
+    </tr>
+    <tr class="bg-info" id="oct-13-2025">
+        <td class="calendar-date" title="Mon Oct 13 2025">Oct 13 <a class="anchor d-none d-lg-inline" href="#oct-13-2025" aria-hidden="true" title="Anchor Link: Oct 13"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><em class="text-muted"><span class="lecture-title">Fall Break  &mdash; No Class</span></em></td>
+        <td class="d-none d-lg-table-cell calendar-slides"></td>
+        <td class="d-none d-lg-table-cell calendar-notes"></td>
+        <td class="d-none d-lg-table-cell calendar-video"></td>
+    </tr>
+    <tr class="bg-info" id="oct-15-2025">
+        <td class="calendar-date" title="Wed Oct 15 2025">Oct 15 <a class="anchor d-none d-lg-inline" href="#oct-15-2025" aria-hidden="true" title="Anchor Link: Oct 15"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><em class="text-muted"><span class="lecture-title">Fall Break  &mdash; No Class</span></em></td>
+        <td class="d-none d-lg-table-cell calendar-slides"></td>
+        <td class="d-none d-lg-table-cell calendar-notes"></td>
+        <td class="d-none d-lg-table-cell calendar-video"></td>
+    </tr>
+    <tr class="" id="oct-20-2025">
+        <td class="calendar-date" title="Mon Oct 20 2025">Oct 20 <a class="anchor d-none d-lg-inline" href="#oct-20-2025" aria-hidden="true" title="Anchor Link: Oct 20"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#13: Query Execution I</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/13-queryexecution1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/13-queryexecution1.pdf" title="SLIDES (Lecture #13)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/13-queryexecution1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/13-queryexecution1.pdf" title="NOTES (Lecture #13)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=E-UUd6cB57w&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=13" target="_video13" title="VIDEO (Lecture #13)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 15.1-15.3, 15.7</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fa fa-bullhorn"></i> Project:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a href="project3/">Query Execution</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/13-queryexecution1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/13-queryexecution1.pdf" title="SLIDES (Lecture #13)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/13-queryexecution1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/13-queryexecution1.pdf" title="NOTES (Lecture #13)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=E-UUd6cB57w&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=13" target="_video13" title="VIDEO (Lecture #13)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="oct-22-2025">
+        <td class="calendar-date" title="Wed Oct 22 2025">Oct 22 <a class="anchor d-none d-lg-inline" href="#oct-22-2025" aria-hidden="true" title="Anchor Link: Oct 22"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#14: Query Execution II</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/14-queryexecution2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/14-queryexecution2.pdf" title="SLIDES (Lecture #14)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/14-queryexecution2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/14-queryexecution2.pdf" title="NOTES (Lecture #14)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=Kzf1hGjtZOU&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=14" target="_video14" title="VIDEO (Lecture #14)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-database"></i> Flash Talk:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.linkedin.com');" href="https://www.linkedin.com/in/will-manning-maker-of-things/">Will Manning</a> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/spiraldb.com');" href="https://spiraldb.com/">SpiralDB</a>)</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 22</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-file-signature"></i> Homework:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/files/hw4-clean.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/files/hw4-clean.pdf">Execution &amp; Planning</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/14-queryexecution2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/14-queryexecution2.pdf" title="SLIDES (Lecture #14)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/14-queryexecution2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/14-queryexecution2.pdf" title="NOTES (Lecture #14)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=Kzf1hGjtZOU&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=14" target="_video14" title="VIDEO (Lecture #14)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="oct-27-2025">
+        <td class="calendar-date" title="Mon Oct 27 2025">Oct 27 <a class="anchor d-none d-lg-inline" href="#oct-27-2025" aria-hidden="true" title="Anchor Link: Oct 27"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#15: Query Planning &amp; Optimization I</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/15-optimization1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/15-optimization1.pdf" title="SLIDES (Lecture #15)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/15-optimization1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/15-optimization1.pdf" title="NOTES (Lecture #15)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=b53huOGcsZ8&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=15" target="_video15" title="VIDEO (Lecture #15)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 16</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/15-optimization1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/15-optimization1.pdf" title="SLIDES (Lecture #15)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/15-optimization1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/15-optimization1.pdf" title="NOTES (Lecture #15)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=b53huOGcsZ8&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=15" target="_video15" title="VIDEO (Lecture #15)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="oct-29-2025">
+        <td class="calendar-date" title="Wed Oct 29 2025">Oct 29 <a class="anchor d-none d-lg-inline" href="#oct-29-2025" aria-hidden="true" title="Anchor Link: Oct 29"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#16: Query Planning &amp; Optimization II</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/16-optimization2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/16-optimization2.pdf" title="SLIDES (Lecture #16)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/16-optimization2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/16-optimization2.pdf" title="NOTES (Lecture #16)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=azTHRpzl10o&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=16" target="_video16" title="VIDEO (Lecture #16)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 16</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/16-optimization2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/16-optimization2.pdf" title="SLIDES (Lecture #16)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/16-optimization2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/16-optimization2.pdf" title="NOTES (Lecture #16)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=azTHRpzl10o&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=16" target="_video16" title="VIDEO (Lecture #16)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="nov-03-2025">
+        <td class="calendar-date" title="Mon Nov 03 2025">Nov 03 <a class="anchor d-none d-lg-inline" href="#nov-03-2025" aria-hidden="true" title="Anchor Link: Nov 03"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#17: Concurrency Control Theory</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/17-concurrencycontrol.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/17-concurrencycontrol.pdf" title="SLIDES (Lecture #17)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/17-concurrencycontrol.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/17-concurrencycontrol.pdf" title="NOTES (Lecture #17)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=tMFAgvDViAI&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=17" target="_video17" title="VIDEO (Lecture #17)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 18</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/17-concurrencycontrol.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/17-concurrencycontrol.pdf" title="SLIDES (Lecture #17)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/17-concurrencycontrol.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/17-concurrencycontrol.pdf" title="NOTES (Lecture #17)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=tMFAgvDViAI&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=17" target="_video17" title="VIDEO (Lecture #17)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="nov-05-2025">
+        <td class="calendar-date" title="Wed Nov 05 2025">Nov 05 <a class="anchor d-none d-lg-inline" href="#nov-05-2025" aria-hidden="true" title="Anchor Link: Nov 05"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#18: Two-Phase Locking Concurrency Control</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/18-twophaselocking.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/18-twophaselocking.pdf" title="SLIDES (Lecture #18)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/18-twophaselocking.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/18-twophaselocking.pdf" title="NOTES (Lecture #18)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=drStlhNbfHI&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=18" target="_video18" title="VIDEO (Lecture #18)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-database"></i> Flash Talk:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.linkedin.com');" href="https://www.linkedin.com/in/wagjamin">Benjamin Wagner 🇩🇪</a> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/www.firebolt.io');" href="https://www.firebolt.io/">Firebolt</a>)</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 18.1-18.3, 18.9</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-file-signature"></i> Homework:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/files/hw5-clean.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/files/hw5-clean.pdf">Transactions!</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/18-twophaselocking.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/18-twophaselocking.pdf" title="SLIDES (Lecture #18)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/18-twophaselocking.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/18-twophaselocking.pdf" title="NOTES (Lecture #18)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=drStlhNbfHI&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=18" target="_video18" title="VIDEO (Lecture #18)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="nov-10-2025">
+        <td class="calendar-date" title="Mon Nov 10 2025">Nov 10 <a class="anchor d-none d-lg-inline" href="#nov-10-2025" aria-hidden="true" title="Anchor Link: Nov 10"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#19: Timestamp Ordering Concurrency Control</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/19-timestampordering.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/19-timestampordering.pdf" title="SLIDES (Lecture #19)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/19-timestampordering.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/19-timestampordering.pdf" title="NOTES (Lecture #19)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=risHwKeWbBM&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=19" target="_video19" title="VIDEO (Lecture #19)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 18.5-18.6</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fa fa-bullhorn"></i> Project:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a href="project4/">Concurrency Control</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/19-timestampordering.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/19-timestampordering.pdf" title="SLIDES (Lecture #19)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/19-timestampordering.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/19-timestampordering.pdf" title="NOTES (Lecture #19)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=risHwKeWbBM&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=19" target="_video19" title="VIDEO (Lecture #19)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="nov-12-2025">
+        <td class="calendar-date" title="Wed Nov 12 2025">Nov 12 <a class="anchor d-none d-lg-inline" href="#nov-12-2025" aria-hidden="true" title="Anchor Link: Nov 12"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#20: Multi-Version Concurrency Control</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/20-multiversioning.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/20-multiversioning.pdf" title="SLIDES (Lecture #20)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/20-multiversioning.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/20-multiversioning.pdf" title="NOTES (Lecture #20)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=tUFha9-DuSk&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=20" target="_video20" title="VIDEO (Lecture #20)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 18.7-18.8</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/20-multiversioning.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/20-multiversioning.pdf" title="SLIDES (Lecture #20)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/20-multiversioning.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/20-multiversioning.pdf" title="NOTES (Lecture #20)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=tUFha9-DuSk&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=20" target="_video20" title="VIDEO (Lecture #20)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="nov-17-2025">
+        <td class="calendar-date" title="Mon Nov 17 2025">Nov 17 <a class="anchor d-none d-lg-inline" href="#nov-17-2025" aria-hidden="true" title="Anchor Link: Nov 17"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#21: Database Logging</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/21-logging.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/21-logging.pdf" title="SLIDES (Lecture #21)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/21-logging.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/21-logging.pdf" title="NOTES (Lecture #21)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=CedEy54pe3g&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=21" target="_video21" title="VIDEO (Lecture #21)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 19.1-19.8</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/21-logging.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/21-logging.pdf" title="SLIDES (Lecture #21)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/21-logging.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/21-logging.pdf" title="NOTES (Lecture #21)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=CedEy54pe3g&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=21" target="_video21" title="VIDEO (Lecture #21)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="nov-19-2025">
+        <td class="calendar-date" title="Wed Nov 19 2025">Nov 19 <a class="anchor d-none d-lg-inline" href="#nov-19-2025" aria-hidden="true" title="Anchor Link: Nov 19"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#22: Database Recovery</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/22-recovery.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/22-recovery.pdf" title="SLIDES (Lecture #22)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/22-recovery.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/22-recovery.pdf" title="NOTES (Lecture #22)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=X2jc4qalNy0&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=22" target="_video22" title="VIDEO (Lecture #22)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-database"></i> Flash Talk:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.linkedin.com');" href="https://www.linkedin.com/in/robert-schulze-67951a1b8/">Robert Schulze 🇩🇪</a> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/clickhouse.com');" href="https://clickhouse.com/">ClickHouse</a>)</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 19.1-19.9</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/22-recovery.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/22-recovery.pdf" title="SLIDES (Lecture #22)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/22-recovery.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/22-recovery.pdf" title="NOTES (Lecture #22)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=X2jc4qalNy0&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=22" target="_video22" title="VIDEO (Lecture #22)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="nov-24-2025">
+        <td class="calendar-date" title="Mon Nov 24 2025">Nov 24 <a class="anchor d-none d-lg-inline" href="#nov-24-2025" aria-hidden="true" title="Anchor Link: Nov 24"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#23: Distributed Database Systems I</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/23-distributed1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/23-distributed1.pdf" title="SLIDES (Lecture #23)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/23-distributed1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/23-distributed1.pdf" title="NOTES (Lecture #23)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=IFLQBWY6dlE&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=23" target="_video23" title="VIDEO (Lecture #23)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 20.4-20.5, 21, 23.1-23.4</dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-file-signature"></i> Homework:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/files/hw6-clean.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/files/hw6-clean.pdf">Recovery</a></dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/23-distributed1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/23-distributed1.pdf" title="SLIDES (Lecture #23)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/23-distributed1.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/23-distributed1.pdf" title="NOTES (Lecture #23)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=IFLQBWY6dlE&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=23" target="_video23" title="VIDEO (Lecture #23)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="bg-info" id="nov-26-2025">
+        <td class="calendar-date" title="Wed Nov 26 2025">Nov 26 <a class="anchor d-none d-lg-inline" href="#nov-26-2025" aria-hidden="true" title="Anchor Link: Nov 26"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><em class="text-muted"><span class="lecture-title">Thanksgiving &mdash; No Class</span></em></td>
+        <td class="d-none d-lg-table-cell calendar-slides"></td>
+        <td class="d-none d-lg-table-cell calendar-notes"></td>
+        <td class="d-none d-lg-table-cell calendar-video"></td>
+    </tr>
+    <tr class="" id="dec-01-2025">
+        <td class="calendar-date" title="Mon Dec 01 2025">Dec 01 <a class="anchor d-none d-lg-inline" href="#dec-01-2025" aria-hidden="true" title="Anchor Link: Dec 01"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#24: Distributed Database Systems II</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/24-distributed2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/24-distributed2.pdf" title="SLIDES (Lecture #24)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-alt "></i> Notes:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/24-distributed2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/24-distributed2.pdf" title="NOTES (Lecture #24)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=pQh5fka3FC0&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=24" target="_video24" title="VIDEO (Lecture #24)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-book"></i> Readings:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0">Chapter 20.7, 22.9</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/24-distributed2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/24-distributed2.pdf" title="SLIDES (Lecture #24)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/notes/24-distributed2.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/notes/24-distributed2.pdf" title="NOTES (Lecture #24)" class="schedule-badge"><i class="fas fa-file-alt fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=pQh5fka3FC0&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=24" target="_video24" title="VIDEO (Lecture #24)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+    <tr class="" id="dec-03-2025">
+        <td class="calendar-date" title="Wed Dec 03 2025">Dec 03 <a class="anchor d-none d-lg-inline" href="#dec-03-2025" aria-hidden="true" title="Anchor Link: Dec 03"><i class="fas fa-link anchor-icon text-muted"></i></a></td>
+        <td class="calendar-activity"><span class="lecture-title">#25: Final Review + Systems Potpourri</span>
+            <dl class="row mb-0 ps-1">
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-pdf "></i> Slides:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/25-potpourri.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/25-potpourri.pdf" title="SLIDES (Lecture #25)" class="schedule-badge">Download <i class="fas fa-arrow-circle-down"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3 d-sm-block d-lg-none"><i class="fas fa-file-video "></i> Video:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0 d-sm-block d-lg-none"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=qiVUf9X6ItM&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=25" target="_video25" title="VIDEO (Lecture #25)" class="schedule-badge">Watch <i class="fas fa-external-link-alt"></i></a></a></dd>
+
+                <dt class="col-4 col-lg-4 col-xl-3"><i class="fas fa-database"></i> Flash Talk:</dt>
+                <dd class="col-8 col-lg-8 col-xl-9 mb-0"><a onclick="javascript:ga('send', 'pageview', '/outgoing/homepages.inf.ed.ac.uk');" href="https://homepages.inf.ed.ac.uk/libkin/">Leonid Libkin</a> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/relational.ai');" href="https://relational.ai/">RelationalAI</a>)</dd>
+            </td>
+        <td class="d-none d-lg-table-cell calendar-slides"><a onclick="javascript:ga('send', 'pageview', '/downloads/fall2025/slides/25-potpourri.pdf');" href="https://15445.courses.cs.cmu.edu/fall2025/slides/25-potpourri.pdf" title="SLIDES (Lecture #25)" class="schedule-badge"><i class="fas fa-file-pdf fa-lg"></i></a></td>
+        <td class="d-none d-lg-table-cell calendar-notes">&mdash;</td>
+        <td class="d-none d-lg-table-cell calendar-video"><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=qiVUf9X6ItM&list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5&index=25" target="_video25" title="VIDEO (Lecture #25)" class="schedule-badge"><i class="fas fa-file-video fa-lg"></i></a></td>
+    </tr>
+</tbody>
+</table>
+
+<!-- END SCHEDULE -->
+</div>
+        </div>
+        <!-- END: main -->
+    </main>
+
+<!-- Footer -->
+<footer class="footer mt-auto bg-black">
+  <div class="container">
+    <div class="row pt-3 pb-2">
+      <div class="col-4 my-auto">
+        <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu" title="Carnegie Mellon Database Group"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmu-db-group.svg" class="cmudb-logo" /></a>
+      </div>
+      <div class="col-8 float-end">
+
+            <div class="dropdown float-end justify-content-end">
+              <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-book"></i> Archives
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                    <li class=""> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2025/" class="dropdown-item" target="_archive1" title="View Previous Course Website">Spring 2025 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2024/" class="dropdown-item" target="_archive2" title="View Previous Course Website">Fall 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2024/" class="dropdown-item" target="_archive3" title="View Previous Course Website">Spring 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2023/" class="dropdown-item" target="_archive4" title="View Previous Course Website">Fall 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2023/" class="dropdown-item" target="_archive5" title="View Previous Course Website">Spring 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2022/" class="dropdown-item" target="_archive6" title="View Previous Course Website">Fall 2022 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2021/" class="dropdown-item" target="_archive7" title="View Previous Course Website">Fall 2021 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2020/" class="dropdown-item" target="_archive8" title="View Previous Course Website">Fall 2020 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2019/" class="dropdown-item" target="_archive9" title="View Previous Course Website">Fall 2019 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2018/" class="dropdown-item" target="_archive10" title="View Previous Course Website">Fall 2018 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2017/" class="dropdown-item" target="_archive11" title="View Previous Course Website">Fall 2017 <i class="fa fa-external-link"></i></a>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</footer>    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6CTRQK4NY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-T6CTRQK4NY');
+    </script>
+    <!-- End Google Analytics Code -->
+
+<!--     <script src="js/bootstrap.bundle.min.js"></script> -->
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

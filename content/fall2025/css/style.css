@@ -1,0 +1,424 @@
+@font-face {
+    font-family: 'Swede-Trauma';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Swede-Trauma'), url('../fonts/trauma____________sw____.woff') format('woff');
+}
+:root {
+  --main-color: #e30008;
+  --link-color: #e30008;
+  --shadow-color: #e30008;
+  --header-color: #dee2e6;
+  --header-font: 'Swede-Trauma';
+  --text-font: "Rubik", sans-serif;
+  --bs-body-font-size: 1.2rem;
+  --bs-code-color: var(--main-color);
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+  font-family: var(--text-font), sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  background: linear-gradient(0deg, #1a0303, #010101);
+  color: #0d0d0d;
+}
+main {
+    margin-top: 3rem;
+}
+main.page {
+/*     margin-top: 7rem; */
+}
+main.page img {
+  max-width: 100%;
+}
+pre, code {
+    background-color: #e9ecef !important;
+}
+/*pre > code {
+    color: #ae81ff;
+}*/
+
+.footer {
+  border-top: 1px solid var(--alchemy-border);
+  z-index: 20;
+}
+footer img {
+    max-width: 10rem;
+    clear: both;
+}
+.content h1 {
+    font-weight: 800;
+    border-bottom: 5px solid var(--header-color);
+}
+.content h2 {
+    font-weight: 600;
+    border-bottom: 3px dotted var(--header-color);
+}
+h1.page-header {
+  font-family: var(--header-font), serif;
+  font-weight: 500;
+/*   color: var(--link-color); */
+  text-shadow: 0.1rem 0.1rem var(--shadow-color);
+}
+
+h1.page-header {
+    font-family: var(--header-font), serif;
+    font-weight: 900;
+/*     letter-spacing: 0.1em; */
+    font-size: 3.8rem;
+    border-bottom: 0px;
+}
+
+
+a {
+    color: var(--link-color);
+    padding: 1px 1px;            /* optional: space inside */
+    border-radius: 3px;          /* optional: rounded corners */
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+a:hover {
+    background-color: var(--link-color);   /* solid background */
+    color: white;                /* white text */
+    text-decoration: underline dotted; /* dotted underline */
+}
+a:has(> img):hover {
+    text-decoration: none !important;
+    background-color: inherit !important;
+}
+
+strong, b, dt {
+    font-weight: 500;
+}
+
+.bg-light {
+    background-color: #f3f4f5 !important;
+}
+
+
+a.filepath {
+    text-decoration: none;
+    font-size: 95%;
+}
+a.filepath tt {
+    border-bottom: 1px dotted;
+}
+
+.dropdown-menu li a:hover {
+    color: #8D0D24;
+}
+
+.dropdown-menu-right {
+   right: 0 !important;
+   left: auto !important;
+}
+
+
+/* Anchor Link Highlighting */
+tr:target, div:target {
+    background-color: #FFFFCC;
+    border: 3px solid var(--link-color);
+    scroll-margin-top: 5rem;
+}
+/* This adds vertical padding above the target to handle fixed header */
+/* tr:target::before, */
+/*div:target::before {
+    content: '';
+    display: block;
+    height: 50px;
+    margin: -50px 0 0 0;
+}*/
+
+
+/********************************************************************
+ * BEGIN: NAVBAR
+ ********************************************************************/
+.navbar-brand {
+    font-weight: 600;
+}
+a.navbar-brand:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: inherit !important;
+
+}
+.navbar-nav .nav-link {
+  font-weight: 500;
+}
+.navbar-nav .nav-link.active {
+  font-weight: 700;
+}
+
+/********************************************************************
+ * BEGIN: HOMEPAGE BANNER
+ ********************************************************************/
+.banner-title h1 {
+  font-size: 12rem;
+  line-height: 0.9em;
+  font-family: var(--header-font), serif;
+  font-weight: 500;
+  text-shadow: 0.25rem 0.25rem var(--shadow-color);
+}
+.banner {
+  min-height: 45rem;
+  border-color: black !important;
+  border-width: 0.8em !important;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0% 75%;
+  text-shadow: 3px 3px var(--shadow-color);
+}
+.banner-row {
+  perspective: 60rem;
+  perspective-origin: 21% -45%;
+}
+.banner-title {
+  transform:
+    scaleX(1)
+    scaleY(1)
+    scaleZ(1)
+    rotateX(0deg)
+    rotateY(-33deg)
+    rotateZ(0deg)
+    translateX(0px)
+    translateY(2.5rem)
+    translateZ(0px)
+    skewX(-5deg)
+    skewY(-10deg);
+}
+
+.bg-danger {
+    background-color: var(--link-color) !important;
+    color: white !important;
+}
+.bg-danger a {
+    color: white !important;
+}
+.warning a {
+    color: white !important;
+}
+
+/********************************************************************
+ * BEGIN: HOMEPAGE STUFF
+ ********************************************************************/
+.sponsors img {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+.sponsors > a:hover {
+  background-color: inherit !important;
+}
+.awards img {
+    max-width: 8rem;
+    height: auto;
+}
+
+.course-personnel table {
+    line-height: 1.3;
+}
+.personnel-photo {
+    width: 14%;
+    text-align: center;
+}
+.personnel-name {
+    min-width: 25%;
+}
+.personnel-hours {
+    min-width: 25%;
+}
+.personnel-location {
+    min-width: 30%;
+}
+table.instructors img, table.tas img {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+table.instructors img {
+    max-width: 5.5rem;
+}
+table.tas img {
+    max-width: 4.75rem;
+}
+
+dd.course-info {
+  font-size: 90%;
+}
+.course-info > dd {
+  padding-left: 0px;
+}
+
+.published {
+    font-size: 90%;
+}
+
+/********************************************************************
+ * BEGIN: FAQ
+ ********************************************************************/
+/*div.question {
+    border-bottom: 2px #e0e1e2 dotted;
+    margin-top: 2px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}*/
+div.question {
+    border-radius: 15px;
+    background-color: #edeeef;
+    padding: 1.25rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+}
+div.question h3::before {
+    content: "🗹 ";
+}
+h2.task::before {
+    content: "» ";
+}
+
+/********************************************************************
+ * BEGIN: ASSIGNMENTS
+ ********************************************************************/
+.assignments a {
+    font-weight: 500;
+}
+
+/********************************************************************
+ * BEGIN: SCHEDULE
+ ********************************************************************/
+tr.bg-info {
+    background-color: #DFF0D8 !important;
+}
+.calendar-date {
+    font-size: 95%;
+}
+.lecture-title {
+    font-weight: 700;
+    font-size: 110%;
+    line-height: 0.7rem;
+}
+.calendar-activity dt {
+    font-weight: 400;
+}
+.calendar-activity dd {
+  padding-left: 0px;
+}
+
+/*.calendar-activity {
+    padding-bottom: 4px;
+}*/
+div.pill-box {
+    margin-bottom: 6px;
+}
+a.schedule-badge {
+    border: none !important;
+}
+a.schedule-badge:hover {
+    background: #FFFFCC;
+}
+.calendar-activity span.special {
+    font-style: italic;
+    color: var(--link-color);
+}
+.calendar-video, .calendar-slides, .calendar-notes {
+    text-align: center;
+}
+
+/*.table>thead>tr {
+    background-color: #efeff3;
+}*/
+.table>thead>td {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.anchor {
+    text-decoration: none;
+    border: none !important;
+    line-height: 1;
+}
+.anchor-icon {
+    vertical-align: middle;
+    visibility: hidden;
+}
+a.anchor:hover {
+/*     color: #fff; */
+    text-decoration: none;
+    background-color: inherit !important;
+
+}
+.calendar-date:hover .anchor-icon, .faq-question:hover .anchor-icon {
+    visibility: visible;
+}
+
+/********************************************************************
+ * BEGIN: MOBILE FIXES
+ ********************************************************************/
+
+@media (max-width: 1400px) {
+    .banner-title h1 {
+      font-size: 10rem;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    main.page {
+        margin-top: 3rem;
+    }
+    .banner-title {
+        transform: none;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+    .banner-title h1 {
+      font-size: 8rem;
+      text-align: center;
+    }
+    .banner {
+      min-height: auto;
+    }
+    .sponsors img {
+      max-width: 80%;
+    }
+    .awards img {
+        max-width: 6rem;
+        height: auto;
+    }
+    .calendar-date {
+        min-width: 18%;
+    }
+    footer img {
+/*         max-width: 10rem; */
+    }
+    table.instructors img {
+        max-width: 5.0rem;
+    }
+    table.tas img {
+        max-width: 4.5rem;
+    }
+
+}
+@media (max-width: 575px) {
+    table {
+        font-size: 75%;
+    }
+    .awards img {
+        max-width: 4.5rem;
+        height: auto;
+    }
+    .main-content {
+      border-radius: 0 !important;
+    }
+    
+    .calendar-activity .col-4 {
+        width: 38% !important;
+    }
+    .calendar-activity .col-8 {
+        width: 62% !important;
+    }
+}
+
+

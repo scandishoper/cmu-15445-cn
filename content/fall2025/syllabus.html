@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="https://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+        <meta name="author" content="Andy Pavlo" />
+        <meta name="description" content="Course syllabus and grading information." />
+    
+    <meta name="keywords" content="" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link href="https://15445.courses.cs.cmu.edu/fall2025/css/style.css" rel="stylesheet" />
+<!--     <link href="https://15445.courses.cs.cmu.edu/fall2025/css/pygment.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <meta property="og:site_name" content="CMU 15-445/645" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Syllabus - CMU 15-445/645 :: Intro to Database Systems (Fall 2025)"/>
+    <meta property="og:url" content="https://15445.courses.cs.cmu.edu/fall2025/syllabus.html"/>
+    <meta property="article:published_time" content="2025-08-26" />
+    <meta property="og:description" content="Course syllabus and grading information." />
+        <meta property="og:image"
+              content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@CMUDB">
+        <meta name="twitter:creator" content="@CMUDB">
+    <meta name="twitter:domain" content="https://15445.courses.cs.cmu.edu/fall2025">
+            <meta property="twitter:image"
+                  content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+    <meta property="twitter:label1" content="Semester" />
+    <meta property="twitter:data1" content="Fall 2025" />
+        
+    
+<!--     <link href="https://db.cs.cmu.edu/favicon.png" rel="icon"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/apple-touch-icon.gif">
+    <link rel="icon" type="image/gif" sizes="32x32" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-32x32.gif">
+    <link rel="icon" type="image/gif" sizes="16x16" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-16x16.gif">
+    <link rel="manifest" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#c41230">
+    <meta name="theme-color" content="#010000">
+
+
+    <title>Syllabus | CMU 15-445/645 :: Intro to Database Systems (Fall 2025) </title>
+</head>
+
+<body class="min-vh-100 d-flex flex-column h-100">
+    <!-- BEGIN: header -->
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg bg-black navbar-dark" aria-label="Navigation Menu">
+    <div class="container">
+      <a class="navbar-brand" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025" title="CMU 15-445/645"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmudb-icon-white.svg" width="24"> CMU 15-445/645</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav me-auto mb-0 text-uppercase">
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/assignments.html">Assignments</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/faq.html">FAQ</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/schedule.html">Schedule</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link active" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/syllabus.html">Syllabus</a>
+              </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-0 text-uppercase">
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Youtube" onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5" target="_yt"><i class="fab fa-youtube"></i> Youtube</a>
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Piazza" onclick="javascript:ga('send', 'pageview', '/outgoing/piazza.com');" href="https://piazza.com/cmu/fall2025/15445645" target="_pz"><i class="fas fa-comments"></i> Piazza</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>    <!-- END: header -->
+
+    <main class="flex-shrink-0 page">
+        <!-- BEGIN: banner -->
+<!-- Empty space -->
+<!--<div class="container mt-5">
+    <div class="row">
+    </div>
+</div>-->
+        <!-- END: banner -->
+
+<!-- BEGIN: LINK TO NEW COURSE -->
+<style>
+div#new-class-alert {
+/*     position: fixed; */
+    z-index: 9999;
+}
+div#new-class-alert div {
+    margin: auto;
+    font-size: 130%;
+    text-align: center;
+    background-color: var(--link-color) !important;
+}
+div#new-class-alert a {
+  color: white !important;
+}
+</style>
+<div id="new-class-alert"  class="row mt-5 mb-0 mx-auto">
+<div class="p-2 py-3 col-12 col-md-10 col-lg-8 alert alert-danger text-center text-white border-0">
+<i class="fa fa-exclamation-triangle fa-1x"></i>
+<a href="/" title="View latest version of 15-445/645">
+<b>NOTICE:</b> This is an archived version of the course. Click here to view the latest offering.
+</a>
+</div>
+</div>
+<!-- END: LINK TO NEW COURSE -->
+
+
+        <!-- BEGIN: main -->
+        <div class="container main-content rounded-5 mb-0 mb-lg-5 mt-0 mt-sm-3 mt-md-4 mt-lg-5 py-3 py-md-5 px-md-5 shadow-sm bg-light content">
+<h1 class="page-header mb-3 mb-md-4"><i class="fas fa-university"></i> <span class="text-uppercase">Syllabus</span>
+    <span class="fw-normal fs-6 float-end mt-2 text-muted published d-none d-lg-inline" style="font-family: sans; letter-spacing: normal; text-shadow: none;">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-08-26 11:45:45.173617-04:00">Last Updated: Aug 26, 2025</time>
+    </span>
+</h1>
+<div class="row pb-3 d-block d-lg-none">
+    <div class="col-12 text-start text-muted published">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-08-26 11:45:45.173617-04:00">Last Updated: Aug 26, 2025</time>
+    </div>
+</div>
+<!-- START COURSE_INFO -->
+<!-- AUTO-GENERATED BY GENERATE-SCHEDULE SCRIPT -->
+<!-- ANY MODIFICATIONS WILL BE OVERWRITTEN -->
+<p>You want to know whether this is the premier course at Carnegie Mellon University on the design and implementation of database management systems? Well, it is. This course rips through data models (relational, document, key/value), storage models (n-ary, decomposition), query languages (SQL, stored procedures), storage architectures (heaps, log-structured), indexes + filters (order preserving trees, hash tables, vector indexes), transaction processing (ACID, concurrency control), recovery (logging, checkpoints), query processing (joins, sorting, aggregation, optimization), and parallel architectures (multi-core, distributed). We will also use case studies on open-source and commercial database systems to illustrate these techniques and trade-offs. You should straight know that this course is appropriate for students that are ready to commit to a database-centric lifestyle and flex their systems programming skills.</p>
+<ul>
+<li> <b>Meeting Time:</b> Mon/Wed 2:00pm-3:20pm ET<li> <b>Lecture Location:</b> <a onclick="javascript:ga('send', 'pageview', '/outgoing/maps.app.goo.gl');" href="https://maps.app.goo.gl/8jiEATjcUw1hkQTx5">Posner Hall A35</a>
+<li> <b>Pre-requisites:</B> <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.cs.cmu.edu');" href="https://www.cs.cmu.edu/~213/">CMU 15-213/513</a>
+<li> <b>Textbook:</b> <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.db-book.com');" href="https://www.db-book.com/">DB System Concepts (7th Ed.)</a>
+</ul>
+
+<!-- END COURSE_INFO -->
+
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-graduation-cap fa-lg p-1 pe-lg-2"></i>
+    This course satisfies the <em>Software Systems Elective</em> requirements for CMU's <a onclick="javascript:ga('send', 'pageview', '/outgoing/coursecatalog.web.cmu.edu');" href="http://coursecatalog.web.cmu.edu/schools-colleges/schoolofcomputerscience/undergraduatecomputerscience/#bscurriculumtextcontainer">Computer Science Bachelors Curriculum</a>.
+</p>
+
+<!-- BEGIN:objectives -->
+<div class="mt-1 mt-md-2 mt-lg-3" id="objectives">
+<h2 id="educational-objectives">Educational Objectives</h2>
+<p>This is an upper-level course on the internals of database management systems. This course has a heavy emphasis on programming projects. There are also readings assigned for each class, homeworks, and two exams. Upon successful completion of this course, the student should be able to:</p>
+<ul>
+    <li> Use relational algebra to express database queries.
+    <li> Use SQL to interact with database management systems.
+    <li> Design appropriate database tables, using functional dependencies and normal forms.
+    <li> Implement a disk-oriented database storage manager with table heaps and indexes.
+    <li> Understand, compare, and implement the fundamental concurrency control algorithms.
+    <li> Implement database recovery algorithms and verify their correctness.
+    <li> Identify trade-offs among database systems techniques and contrast distributed/parallel alternatives for both on-line transaction processing and on-line analytical workloads.
+    <li> Interpret and comparatively criticize database system architectures.
+</ul>
+<p>All programming projects will be completed in the <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub">BusTub</a> database management system.</p>
+</div>
+<!-- BEGIN:waitlist -->
+<div class="mt-1 mt-md-2 mt-lg-3" id="waitlist">
+<h2 id="wait-list">Wait List</h2>
+<p>Our capacity in the course is limited to the number of TAs that we have and the room size. We will move students off of the wait list as new seats become available. Preferential consideration is given to SCS students. Please do <u>not</u> contact the instructors or the TAs about whether you have a chance of enrolling into the course. You will be contacted if you are enrolled in the class.</p>
+<p>If you are enrolled in the course but want to drop, you are <u>not</u> allowed to swap your position with another student on the waitlist. The admins will enroll students according to their protocol in a rolling basis until the course reaches capacity.</p>
+<p>If you are enrolled in the course after the semester has started and assignments are due, it is your responsbility to contact the instructor and let them know how quickly you will turn in those projects.</p>
+<!-- <p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-exclamation-triangle fa-lg p-1 pe-lg-2"></i>
+    <b>Update 2024-09-10:</b> The course roster is full. We will <u>not</u> be taking any additional students from the waitlist.
+</p> -->
+<!-- BEGIN:officehours -->
+<div class="mt-1 mt-md-2 mt-lg-3" id="officehours">
+<h2 id="office-hours">Office Hours</h2>
+<p>Instructors and TAs will hold office hours on weekdays (Mon-Fri) at different times of the day. Please contact the instructor if you are not able to attend regularly scheduled office hours due to unforeseen circumstances. Students are encouraged to check Piazza and ask questions there instead of waiting for office hours. There will <u>not</u> be any office hours on Sundays to encourage students to start working on projects before the deadlines.</p>
+<p>We will also hold an on-campus TA power session on the Saturday before each project is due.</p>
+<p>We will hold an online recitation for each project after it is released. This recitation will be held online and the recording will be made available afterwards on Piazza.</p>
+<p>Please do <u>not</u> email individual TAs with questions about projects or homeworks. Students should post all technical questions to Piazza.</p>
+</div>
+<!-- BEGIN:grading -->
+<div class="mt-1 mt-md-2 mt-lg-3" id="grading">
+<h2 id="grading-scheme">Grading Scheme</h2>
+<p>The final grade for the course will be based approximately on the following weights:</p>
+<ul>
+    <li> <b>15%</b> &mdash; <a href="#homeworks">Homeworks</a>
+    <li> <b>45%</b> &mdash; <a href="#projects">Programming Projects</a>
+    <li> <b>20%</b> &mdash; <a href="#exams">Midterm Exam</a>
+    <li> <b>20%</b> &mdash; <a href="#exams">Final Exam</a>
+</ul>
+</div>
+<!-- BEGIN:homeworks -->
+<div class="mt-1 mt-md-2 mt-lg-3" id="homeworks">
+<h2 id="homeworks_1">Homeworks</h2>
+<p>Students will complete multiple homework assignments during the course. These homeworks are designed to reinforce the lectures and reading materials. The homework due dates are the ones that are posted on this website.</p>
+<p>Each homework will be graded out of a total of 100 points and are counted equally when computing the homework portion of the final grade.</p>
+</div>
+<!-- BEGIN:projects -->
+<div class="mt-1 mt-md-2 mt-lg-3" id="projects">
+<h2 id="programming-projects">Programming Projects</h2>
+<p>Students will complete programming projects during the course. Each assignment is cumulative. That is, you need to successfully complete each assignment in order to complete the next one. We will <b><u>not</u></b> release solutions or grading tests for the programming projects.</p>
+<p>Each project will be graded out of a total of 100 points and are counted equally when computing the project portion of the final grade.</p>
+<p>The course instructors and TAs will <b><u>not</u></b> teach students how to write/debug C++17 programs during the semester. It is a prerequisite for this course.</p>
+<p>All students are required to complete <a href="./project0">Project #0</a> with a full score by September 7, 2025.
+Any student that is <u>not</u> able to complete this project before the deadline will be asked to drop the course and will automatically fail all subsequent assignments if they remain enrolled. Late days are <u>not</u> allowed for this first project. Students enrolled after the project deadline will be given only one day (24 hours) to complete the assignment starting at the date they are notified that they are enrolled in the course.</p>
+</div>
+<!-- BEGIN:exams-->
+<div class="mt-1 mt-md-2 mt-lg-3" id="exams">
+<h2 id="exams_1">Exams</h2>
+<p>There will be two exams during the course. These exams will cover the mandatory readings and topics discussed in class. The first will be an "in-class" midterm exam. The second will be a final exam at during the University's final examination period at the end of the semester. </p>
+</div>
+<!-- BEGIN:late-policy-->
+<div class="mt-1 mt-md-2 mt-lg-3" id="late-policy">
+<h2 id="late-policy_1">Late Policy</h2>
+<p>Each person has an automatic extension of <b>four</b> calendar days for programming projects only. For instance, you can hand in one project four days late, or each of four projects one day late.</p>
+<ul>
+    <li> Late days are rounded up to the nearest integer. For example, a submission that is 4 hours late will count as one day late.
+    <li> You will lose 10% of the points for a project for every 24 hours it is late.
+</ul>
+<p>Late homeworks will <b><u>not</u></b> be accepted.</p>
+<p>In <strong>extreme circumstances</strong> (e.g., medical emergencies), we will grant no-penalty extensions. Please provide written documentation (e.g., doctor's note).</p>
+</div>
+<!-- BEGIN:collaboration -->
+<div class="mt-1 mt-md-2 mt-lg-3" id="collaboration">
+<h2 id="collaboration-policy">Collaboration Policy</h2>
+<p>We expect that your work on homeworks, projects, and exams will be your own. You may not copy any part of a solution that was written by another student, or develop your project or homework solutions together with another student, or copy solutions from any unauthorized source such as the Internet. You may not look at another student's solution without permission from the course staff, even if you have completed your own, nor may you knowingly give your solution to another student or leave your solution where another student can see it.</p>
+<!-- You may not use generative AI tools (such as ChatGPT and GitHub Copilot) in any way to assist with your work in this course. -->
+<p>Here are some examples of behavior that are inappropriate:</p>
+<ul>
+<li> Copying (or retyping) homework, project, or exam solutions from another person or source, either in draft or final form, even if permissions are incorrectly set to allow it. This behavior is still clearly inappropriate even if you make modifications from the original source.
+  <li> Searching for or viewing a current or past student's homework, project, or exam solution.
+  <li> Allowing someone else to view or copy your code, written assignment, quiz, or exam, either in draft or final form.
+  <li> Getting help that you do not fully understand or from someone whom you do not acknowledge on your solution.
+  <li> Coaching others step-by-step without them understanding your help.
+  <li> Writing, using, or submitting a program that attempts to alter or erase grading information or otherwise compromise security of course resources.
+  <li> Lying to course staff.
+  <li> Making your work publicly available in a way that other students (current or future) can access your solutions, even if others’ access is accidental or incidental to your goals.
+</li>
+</li>
+</li>
+</li>
+</li>
+</li>
+</li>
+</li>
+</ul>
+<p>If your work contains any statement or code that was not written by you, you must clearly identify the derived work and cite the source. If you are paraphrasing an idea you read elsewhere, you must acknowledge the source. Using existing material without proper citation is plagiarism, a form of cheating. If there is any question about whether the material is permitted, you must get permission in advance.</p>
+<p>It is not considered cheating to clarify vague points in the assignments, lectures, lecture notes, or to give help or receive help in using the computer systems, compilers, or other facilities.  You may discuss high-level concepts (including high-level discussions of algorithms) with other students, but you may not take notes from those conversations or develop your own solutions in sight of others’ diagrams or notes.
+Any violation of this policy is cheating. The minimum penalty for cheating (including plagiarism) will be a zero grade for the whole assignment; a typical penalty will be -100% on the assignment. Dishonesty while discussing an academic integrity issue (i.e. lying to course staff) usually results in an 'R' in the course. All violations of this collaboration policy will be referred to the appropriate University disciplinary board, with possible additional disciplinary action. For more information, see the <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.cmu.edu');" href="https://www.cmu.edu/policies/student-and-student-life/academic-integrity.html">University Policy on Academic Integrity</a>.</p>
+<p>If you believe you have violated this collaboration policy, you may retroactively retract your homework, project, or exam solution.  If you retract your solution before we otherwise are aware of your conduct, you will receive a zero grade on the retracted work, but we will not consider your conduct to be an academic integrity violation.</p>
+<p>There is no statute of limitations for violations of the collaboration policy; penalties may be assessed (and referred to the university disciplinary board) after you have completed the course, and some requirements of the collaboration policy (such as restrictions on you posting your solutions) extend beyond your completion of the course.</p>
+<p>If you have any question about how this policy applies in a particular situation, ask the instructors or TAs for clarification.</p>
+</div>
+</div>
+        </div>
+        <!-- END: main -->
+    </main>
+
+<!-- Footer -->
+<footer class="footer mt-auto bg-black">
+  <div class="container">
+    <div class="row pt-3 pb-2">
+      <div class="col-4 my-auto">
+        <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu" title="Carnegie Mellon Database Group"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmu-db-group.svg" class="cmudb-logo" /></a>
+      </div>
+      <div class="col-8 float-end">
+
+            <div class="dropdown float-end justify-content-end">
+              <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-book"></i> Archives
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                    <li class=""> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2025/" class="dropdown-item" target="_archive1" title="View Previous Course Website">Spring 2025 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2024/" class="dropdown-item" target="_archive2" title="View Previous Course Website">Fall 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2024/" class="dropdown-item" target="_archive3" title="View Previous Course Website">Spring 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2023/" class="dropdown-item" target="_archive4" title="View Previous Course Website">Fall 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2023/" class="dropdown-item" target="_archive5" title="View Previous Course Website">Spring 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2022/" class="dropdown-item" target="_archive6" title="View Previous Course Website">Fall 2022 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2021/" class="dropdown-item" target="_archive7" title="View Previous Course Website">Fall 2021 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2020/" class="dropdown-item" target="_archive8" title="View Previous Course Website">Fall 2020 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2019/" class="dropdown-item" target="_archive9" title="View Previous Course Website">Fall 2019 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2018/" class="dropdown-item" target="_archive10" title="View Previous Course Website">Fall 2018 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2017/" class="dropdown-item" target="_archive11" title="View Previous Course Website">Fall 2017 <i class="fa fa-external-link"></i></a>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</footer>    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6CTRQK4NY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-T6CTRQK4NY');
+    </script>
+    <!-- End Google Analytics Code -->
+
+<!--     <script src="js/bootstrap.bundle.min.js"></script> -->
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

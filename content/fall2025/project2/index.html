@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="https://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+        <meta name="author" content="Andy Pavlo" />
+        <meta name="description" content="Remember to pull the latest code from the bustub repository. Do not post your code on a public GitHub repository. Overview In this project you will implement a B+Tree index in your database system. A B+Tree is a balanced search tree in which the internal pages direct the …" />
+    
+    <meta name="keywords" content="" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link href="https://15445.courses.cs.cmu.edu/fall2025/css/style.css" rel="stylesheet" />
+<!--     <link href="https://15445.courses.cs.cmu.edu/fall2025/css/pygment.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <meta property="og:site_name" content="CMU 15-445/645" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Project #2 - B+Tree - CMU 15-445/645 :: Intro to Database Systems (Fall 2025)"/>
+    <meta property="og:url" content="https://15445.courses.cs.cmu.edu/fall2025/project2/index.html"/>
+    <meta property="article:published_time" content="2025-10-03" />
+    <meta property="og:description" content="Remember to pull the latest code from the bustub repository. Do not post your code on a public GitHub repository. Overview In this project you will implement a B+Tree index in your database system. A B+Tree is a balanced search tree in which the internal pages direct the …" />
+        <meta property="og:image"
+              content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@CMUDB">
+        <meta name="twitter:creator" content="@CMUDB">
+    <meta name="twitter:domain" content="https://15445.courses.cs.cmu.edu/fall2025">
+            <meta property="twitter:image"
+                  content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+    <meta property="twitter:label1" content="Semester" />
+    <meta property="twitter:data1" content="Fall 2025" />
+        
+    
+<!--     <link href="https://db.cs.cmu.edu/favicon.png" rel="icon"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/apple-touch-icon.gif">
+    <link rel="icon" type="image/gif" sizes="32x32" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-32x32.gif">
+    <link rel="icon" type="image/gif" sizes="16x16" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-16x16.gif">
+    <link rel="manifest" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#c41230">
+    <meta name="theme-color" content="#010000">
+
+
+    <title>Project #2 - B+Tree | CMU 15-445/645 :: Intro to Database Systems (Fall 2025) </title>
+</head>
+
+<body class="min-vh-100 d-flex flex-column h-100">
+    <!-- BEGIN: header -->
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg bg-black navbar-dark" aria-label="Navigation Menu">
+    <div class="container">
+      <a class="navbar-brand" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025" title="CMU 15-445/645"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmudb-icon-white.svg" width="24"> CMU 15-445/645</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav me-auto mb-0 text-uppercase">
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/assignments.html">Assignments</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/faq.html">FAQ</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/schedule.html">Schedule</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/syllabus.html">Syllabus</a>
+              </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-0 text-uppercase">
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Youtube" onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5" target="_yt"><i class="fab fa-youtube"></i> Youtube</a>
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Piazza" onclick="javascript:ga('send', 'pageview', '/outgoing/piazza.com');" href="https://piazza.com/cmu/fall2025/15445645" target="_pz"><i class="fas fa-comments"></i> Piazza</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>    <!-- END: header -->
+
+    <main class="flex-shrink-0 page">
+        <!-- BEGIN: banner -->
+<!-- Empty space -->
+<!--<div class="container mt-5">
+    <div class="row">
+    </div>
+</div>-->
+        <!-- END: banner -->
+        <!-- BEGIN: main -->
+        <div class="container main-content rounded-5 mb-0 mb-lg-5 mt-0 mt-sm-3 mt-md-4 mt-lg-5 py-3 py-md-5 px-md-5 shadow-sm bg-light content">
+<h1 class="page-header mb-3 mb-md-4"><i class="fas fa-database"></i> <span class="text-uppercase">Project #2 - B+Tree</span>
+    <span class="fw-normal fs-6 float-end mt-2 text-muted published d-none d-lg-inline" style="font-family: sans; letter-spacing: normal; text-shadow: none;">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-10-03 23:13:46.089175-04:00">Last Updated: Oct 03, 2025</time>
+    </span>
+</h1>
+<div class="row pb-3 d-block d-lg-none">
+    <div class="col-12 text-start text-muted published">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-10-03 23:13:46.089175-04:00">Last Updated: Oct 03, 2025</time>
+    </div>
+</div>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-exclamation-triangle fa-lg p-1 pe-lg-2"></i>
+    Remember to pull the latest code from the bustub repository. Do <u>not</u> post your code on a public GitHub repository.
+</p>
+
+<!-- ========================================================================= -->
+<!-- OVERVIEW                                                                  -->
+<!-- ========================================================================= -->
+<h1 id="overview">Overview</h1>
+
+<p>In this project you will implement a <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.wikipedia.org');" href="https://en.wikipedia.org/wiki/B%2B_tree">B+Tree</a> index in your database system.
+A B+Tree is a balanced search tree in which the internal pages direct the search and leaf pages contain the actual data entries.
+The index provides fast data retrieval without needing to search every row in a database table, enabling rapid random lookups and efficient scans of ordered records.
+Your implementation will support thread-safe search, insertion, deletion (including splitting and merging nodes), and an iterator to support in-order leaf scans. You need to complete the following tasks:</p>
+<ul class="">
+    <li> <a href="#btree-pages">Task #1 - B+Tree Pages</a>
+    <li> <a href="#btree-operations">Task #2 - B+Tree Operations (Insertion, Deletion, and Point Search)</a>
+    <li> <a href="#index-iterator">Task #3 - Index Iterator</a>
+    <li> <a href="#concurrency-control">Task #4 - Concurrency Control</a>
+</ul>
+
+<p>Your work in Project #2 depends on your implementation of the buffer pool and page guards from <a href="../project1">Project #1</a>.
+If your Project #1 solution is incorrect, you <b>MUST</b> fix it to successfully complete this project.
+This project must be completed <b>individually</b> (i.e., no groups).</p>
+<!-- START project2 -->
+<!-- AUTO-GENERATED BY GENERATE-SCHEDULE SCRIPT -->
+<!-- ANY MODIFICATIONS WILL BE OVERWRITTEN -->
+<ul>
+<li><b>Release Date:</b> Sep 29, 2025</li>
+<li><b>Due Date:</b> Oct 26, 2025 @ 11:59pm</li>
+</ul>
+<!-- END project2 -->
+
+<div class="warning p-2 row justify-content-center align-items-center my-3 bg-secondary rounded">
+    <div class="col-md-auto px-0 mb-2 mb-md-0 d-flex justify-content-center fs-2">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x text-danger"></i>
+            <i class="fa fa-skull-crossbones fa-stack-1x fa-inverse"></i>
+        </span>
+    </div>
+    <div class="col text-light fw-bold">
+        This project is more difficult than previous projects/homework! We strongly recommend that you <u>START EARLY</u> or you will have problems. You have been warned!
+    </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- PROJECT SPECIFICATION                                                     -->
+<!-- ========================================================================= -->
+<h1 id="project-specification">Project Specification</h1>
+<p>We have provided stub classes that define the APIs that you must implement. You should <b><u>not</u></b> modify the signatures of these pre-defined functions; if you do, our test code will not work and you will receive little or no credit for the project.
+Similarly, you should not remove existing member variables from the code we provide.
+You may add functions and member variables to these classes to implement your solution.</p>
+<p>Before you start, run <code>git pull public master</code> to pull the latest code from the public <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub">BusTub repository</a>.</p>
+<!-- **************************************************** -->
+<!-- B+Tree Pages                                         -->
+<!-- **************************************************** -->
+<h2 class="task" id="btree-pages">Task #1 - B+Tree Pages</h2>
+<p>You must implement the following three <code>Page</code> classes to store the data of your B+Tree.</p>
+<ul>
+    <li> <a href="#btree-page">B+Tree Page</a>
+    <li> <a href="#btree-internal-page">B+Tree Internal Page</a>
+    <li> <a href="#btree-leaf-page">B+Tree Leaf Page</a>
+</ul>
+
+<!-- **************************************************** -->
+<!-- Base Page                                            -->
+<!-- **************************************************** -->
+<div class="question">
+<h3 id="btree-page">Base Page</h3>
+<p>This is a base class that the Internal Page and Leaf Page inherit from, and contains only information that both child classes share.
+The B+Tree Page has the following fields:</p>
+<table class="table table-striped border">
+<thead>
+    <tr>
+        <th>Variable Name</th>
+        <th>Size</th>
+        <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+        <tr id="row1">
+            <td class="font-monospace">page_type_</td>
+            <td>4</td>
+            <td>Page type (invalid page / leaf page / internal page)</td>
+        </tr>
+        <tr id="row2">
+            <td class="font-monospace">size_</td>
+            <td>4</td>
+            <td>Number of key &amp; value pairs in a page</td>
+        </tr>
+        <tr id="row3">
+            <td class="font-monospace">max_size_</td>
+            <td>4</td>
+            <td>Max number of key &amp; value pairs in a page</td>
+        </tr>
+</tbody>
+</table>
+<p>You must implement the B+Tree Page by modifying only its header file (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/page/b_plus_tree_page.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/page/b_plus_tree_page.h</tt> <i class="fas fa-external-link-alt"></i></a>) and the corresponding source file (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/storage/page/b_plus_tree_page.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/storage/page/b_plus_tree_page.cpp</tt> <i class="fas fa-external-link-alt"></i></a>).</p>
+</div>
+<!-- **************************************************** -->
+<!-- B+Tree Internal Page                                 -->
+<!-- **************************************************** -->
+<div class="question">
+<h3 id="btree-internal-page">Internal Page</h3>
+<p>An Internal Page (i.e., inner node) stores <code>m</code> ordered keys and <code>m + 1</code> child pointers (i.e. page_ids) to other B+Tree Pages.
+These keys and pointers are internally represented as an array of key/page_id pairs.
+As the number of child pointers is one more than the number of keys, the first key in <code>key_array_</code> (see <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/page/b_plus_tree_internal_page.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/page/b_plus_tree_internal_page.h</tt> <i class="fas fa-external-link-alt"></i></a>) is set to be invalid, and lookups should always start from the second key.</p>
+<p>At any time, each internal page should be at least half full. During deletion, two half-full pages can be merged, or keys and pointers can be redistributed to avoid merging.
+During insertion, one full page can be split into two, or keys and pointers can be redistributed to avoid splitting.
+These are examples of the many design choices that you will make while implementing your B+Tree.</p>
+<p>You must implement the Internal Page by modifying only its header file (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/page/b_plus_tree_internal_page.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/page/b_plus_tree_internal_page.h</tt> <i class="fas fa-external-link-alt"></i></a>') and the corresponding source file (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/storage/page/b_plus_tree_internal_page.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/storage/page/b_plus_tree_internal_page.cpp</tt> <i class="fas fa-external-link-alt"></i></a>).</p>
+</div>
+<!-- **************************************************** -->
+<!-- B+Tree Leaf Page                                    -->
+<!-- **************************************************** -->
+<div class="question">
+<h3 id="btree-leaf-page">Leaf Page</h3>
+<p>The Leaf Page stores <code>m</code> ordered keys and their <code>m</code> corresponding values.
+In your implementation, the value should always be the 64-bit record id for where the actual tuples are stored -- see the <code>RID</code> class, in <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/common/rid.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/common/rid.h</tt> <i class="fas fa-external-link-alt"></i></a>.
+Leaf pages have the same restrictions on the number of key/value pairs as Internal pages, and should follow the same operations for merging, splitting, and redistributing keys.</p>
+<p>For this project, we will extend our leaf page implementation by also including a tombstone buffer for recent deletions. This tombstone buffer stores the last <code>k</code> indexes of entries in key/value arrays that have been deleted. Thus, when a key is deleted from the index (if <code>k</code> &gt; 0) its entry in its corresponding leaf page is not actually deleted but the index is appended to the tombstone buffer. Only when the buffer of said leaf page has <code>k</code> entries in it is the oldest buffered deletion actually applied to the key/value arrays. This is a simplified version of the <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.wikipedia.org');" href="https://en.wikipedia.org/wiki/Fractal_tree_index#B%CE%B5_trees">Bε-tree</a> discussed in the lectures.</p>
+<p>You must implement <code>GetTombstones()</code> to report the keys that the tombstones in a given page correspond to. <code>KeyAt</code> must however return the physical entry at a given index regardless of whether a tombstone exists for that entry.</p>
+<p>You must implement your Leaf Page by modifying only its header file (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/page/b_plus_tree_leaf_page.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/page/b_plus_tree_leaf_page.h</tt> <i class="fas fa-external-link-alt"></i></a>) and corresponding source file (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/storage/page/b_plus_tree_leaf_page.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/storage/page/b_plus_tree_leaf_page.cpp</tt> <i class="fas fa-external-link-alt"></i></a>).</p>
+<p><strong>Note:</strong> Even though Leaf Pages and Internal Pages contain the same key type, they may have different value types. Thus, the <code>max_size</code> can be different.</p>
+<p>Each B+Tree leaf/internal page corresponds to the content (i.e., the <code>data_</code> part) of a memory page fetched by the buffer pool.
+Every time you read or write from/to a leaf or internal page, you must first fetch the page from the buffer pool (using its unique <code>page_id</code>),
+Use <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.cppreference.com');" href="http://en.cppreference.com/w/cpp/language/reinterpret_cast">reinterpret cast</a> to convert it to either a leaf or an internal page, and unpin the page after reading or writing from/to it.</p>
+</div>
+<!-- ******************************************************************** -->
+<!-- B+Tree Data structure (Insertion and search for single values)      -->
+<!-- ******************************************************************** -->
+<h2 class="task" id="btree-operations">Task #2 - B+Tree Operations (Insertion, Deletion, and Point Search)</h2>
+
+<p>In this task, your B+Tree Index needs to support insertion (<code>Insert()</code>), deletion (<code>Remove()</code>), and search (<code>GetValue()</code>) for single values.
+The index should support only unique keys; if you try to reinsert an existing key into the index, insertion should not be performed and <code>false</code> will be returned. You must implement
+this task by modifying the source file <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/storage/index/b_plus_tree.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/storage/index/b_plus_tree.cpp</tt> <i class="fas fa-external-link-alt"></i></a> and optionally it's corresponding header file <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/index/b_plus_tree.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/index/b_plus_tree.h</tt> <i class="fas fa-external-link-alt"></i></a>.</p>
+<p>B+Tree pages should be split (or keys should be redistributed) if an insertion would violate the B+Tree's invariants. Furthermore, leaf page tombstones (and their ordering) must be maintained across any merging, splitting, and redistributing operations. When a leaf is coalesced or redistributed into another leaf we consider all of its pending deletions to be more recent than any pending deletion in the recipient leaf (in other words: the node with entries being inserted into it should have its tombstones processed first).</p>
+<p>If an insertion changes the page ID of the root, you must update the <code>root_page_id</code> in the B+Tree index's header page.
+You can do this by accessing the <code>header_page_id_</code> page, which is given to you in the constructor.
+Then, by using <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.cppreference.com');" href="http://en.cppreference.com/w/cpp/language/reinterpret_cast">reinterpret cast </a>, you can interpret this page as a <code>BPlusTreeHeaderPage</code> (from <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/page/b_plus_tree_header_page.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/page/b_plus_tree_header_page.h</tt> <i class="fas fa-external-link-alt"></i></a>) and update the root page ID from there.
+You also must implement <code>GetRootPageId</code>.</p>
+<p>Similarly, your B+Tree Index must support including merging or redistributing keys between pages if necessary to maintain the B+Tree invariants when deleting a key.
+As with insertions, you must correctly update the B+Tree's root page ID if the root changes.</p>
+<p>We recommend that you use the page guard classes from Project #1 to avoid synchronization problems.
+You should use <code>ReadPage</code> or <code>WritePage</code> accordingly.</p>
+<!-- For this checkpoint, we recommend that you use <code>FetchPageBasic</code> (defined in <tt class="filepath">src/include/storage/page/</tt>) when you access a page. When you later implement concurrency control in Task #4, you can change this to use <code>FetchPageRead</code> and <code>FetchPageWrite</code>, as needed. -->
+
+<p>You may optionally use the <code>Context</code> class (defined in <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/index/b_plus_tree.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/index/b_plus_tree.h</tt> <i class="fas fa-external-link-alt"></i></a>) to track the pages that you've read or written (via the <code>read_set_</code> and <code>write_set_</code> fields) or to store other metadata that you need to pass into other functions recursively.</p>
+<p>If you are using the <code>Context</code> class, here are some tips:</p>
+<ul>
+<li>You might only need to use <code>write_set_</code> when inserting or deleting. It is possible that you do not use <code>read_set_</code>, depending on your implementation.</li>
+<li>You might want to store the root page id in the context and acquire write guard of header page when modifying the B+Tree.</li>
+<li>To find a parent of the current node, look at the back of <code>write_set_</code>. It should contain all nodes along the access path.</li>
+<li>You may use <code>BUSTUB_ASSERT</code> to help you find inconsistent data in your implementation. For example, if you want to split a node (except root), you should ensure that there is still at least one node in the <code>write_set_</code>. If you need to split root, you should check if <code>header_page_</code> is <code>std::nullopt</code>.</li>
+<li>To unlock the header page, simply set <code>header_page_</code> to <code>std::nullopt</code>. To unlock other pages, pop from the <code>write_set_</code> and drop.</li>
+</ul>
+<p>The B+Tree is parameterized on arbitrary key, value, and key comparator types.
+We've defined a macro, <code>INDEX_TEMPLATE_ARGUMENTS</code>, that generates the template parameter declaration for you:</p>
+<pre class="shadow-sm p-2">
+template &#60;typename KeyType,
+          typename ValueType,
+          typename KeyComparator&#62;
+</pre>
+
+<p>The type parameters are:</p>
+<ul>
+    <li><code>KeyType</code>:
+    The type of each key in the index. In practice this will be a <code>GenericKey</code>. The actual size of a <code>GenericKey</code> varies, and is specified with its own template argument that depends on the type of indexed attribute.
+
+    <li><code>ValueType</code>:
+    The type of each value in the index. In practice, this will be a 64-bit RID.
+
+    <li><code>KeyComparator</code>:
+    A class used to compare whether two <code>KeyType</code> instances are less than, greater than, or equal to each other. These will be included in the <code>KeyType</code> implementation files.
+</ul>
+
+<!-- **************************************************** -->
+<!-- Iterator                                             -->
+<!-- **************************************************** -->
+<h2 class="task" id="index-iterator">Task #3 - Index Iterator</h2>
+<p>After you have implemented and thoroughly tested your B+Tree in Tasks #1 and #2, you must add a C++ iterator that efficiently supports an in-order scan of the entries in the index.
+The basic idea is store sibling pointers so that you can efficiently traverse the leaf pages, and then implement an iterator that iterates through every key-value pair, in order, in the index. Note that this iterator <em>must respect tombstones</em> and thus you should skip any key-value pair with a corresponding tombstone.</p>
+<p>Your iterator must be a <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.cplusplus.com');" href="http://www.cplusplus.com/reference/iterator/">C++17-style Iterator</a>, including at least the following methods:</p>
+<ul>
+    <li><code>isEnd()</code>:
+    Return whether this iterator is pointing at the last key/value pair.
+
+    <li><code>operator++()</code>:
+    Move to the next key/value pair.
+
+    <li><code>operator*()</code>:
+    Return the key/value pair this iterator is currently pointing at.
+
+    <li><code>operator==()</code>:
+    Return whether two iterators are equal.
+
+    <li><code>operator!=()</code>:
+    Return whether two iterators are not equal.
+</ul>
+
+<p>Your <code>BPlusTree</code> also must correctly implement <code>begin()</code> and <code>end()</code> methods, to support C++ for-each loop functionality on the index.</p>
+<p>You must implement your index iterator by modifying only its header file (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/index/index_iterator.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/index/index_iterator.h</tt> <i class="fas fa-external-link-alt"></i></a>) and corresponding source file (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/index/storage/index_iterator.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/index/storage/index_iterator.cpp</tt> <i class="fas fa-external-link-alt"></i></a>).</p>
+<!-- **************************************************** -->
+<!-- Concurrency Control                                  -->
+<!-- **************************************************** -->
+<h2 class="task" id="concurrency-control">Task #4 - Concurrency Control</h2>
+<p>In the last task, you will modify your B+Tree implementation so that it safely supports concurrent operations.
+You should use the <em>optimistic</em> latch coupling/crabbing technique described in class and in the textbook.
+The thread traversing the index should acquire latches on B+Tree pages as necessary to ensure safe concurrent operations, and should release latches on parent pages as soon as possible when it is safe to do so.</p>
+<!-- We recommend that you complete this task by first changing instances of <code>FetchPageBasic</code> to either <code>FetchPageWrite</code> or <code>FetchPageRead</code>, depending on whether you want to access a page with read or write privileges. Then modify your implementation to grab and release read and write latches as necessary to implement the latch crabbing algorithm. -->
+
+<p><strong>Note:</strong> You should never acquire the same read latch twice in a single thread. It might lead to deadlock.</p>
+<!-- **************************************************** -->
+<!-- Leaderboard                                          -->
+<!-- **************************************************** -->
+<h2 class="task" id="leaderboard">Leaderboard Task (Optional)</h2>
+
+<p>The leaderboard task is a measurement of how fast your B+Tree Index compared to other students' implementations. The B+Tree benchmark runner (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/tools/btree_bench/btree_bench.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>tools/btree_bench/btree_bench.cpp</tt> <i class="fas fa-external-link-alt"></i></a>) uses multiple threads to concurrently read and update the index using different access patterns.</p>
+<p>Optimizing for the leaderboard is optional (i.e., you can get a perfect score in the project after finishing all previous tasks).
+However, your solution must finish the leaderboard test with a correct result and without deadlock and segfault.</p>
+<p>We will run your B+Tree with a <code>NumTombs</code> value of -1 which means we will not enforce any specific behavior concerning tombstoning. You can modify the <code>LEAF_PAGE_DEFAULT_TOMB_CNT</code> macro to use your own custom default number of tombstones in this case. </p>
+<p>One simple optimization we recommend as a starting point is considering more efficient representations of tombstones. You may also want to refer to existing work surrounding B+ tree variants and optimizations (e.g. Bε-tree paper, Goetz Grafe books). You may assume that only integer keys will be used in the leaderboard task.</p>
+<!-- ========================================================================= -->
+<!-- INSTRUCTIONS                                                              -->
+<!-- ========================================================================= -->
+<h1 id="instructions">Instructions</h1>
+
+<p>See the <a href="../project0/#instructions">Project #0 instructions</a> on how to create your private repository and setup your development environment.</p>
+<!-- **************************************************** -->
+<!-- Development Roadmap                                  -->
+<!-- **************************************************** -->
+<h2 id="development-roadmap">Development Roadmap</h2>
+<p>There are several ways in which you could go about building a B+Tree Index.
+This road map only serves as a rough conceptual guideline, which is based on the algorithm outlined in the textbook.
+You could end up with a semantically correct B+Tree that passes all our tests even without strictly following the roadmap.
+The choice is entirely yours.</p>
+<ol>
+    <li> <b>Simple Inserts:</b>
+    Given a key-value pair KV and a non-full node N, insert KV into N. Self check: What are the different types of nodes and can key-values be inserted in all of them?
+
+    <li> <b>Simple Search:</b>
+    Given a key K, define a search mechanism on the tree to determine the presence of the key.
+    Self check: Can keys exist in multiple nodes and are all these keys the same?
+
+    <li> <b>Simple Splits:</b>
+    Given a key K, and a target leaf node L that is full, insert the key into the tree, while keeping the tree consistent. Self check: When do you choose to split a node and how to define a split?
+
+    <li> <b>Multiple Splits:</b>
+    Define inserts for a key K on a leaf node L that is full, whose parent node M is also full. Self check: What happens when the parent of M is also full?
+
+    <li> <b>Simple Deletes:</b>
+    Given a key K and a target leaf node L that is at-least half full, delete K from L. Self check: Is the leaf node L the only node that contains the key K?
+
+    <li> <b>Simple Coalesces:</b>
+    Define deletion for a key K on a leaf node L that is less than half-full after the delete operation. Self check: Is it mandatory to coalesce when L is less than half-full and how do you choose which node to coalesce with?
+
+    <li> <b>Not-So-Simple Coalesces:</b>
+    Define deletion for a key K on a node L that contains no suitable node to coalesce with. Self check: Does coalescing behavior vary depending on the type of nodes? This should take you through to Task 1 and 2.</li>
+
+    <li> <b>Index Iterators:</b>
+    The section on <a href="#index-iterator">Task #3</a> describes the implementation of an iterator for the B+Tree.
+
+    <li> <b>Concurrent Indexes:</b>
+    The section on <a href="#concurrency-control">Task #4</a> describes the implementation of the latch crabbing technique to support concurrency in your design.
+</ol>
+
+<!-- **************************************************** -->
+<!-- Requirements and Hints                               -->
+<!-- **************************************************** -->
+<h2 id="requirements-and-hints">Requirements and Hints</h2>
+<ul>
+    <li>You are <b>not</b> allowed to use a global latch to protect your data structure; your implementation must support a reasonable level of concurrency. In other words, you may not latch the whole index and only unlatch when operations are done. </li>
+
+    <li>We recommend that you use the page guard classes <code>ReadPageGuard</code> and <code>WritePageGuard</code> to implement thread safety for your B+Tree. You can receive full credit on this project if you use these constructs correctly.</li>
+
+    <li>You may add functions to your implementation as long as you keep all our original public interfaces intact for testing purposes.</li>
+
+    <li>Do not use <code>malloc</code> or <code>new</code> to allocate large blocks of memory for your tree. If you need to need to create a new node for your tree or need a buffer for some operation, you should use the buffer pool manager.</li>
+
+    <li>Use binary search to find the place to insert a value when iterating an internal or leaf node. Otherwise, your implementation will probably timeout on Gradescope.</li>
+
+    <li>We recommend (but do not require) that you to follow this rule when implementing split: split a leaf node when the number of values reaches <code>max_size</code> after insertion, and split an internal node when number of values reaches <code>max_size</code> before insertion. This will ensure that an insertion to a leaf node will never cause a page data overflow when you do something like <code>InsertIntoLeaf</code> and then redistribute; it will also prevent an internal node with only one child. However, you indeed can do something like lazily splitting leaf node / handling the case for internal node of only one children. It is up to you; our test cases do not test for these conditions.</li>
+</ul>
+
+<!-- **************************************************** -->
+<!-- Pitfalls                                             -->
+<!-- **************************************************** -->
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+<ul>
+    <li>We do not test your iterator for thread-safe leaf scans. A correct implementation, however, would require the Leaf Page to throw a <code>std::exception</code> when it cannot acquire a latch on its sibling to avoid potential dead-locks.
+
+    <li>If you implement a concurrent B+Tree index correctly, every thread will always acquire latches from the header page to the bottom. When you release latches, make sure you release them in the same order (from the header page to the bottom).
+
+    <li> When implementing the page classes (Task 1), make sure you only add class fields of trivially-constructed types (e.g. <code>int</code>). Do not add vectors and do not modify <code>key_array_</code> and <code>value_array_</code>.
+
+</ul>
+
+<!-- **************************************************** -->
+<!-- Testing                                              -->
+<!-- **************************************************** -->
+<h2 id="testing">Testing</h2>
+<p>You can test your B+ Tree implementation locally using the folloing tests:</p>
+<ul>
+    <li> <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/test/storage/b_plus_tree_insert_test.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>test/storage/b_plus_tree_insert_test.cpp</tt> <i class="fas fa-external-link-alt"></i></a>
+    <li> <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/test/storage/b_plus_tree_sequential_scale_test.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>test/storage/b_plus_tree_sequential_scale_test.cpp</tt> <i class="fas fa-external-link-alt"></i></a>
+    <li> <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/test/storage/b_plus_tree_delete_test.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>test/storage/b_plus_tree_delete_test.cpp</tt> <i class="fas fa-external-link-alt"></i></a>
+    <li> <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/test/storage/b_plus_tree_concurrent_test.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>test/storage/b_plus_tree_concurrent_test.cpp</tt> <i class="fas fa-external-link-alt"></i></a>
+</ul>
+
+<p>We <b>strongly</b> encourage you to write additional test cases for yourself to better understand your implementation.
+Although the public tests cover the most use cases, the grading script will test with more complicated access patterns.</p>
+<p>You can test the individual components of this assigment using our testing framework. We use <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/google/googletest">GTest</a> for unit test cases.</p>
+<p>You can compile and run each test individually from the command line:</p>
+<pre class="shadow-sm p-2">
+$ mkdir build
+$ cd build
+$ make b_plus_tree_insert_test -j$(nproc)
+$ ./test/b_plus_tree_insert_test
+</pre>
+
+<p>You can also run <code>make check-tests</code> to run all the test cases.
+Note that some tests are disabled as you have not implemented future projects.
+You can disable tests in GTest by adding a <code>DISABLED_</code> prefix to the test name.</p>
+<!-- **************************************************** -->
+<!-- Visualizer                                           -->
+<!-- **************************************************** -->
+<h2 id="tree-visualization">Tree Visualization</h2>
+<p>BusTub includes a built-in tool (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/tools/b_plus_tree_printer/b_plus_tree_printer.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>tools/b_plus_tree_printer/b_plus_tree_printer.cpp</tt> <i class="fas fa-external-link-alt"></i></a>) for generating a graphical representation of your B+Tree.
+This tool will help you check your solution for correct behavior to ensure it is performing the splits and merges correctly.</p>
+<p>To generate a dot file after constructing a tree:</p>
+<pre class="shadow-sm p-2">
+# To build the tool
+$ mkdir build
+$ cd build
+$ make b_plus_tree_printer -j
+$ ./bin/b_plus_tree_printer
+>> ... USAGE ...
+>> 5 5 // set leaf node and internal node max size to be 5
+>> f input.txt // Insert into the tree with some inserts
+>> g my-tree.dot // output the tree to dot format
+>> q // Quit the test (Or use another terminal)
+</pre>
+
+<p>You should now have a <code>my-tree.dot</code> file with the <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.wikipedia.org');" href="https://en.wikipedia.org/wiki/DOT_(graph_description_language)">DOT</a> file format in the same directory as your test binary, which you can then visualize with a command line visualizer or an online visualizer:</p>
+<ol>
+    <li> Dump the content to <a onclick="javascript:ga('send', 'pageview', '/outgoing/dreampuf.github.io');" href="http://dreampuf.github.io/GraphvizOnline/">http://dreampuf.github.io/GraphvizOnline/</a>.
+    <li> Or download a <a onclick="javascript:ga('send', 'pageview', '/outgoing/graphviz.org');" href="https://graphviz.org/download/">command line tool</a> for your platform. Then create a PNG file of your tree using this command: <code>dot -Tpng -O my-tree.dot</code>
+</ol>
+
+<p>Consider the following example generated with GraphvizOnline:</p>
+<p><img src="img/project2-tree.png" alt="HLL" class="mx-auto d-block border rounded p-2" width=400 style="max-width: 100%;" /></p>
+<ul>
+    <li> Rectangles in Pink represent internal nodes, those in Green represent leaf nodes.
+    <li> The first row <code>P=3</code> tells you the page id of the tree page.
+    <li> The second row prints out the properties.
+    <li> The third row in a leaf node prints out the keys of tombstoned entries.
+    <li> The third/fourth row prints out keys, and pointers from internal node to the leaf node is constructed from internal node's value.
+    <li> Note that the first box of the internal node is empty. This is not a bug.
+</ul>
+
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-info-circle fa-lg p-1 pe-lg-2"></i>
+    You can also compare with our <a href="../bpt-printer/">reference solution running in your browser</a>.
+</p>
+
+<!-- **************************************************** -->
+<!-- Formatting                                           -->
+<!-- **************************************************** -->
+<h2 id="formatting">Formatting</h2>
+<p>Your code must follow the <a onclick="javascript:ga('send', 'pageview', '/outgoing/google.github.io');" href="https://google.github.io/styleguide/cppguide.html">Google C++ Style Guide</a>.
+We use <a onclick="javascript:ga('send', 'pageview', '/outgoing/clang.llvm.org');" href="https://clang.llvm.org/">Clang</a> to automatically check the quality of your source code.
+Your project grade will be <u><b>zero</b></u> if your submission fails any of these checks.</p>
+<p>Execute the following commands to check your syntax.
+The <code>format</code> target will automatically correct your code.
+The <code>check-lint</code> and <code>check-clang-tidy-p2</code> targets will print errors and instruct you how to fix it to conform to our style guide.</p>
+<pre class="shadow-sm p-2">
+$ make format
+$ make check-lint
+$ make check-clang-tidy-p2
+</pre>
+
+<!-- **************************************************** -->
+<!-- Memory Leaks                                         -->
+<!-- **************************************************** -->
+<h2 id="memory-leaks">Memory Leaks</h2>
+<p>For this project, we use <a onclick="javascript:ga('send', 'pageview', '/outgoing/clang.llvm.org');" href="https://clang.llvm.org/docs/AddressSanitizer.html">LLVM Address Sanitizer (ASAN) and Leak Sanitizer (LSAN)</a> to check for memory errors.
+To enable ASAN and LSAN, configure CMake in debug mode and run tests as you normally would.
+If there is a memory error, you will see a memory error report.
+Note that MacOS <strong>only supports address sanitizer without leak sanitizer</strong>.</p>
+<p>In some cases, address sanitizer might affect the usability of the debugger.
+In this case, you might need to disable all sanitizers by configuring the CMake project with:</p>
+<pre class="shadow-sm p-2">
+$ cmake -DCMAKE_BUILD_TYPE=Debug -DBUSTUB_SANITIZER= ..
+</pre>
+
+<!-- **************************************************** -->
+<!-- Hints                                                -->
+<!-- **************************************************** -->
+<h2 id="development-hints">Development Hints</h2>
+<p>You can use <code>BUSTUB_ASSERT</code> for assertions in debug mode.
+Note that the statements within <code>BUSTUB_ASSERT</code> will NOT be executed in release mode.
+If you have something to assert in all cases, use <code>BUSTUB_ENSURE</code> instead.</p>
+<p>We encourage you to use a graphical debugger to debug your project if you are having problems.</p>
+<p>If you are having compilation problems, running <code>make clean</code> does not completely reset the compilation process.
+You will need to delete your build directory and run <code>cmake ..</code> again before you rerun <code>make</code>.</p>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-question-circle fa-lg p-1 pe-lg-2"></i>
+    Post all of your questions about this project on Piazza. Do <u>not</u> email the TAs directly with questions.
+</p>
+
+<!-- ========================================================================= -->
+<!-- GRADING RUBRIC                                                            -->
+<!-- ========================================================================= -->
+<h1 id="grading">Grading Rubric</h1>
+<p>Each project submission will be graded based on the following criteria:</p>
+<ol>
+    <li> Does the submission successfully execute all of the test cases and produce the correct answer?
+    <li> Does the submission execute without any memory leaks?
+    <li> Does the submission follow the code formatting and style policies?
+</ol>
+
+<!-- Note that we will use additional test cases to grade your submission that are more complex than the sample test cases that we provide you. -->
+
+<!-- ========================================================================= -->
+<!-- LATE POLICY                                                               -->
+<!-- ========================================================================= -->
+<h1 id="late-policy">Late Policy</h1>
+
+<p>See the <a href="../syllabus.html#late-policy">late policy</a> in the syllabus.</p>
+<!-- ========================================================================= -->
+<!-- SUBMISSION                                                                -->
+<!-- ========================================================================= -->
+<h1 id="submission">Submission</h1>
+
+<p>After completing the assignment, you can submit your implementation to Gradescope:</p>
+<ul>
+<li><b><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.gradescope.com');" href="https://www.gradescope.com/courses/1074751">https://www.gradescope.com/courses/1074751</a></b></li>
+</ul>
+<p>Running <code>make submit-p2</code> in your <code>build/</code> directory will generate a <code>zip</code> archive called <code>project2-submission.zip</code> under your project root directory that you can submit to Gradescope.
+You can submit your zip file as many times as you want and get immediate feedback. Your score will be sent via email to your Andrew account within a few minutes after your submission.</p>
+<h2 id="notes-on-gradescope-and-autograder">Notes on Gradescope and Autograder</h2>
+<ol>
+<li>If you are timing out on Gradescope, it is likely because you have a deadlock in your code or your code is too slow and does not run in 60 seconds.</li>
+<li>The autograder will not work if you are printing too many logs in your submissions.</li>
+<li>If the autograder did not work properly, make sure that your formatting commands work and that you are submitting the right files.</li>
+<li>The leaderboard benchmark score will be calculated by stress testing your B+Tree implementation.</li>
+</ol>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-question-circle fa-lg p-1 pe-lg-2"></i>
+    CMU students should use the Gradescope course code announced on Piazza.
+</p>
+
+<!-- ========================================================================= -->
+<!-- COLLABORATION POLICY
+<!-- ========================================================================= -->
+<h1 id="collaboration">Collaboration Policy</h1>
+
+<ul>
+<li>Every student has to work individually on this assignment.</li>
+<li>Students are allowed to discuss high-level details about the project with others.</li>
+<li>Students are <strong>not</strong> allowed to copy the contents of a white-board after a group meeting with other students.</li>
+<li>Students are <strong>not</strong> allowed to copy the solutions from another colleague.</li>
+</ul>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-exclamation-triangle fa-lg p-1 pe-lg-2"></i>
+    <b>WARNING:</b> All of the code for this project must be your own. You may not copy source code from other students or other sources that you find on the web. Plagiarism <b>will not</b> be tolerated. See CMU's <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.cmu.edu');" href="https://www.cmu.edu/policies/student-and-student-life/academic-integrity.html">Policy on Academic Integrity</a> for additional information.
+</p>
+        </div>
+        <!-- END: main -->
+    </main>
+
+<!-- Footer -->
+<footer class="footer mt-auto bg-black">
+  <div class="container">
+    <div class="row pt-3 pb-2">
+      <div class="col-4 my-auto">
+        <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu" title="Carnegie Mellon Database Group"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmu-db-group.svg" class="cmudb-logo" /></a>
+      </div>
+      <div class="col-8 float-end">
+
+            <div class="dropdown float-end justify-content-end">
+              <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-book"></i> Archives
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                    <li class=""> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2025/" class="dropdown-item" target="_archive1" title="View Previous Course Website">Spring 2025 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2024/" class="dropdown-item" target="_archive2" title="View Previous Course Website">Fall 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2024/" class="dropdown-item" target="_archive3" title="View Previous Course Website">Spring 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2023/" class="dropdown-item" target="_archive4" title="View Previous Course Website">Fall 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2023/" class="dropdown-item" target="_archive5" title="View Previous Course Website">Spring 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2022/" class="dropdown-item" target="_archive6" title="View Previous Course Website">Fall 2022 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2021/" class="dropdown-item" target="_archive7" title="View Previous Course Website">Fall 2021 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2020/" class="dropdown-item" target="_archive8" title="View Previous Course Website">Fall 2020 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2019/" class="dropdown-item" target="_archive9" title="View Previous Course Website">Fall 2019 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2018/" class="dropdown-item" target="_archive10" title="View Previous Course Website">Fall 2018 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2017/" class="dropdown-item" target="_archive11" title="View Previous Course Website">Fall 2017 <i class="fa fa-external-link"></i></a>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</footer>    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6CTRQK4NY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-T6CTRQK4NY');
+    </script>
+    <!-- End Google Analytics Code -->
+
+<!--     <script src="js/bootstrap.bundle.min.js"></script> -->
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="https://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+        <meta name="author" content="Andy Pavlo" />
+        <meta name="description" content="List of questions and answers for the course." />
+    
+    <meta name="keywords" content="" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link href="https://15445.courses.cs.cmu.edu/fall2025/css/style.css" rel="stylesheet" />
+<!--     <link href="https://15445.courses.cs.cmu.edu/fall2025/css/pygment.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <meta property="og:site_name" content="CMU 15-445/645" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="FAQ - CMU 15-445/645 :: Intro to Database Systems (Fall 2025)"/>
+    <meta property="og:url" content="https://15445.courses.cs.cmu.edu/fall2025/faq.html"/>
+    <meta property="article:published_time" content="2025-09-05" />
+    <meta property="og:description" content="List of questions and answers for the course." />
+        <meta property="og:image"
+              content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@CMUDB">
+        <meta name="twitter:creator" content="@CMUDB">
+    <meta name="twitter:domain" content="https://15445.courses.cs.cmu.edu/fall2025">
+            <meta property="twitter:image"
+                  content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+    <meta property="twitter:label1" content="Semester" />
+    <meta property="twitter:data1" content="Fall 2025" />
+        
+    
+<!--     <link href="https://db.cs.cmu.edu/favicon.png" rel="icon"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/apple-touch-icon.gif">
+    <link rel="icon" type="image/gif" sizes="32x32" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-32x32.gif">
+    <link rel="icon" type="image/gif" sizes="16x16" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-16x16.gif">
+    <link rel="manifest" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#c41230">
+    <meta name="theme-color" content="#010000">
+
+
+    <title>FAQ | CMU 15-445/645 :: Intro to Database Systems (Fall 2025) </title>
+</head>
+
+<body class="min-vh-100 d-flex flex-column h-100">
+    <!-- BEGIN: header -->
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg bg-black navbar-dark" aria-label="Navigation Menu">
+    <div class="container">
+      <a class="navbar-brand" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025" title="CMU 15-445/645"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmudb-icon-white.svg" width="24"> CMU 15-445/645</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav me-auto mb-0 text-uppercase">
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/assignments.html">Assignments</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link active" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/faq.html">FAQ</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/schedule.html">Schedule</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/syllabus.html">Syllabus</a>
+              </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-0 text-uppercase">
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Youtube" onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5" target="_yt"><i class="fab fa-youtube"></i> Youtube</a>
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Piazza" onclick="javascript:ga('send', 'pageview', '/outgoing/piazza.com');" href="https://piazza.com/cmu/fall2025/15445645" target="_pz"><i class="fas fa-comments"></i> Piazza</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>    <!-- END: header -->
+
+    <main class="flex-shrink-0 page">
+        <!-- BEGIN: banner -->
+<!-- Empty space -->
+<!--<div class="container mt-5">
+    <div class="row">
+    </div>
+</div>-->
+        <!-- END: banner -->
+
+
+<!-- BEGIN: LINK TO NEW COURSE -->
+<style>
+div#new-class-alert {
+/*     position: fixed; */
+    z-index: 9999;
+}
+div#new-class-alert div {
+    margin: auto;
+    font-size: 130%;
+    text-align: center;
+    background-color: var(--link-color) !important;
+}
+div#new-class-alert a {
+  color: white !important;
+}
+</style>
+<div id="new-class-alert"  class="row mt-5 mb-0 mx-auto">
+<div class="p-2 py-3 col-12 col-md-10 col-lg-8 alert alert-danger text-center text-white border-0">
+<i class="fa fa-exclamation-triangle fa-1x"></i>
+<a href="/" title="View latest version of 15-445/645">
+<b>NOTICE:</b> This is an archived version of the course. Click here to view the latest offering.
+</a>
+</div>
+</div>
+<!-- END: LINK TO NEW COURSE -->
+
+        <!-- BEGIN: main -->
+        <div class="container main-content rounded-5 mb-0 mb-lg-5 mt-0 mt-sm-3 mt-md-4 mt-lg-5 py-3 py-md-5 px-md-5 shadow-sm bg-light content">
+<h1 class="page-header mb-3 mb-md-4"><i class="fas fa-question-circle"></i> <span class="text-uppercase">FAQ</span>
+    <span class="fw-normal fs-6 float-end mt-2 text-muted published d-none d-lg-inline" style="font-family: sans; letter-spacing: normal; text-shadow: none;">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-09-05 14:55:56.917297-04:00">Last Updated: Sep 05, 2025</time>
+    </span>
+</h1>
+<div class="row pb-3 d-block d-lg-none">
+    <div class="col-12 text-start text-muted published">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-09-05 14:55:56.917297-04:00">Last Updated: Sep 05, 2025</time>
+    </div>
+</div>
+<!-- START FAQ -->
+<!-- AUTO-GENERATED BY GENERATE-SCHEDULE SCRIPT -->
+<!-- ANY MODIFICATIONS WILL BE OVERWRITTEN -->
+
+<!-- <ul class="list-unstyled faq">
+
+</ul>
+<hr /> -->
+<div class="mb-5 mb-md-4 faq" id="q1"><h2 class="faq-question">Q1: Will this class be taught in person or online? <a class="anchor d-none d-lg-inline text-muted small" href="#q1" aria-hidden="true" title="Anchor Link: Q1"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+The <b>Fall 2025</b> offering of this course will be taught at Carnegie Mellon's Pittsburgh campus. The lectures will be taught in person and all students are expected to attend unless there is extenuating circumstances.</div>
+
+<div class="mb-5 mb-md-4 faq" id="q2"><h2 class="faq-question">Q2: How can I get off the wait list? <a class="anchor d-none d-lg-inline text-muted small" href="#q2" aria-hidden="true" title="Anchor Link: Q2"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+<b>Please do <u>not</u> contact the instructors, TAs, nor admins about whether you have a chance of enrolling into the course.</b> <p>You will be contacted if you are enrolled in the class. Our capacity in the course is limited to the number of TAs that we have and the room size. We will move students off of the wait list as new seats become available. Preferential consideration is given to SCS students. Switching between sections will <u>not</u> improve your chances of getting into the class. Unless this course is required for your program, the fact that it is your last semester will <u>not</u> make a difference on whether you can enroll. <!-- <BR/><B>Update 2020-08-31: The course roster is full. We will not be taking any additional students from the waitlist.</B>--></div>
+
+<div class="mb-5 mb-md-4 faq" id="q3"><h2 class="faq-question">Q3: Will the lectures be recorded? Will the videos also be available on YouTube for non-CMU students? <a class="anchor d-none d-lg-inline text-muted small" href="#q3" aria-hidden="true" title="Anchor Link: Q3"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+Yes, we will record the lectures and make them available to CMU students. Our plan is to make the videos available to both CMU and non-CMU students on the <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/c/CMUDatabaseGroup" target="_youtube">CMU-DB YouTube Channel</a> immediately after class</div>
+
+<div class="mb-5 mb-md-4 faq" id="q4"><h2 class="faq-question">Q4: Does this course have recitations? <a class="anchor d-none d-lg-inline text-muted small" href="#q4" aria-hidden="true" title="Anchor Link: Q4"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+No, there are no scheduled recitations. There are only lectures and additional help sessions for the projects during semester.</div>
+
+<div class="mb-5 mb-md-4 faq" id="q5"><h2 class="faq-question">Q5: Do I need to know C++ for this course? <a class="anchor d-none d-lg-inline text-muted small" href="#q5" aria-hidden="true" title="Anchor Link: Q5"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+Yes, you should be familiar with programming and debugging in C++. All the course projects are on the <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub" target="_bustub">BusTub</a> system written in C++20. There will be a mandatory project to evaluate your C++ proficiency at the beginning of the semester. We will not teach you C++ during the semester. If you are unsure about your C++ programming skills, then please prepare accordingly. You can also to refer to our <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/15445-bootcamp">C++ Bootcamp</a> for additional materials.</div>
+
+<div class="mb-5 mb-md-4 faq" id="q6"><h2 class="faq-question">Q6: Will this course be taught in the Spring semester? <a class="anchor d-none d-lg-inline text-muted small" href="#q6" aria-hidden="true" title="Anchor Link: Q6"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+Yes! <b>Intro to Database Systems (15-445/645)</b> will be taught every semester. The companion <a onclick="javascript:ga('send', 'pageview', '/outgoing/15721.courses.cs.cmu.edu');" href="https://15721.courses.cs.cmu.edu/">Advanced Database Systems (15-721)</a> course will also be taught most semesters going forward. See the <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu/courses/">CMU-DB Course page</a> for additional information.</div>
+
+<div class="mb-5 mb-md-4 faq" id="q7"><h2 class="faq-question">Q7: How can people not enrolled in the class test their projects? <a class="anchor d-none d-lg-inline text-muted small" href="#q7" aria-hidden="true" title="Anchor Link: Q7"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+All of the source code for the projects are available on <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub" target="_bustub">Github</a>. There is a <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.gradescope.com');" href="https://www.gradescope.com/">Gradescope</a> submission site available to non-CMU students: <ul> <li><b>Entry Code:</b> <tt>5R4XPZ</tt> <li><b>School:</b> <tt>Carnegie Mellon University</tt> </ul> We will make the auto-grader for each assignment available to non-CMU students on Gradescope <u>after</u> their due date for CMU students. In exchange for making this available to the public, we ask that you do <u>not</u> make your project implementations public on Github or other source code repositories.</div>
+
+<div class="mb-5 mb-md-4 faq" id="q8"><h2 class="faq-question">Q8: Where can I go to discuss the course material or projects? <a class="anchor d-none d-lg-inline text-muted small" href="#q8" aria-hidden="true" title="Anchor Link: Q8"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+If you are a CMU student during the semester, then post your questions to the <a onclick="javascript:ga('send', 'pageview', '/outgoing/piazza.com');" href="https://piazza.com/cmu/fall2025/15445645/">Piazza message board</a>. If you are not a CMU student, there is an <a onclick="javascript:ga('send', 'pageview', '/outgoing/discord.gg');" href="https://discord.gg/YF7dMCg">Discord channel</a> to meet other students. Note: This Discord channel is <u>not</u> affiliated with CMU and will not be monitored by instructors or TAs.<p><b>⚠ Do <u>not</u> post questions about the project as GitHub issues.</b></div>
+
+<div class="mb-5 mb-md-4 faq" id="q9"><h2 class="faq-question">Q9: How do I become a teaching assistant (TA) for 15-445/645? <a class="anchor d-none d-lg-inline text-muted small" href="#q9" aria-hidden="true" title="Anchor Link: Q9"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+We only hire CMU students as TAs for this course if you satisfy at least one of the following criteria:<ol><li> You already completed 15-445/645 in a previous semester. If you have a high ranking score in the project leaderboards, we will reach out to you to see if you want to TA next semester. <li> You are a <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/skyzh" target="_chi_is_a_freak">freak-of-nature</a> with substantial DBMS internals development experience before arriving at CMU. The instructor makes the final decision on whether your background is sufficient <em>(Spoiler: You probably do <u>not</u> have this)</em>.</ol> <b>⚠ MS Students:</b> Given the complexity of the <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub" target="_bustub">project codebase</a> and the unique nature of this course, the database course you took as an undergrad before coming to CMU is likely not enough to prepare you to be a 15-445/645 TA.</div>
+
+<div class="mb-5 mb-md-4 faq" id="q10"><h2 class="faq-question">Q10: Is it a good idea to start a family while taking this course? <a class="anchor d-none d-lg-inline text-muted small" href="#q10" aria-hidden="true" title="Anchor Link: Q10"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+No, we strongly advise that every student who is serious about pursuing a database-centric lifestyle refrain from acquiring, obtaining, or receiving a baby during the semester. Children are a crushing obligation that requires at least 30 hours of your time per week, which could have been spent learning about and working on database systems instead.</div>
+
+<div class="mb-5 mb-md-4 faq" id="q11"><h2 class="faq-question">Q11: This course helped me prepare for interviews and now I am making more money with my new job! How can I show my gratitude to you? <a class="anchor d-none d-lg-inline text-muted small" href="#q11" aria-hidden="true" title="Anchor Link: Q11"><i class="fas fa-link anchor-icon text-muted"></i></a></h2>
+Congratulations! We love to hear about people getting jobs because of CMU-DB courses. Feel free to send us an email even if you are not a CMU student.<p class="pt-2"><b>⚠ If you would like to give back to our research and education efforts to help the next generation of database students, please consider donating to the <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu/fellowship/">CMU-DB Database Research Endowed Fellowship</a>.</b> If you have other ideas on how you would like to sponsor our research group, please email the instructors. Word is bond.</div>
+
+<!-- END FAQ -->
+        </div>
+        <!-- END: main -->
+    </main>
+
+<!-- Footer -->
+<footer class="footer mt-auto bg-black">
+  <div class="container">
+    <div class="row pt-3 pb-2">
+      <div class="col-4 my-auto">
+        <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu" title="Carnegie Mellon Database Group"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmu-db-group.svg" class="cmudb-logo" /></a>
+      </div>
+      <div class="col-8 float-end">
+
+            <div class="dropdown float-end justify-content-end">
+              <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-book"></i> Archives
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                    <li class=""> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2025/" class="dropdown-item" target="_archive1" title="View Previous Course Website">Spring 2025 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2024/" class="dropdown-item" target="_archive2" title="View Previous Course Website">Fall 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2024/" class="dropdown-item" target="_archive3" title="View Previous Course Website">Spring 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2023/" class="dropdown-item" target="_archive4" title="View Previous Course Website">Fall 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2023/" class="dropdown-item" target="_archive5" title="View Previous Course Website">Spring 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2022/" class="dropdown-item" target="_archive6" title="View Previous Course Website">Fall 2022 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2021/" class="dropdown-item" target="_archive7" title="View Previous Course Website">Fall 2021 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2020/" class="dropdown-item" target="_archive8" title="View Previous Course Website">Fall 2020 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2019/" class="dropdown-item" target="_archive9" title="View Previous Course Website">Fall 2019 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2018/" class="dropdown-item" target="_archive10" title="View Previous Course Website">Fall 2018 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2017/" class="dropdown-item" target="_archive11" title="View Previous Course Website">Fall 2017 <i class="fa fa-external-link"></i></a>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</footer>    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6CTRQK4NY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-T6CTRQK4NY');
+    </script>
+    <!-- End Google Analytics Code -->
+
+<!--     <script src="js/bootstrap.bundle.min.js"></script> -->
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

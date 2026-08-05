@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="https://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+        <meta name="author" content="Andy Pavlo" />
+        <meta name="description" content="Remember to pull the latest code from the bustub repository. Do not post your code on a public GitHub repository. Overview In this project, you will add transaction support for BusTub by implementing optimistic multi-version concurrency control (MVOCC). The project consists of four required tasks and two leaderboard benchmarks. Task …" />
+    
+    <meta name="keywords" content="" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link href="https://15445.courses.cs.cmu.edu/fall2025/css/style.css" rel="stylesheet" />
+<!--     <link href="https://15445.courses.cs.cmu.edu/fall2025/css/pygment.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <meta property="og:site_name" content="CMU 15-445/645" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Project #4 - Concurrency Control - CMU 15-445/645 :: Intro to Database Systems (Fall 2025)"/>
+    <meta property="og:url" content="https://15445.courses.cs.cmu.edu/fall2025/project4/index.html"/>
+    <meta property="article:published_time" content="2025-12-07" />
+    <meta property="og:description" content="Remember to pull the latest code from the bustub repository. Do not post your code on a public GitHub repository. Overview In this project, you will add transaction support for BusTub by implementing optimistic multi-version concurrency control (MVOCC). The project consists of four required tasks and two leaderboard benchmarks. Task …" />
+        <meta property="og:image"
+              content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@CMUDB">
+        <meta name="twitter:creator" content="@CMUDB">
+    <meta name="twitter:domain" content="https://15445.courses.cs.cmu.edu/fall2025">
+            <meta property="twitter:image"
+                  content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+    <meta property="twitter:label1" content="Semester" />
+    <meta property="twitter:data1" content="Fall 2025" />
+        
+    
+<!--     <link href="https://db.cs.cmu.edu/favicon.png" rel="icon"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/apple-touch-icon.gif">
+    <link rel="icon" type="image/gif" sizes="32x32" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-32x32.gif">
+    <link rel="icon" type="image/gif" sizes="16x16" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-16x16.gif">
+    <link rel="manifest" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#c41230">
+    <meta name="theme-color" content="#010000">
+
+
+    <title>Project #4 - Concurrency Control | CMU 15-445/645 :: Intro to Database Systems (Fall 2025) </title>
+</head>
+
+<body class="min-vh-100 d-flex flex-column h-100">
+    <!-- BEGIN: header -->
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg bg-black navbar-dark" aria-label="Navigation Menu">
+    <div class="container">
+      <a class="navbar-brand" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025" title="CMU 15-445/645"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmudb-icon-white.svg" width="24"> CMU 15-445/645</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav me-auto mb-0 text-uppercase">
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/assignments.html">Assignments</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/faq.html">FAQ</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/schedule.html">Schedule</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/syllabus.html">Syllabus</a>
+              </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-0 text-uppercase">
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Youtube" onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5" target="_yt"><i class="fab fa-youtube"></i> Youtube</a>
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Piazza" onclick="javascript:ga('send', 'pageview', '/outgoing/piazza.com');" href="https://piazza.com/cmu/fall2025/15445645" target="_pz"><i class="fas fa-comments"></i> Piazza</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>    <!-- END: header -->
+
+    <main class="flex-shrink-0 page">
+        <!-- BEGIN: banner -->
+<!-- Empty space -->
+<!--<div class="container mt-5">
+    <div class="row">
+    </div>
+</div>-->
+        <!-- END: banner -->
+        <!-- BEGIN: main -->
+        <div class="container main-content rounded-5 mb-0 mb-lg-5 mt-0 mt-sm-3 mt-md-4 mt-lg-5 py-3 py-md-5 px-md-5 shadow-sm bg-light content">
+<h1 class="page-header mb-3 mb-md-4"><i class="fas fa-database"></i> <span class="text-uppercase">Project #4 - Concurrency Control</span>
+    <span class="fw-normal fs-6 float-end mt-2 text-muted published d-none d-lg-inline" style="font-family: sans; letter-spacing: normal; text-shadow: none;">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-12-07 10:39:57.362607-05:00">Last Updated: Dec 07, 2025</time>
+    </span>
+</h1>
+<div class="row pb-3 d-block d-lg-none">
+    <div class="col-12 text-start text-muted published">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-12-07 10:39:57.362607-05:00">Last Updated: Dec 07, 2025</time>
+    </div>
+</div>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-exclamation-triangle fa-lg p-1 pe-lg-2"></i>
+    Remember to pull the latest code from the bustub repository. Do <u>not</u> post your code on a public GitHub repository.
+</p>
+
+<!-- ========================================================================= -->
+<!-- OVERVIEW                                                                  -->
+<!-- ========================================================================= -->
+
+<h1 id="overview">Overview</h1>
+
+<p>In this project, you will add transaction support for BusTub by implementing optimistic multi-version concurrency control (MVOCC). The project consists of four required tasks and two leaderboard benchmarks.</p>
+<ul class="fw-semibold">
+    <li> <a href="#task1">Task #1 - Timestamps</a>
+    <li> <a href="#task2">Task #2.1 - Storage Format</a>
+    <li> <a href="#task2.2">Task #2.2 - Sequential Scan / Tuple Retrieval</a>
+    <li> <a href="#task3">Task #3 - MVCC Executors</a>
+    <li> <a href="#task4">Task #4 - Primary Key Index</a>
+</ul>
+
+<p>This project must be completed individually (i.e., no groups). Before you start, please run <code>git pull public master</code> to pull the latest code from the public <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub">BusTub repo</a> and then rerun <code>cmake</code> to reconfigure the Makefile.</p>
+<p>We would recommend reading over everything <em>once</em> before starting to write code. If you don't have time to do that (since this writeup is quite long), you can focus on reading the sections for just Task 1 and 2, as they contain specific guidance on implementation. This will be much faster than missing out on some information, implementing something incorrectly, and then having to start over.</p>
+<!-- START project4 -->
+<!-- AUTO-GENERATED BY GENERATE-SCHEDULE SCRIPT -->
+<!-- ANY MODIFICATIONS WILL BE OVERWRITTEN -->
+<ul>
+<li><b>Release Date:</b> Nov 10, 2025</li>
+<li><b>Due Date:</b> Dec 07, 2025 @ 11:59pm</li>
+</ul>
+<!-- END project4 -->
+
+<!-- ========================================================================= -->
+<!-- BACKGROUND                                                                -->
+<!-- ========================================================================= -->
+
+<h1 id="background">Background</h1>
+
+<p>In the previous projects, BusTub operated as a single-versioned DBMS. You will now add support for MVCC without modifying its core table storage architecture (i.e., table heaps). The high-level version of this MVCC protocol has been used in DBMSs like <a onclick="javascript:ga('send', 'pageview', '/outgoing/hyper-db.de');" href="https://hyper-db.de/">HyPer</a> and <a onclick="javascript:ga('send', 'pageview', '/outgoing/duckdb.org');" href="https://duckdb.org">DuckDB</a>.</p>
+<p>The storage model in this protocol is similar to the delta table architecture discussed in the lecture. For every single tuple that is stored, the DBMS additionally stores tuple deltas in <em>undo logs</em>. The tuple in the table heap and its corresponding undo logs / deltas form a singly-linked list called the <em>version chain</em>. With this version chain, the DBMS logically "stores" every previous version of a tuple. That is, the DBMS only stores the deltas between each version and not complete versions of a tuple.</p>
+<p>The DBMS stores undo logs within a transaction's in-memory workspace, and transactions themselves are stored in the transaction manager's in-memory data structure. In a production system these logs would be persisted to disk, but this project does not require that for BusTub.</p>
+<p>You will first need to implement the <code>SNAPSHOT ISOLATION</code> isolation level for all of your transactions. You will then expand your concurrency control protocol to support the <code>SERIALIZABLE</code> isolation level in <a href="#task4.4">Task #4.4</a>.</p>
+<p>In every test case, all transactions in the test case run at the same isolation level. All concurrent test cases are public, and all hidden test cases are single-threaded. On Gradescope, you will find a description of what each test case is doing.</p>
+<!-- ========================================================================= -->
+<!-- PROJECT SPECIFICATION                                                     -->
+<!-- ========================================================================= -->
+
+<h1 id="project-specification">Project Specification</h1>
+<p>Like previous projects, we have provided classes that define the APIs you must implement. Do not modify the signatures of the predefined functions or remove predefined member variables in these classes unless indicated. If you do, our test code will not work, and you will not receive credit for the project. You may add private helper functions and member variables to these classes as needed.</p>
+<p>Here are the list of files you will likely need to modify in this project:</p>
+<ul>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/concurrency/transaction_manager.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/concurrency/transaction_manager.h</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/concurrency/transaction_manager.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/concurrency/transaction_manager.cpp</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/execution/execution_common.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/execution/execution_common.h</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/execution/execution_common.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/execution/execution_common.cpp</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/execution/executors/seq_scan_executor.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/execution/executors/seq_scan_executor.h</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/execution/seq_scan_executor.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/execution/seq_scan_executor.cpp</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/execution/executors/index_scan_executor.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/execution/executors/index_scan_executor.h</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/execution/index_scan_executor.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/execution/index_scan_executor.cpp</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/execution/executors/insert_executor.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/execution/executors/insert_executor.h</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/execution/insert_executor.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/execution/insert_executor.cpp</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/execution/executors/update_executor.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/execution/executors/update_executor.h</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/execution/update_executor.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/execution/update_executor.cpp</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/execution/executors/delete_executor.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/execution/executors/delete_executor.h</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/execution/delete_executor.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/execution/delete_executor.cpp</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/concurrency/watermark.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/concurrency/watermark.h</tt> <i class="fas fa-external-link-alt"></i></a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/concurrency/watermark.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/concurrency/watermark.cpp</tt> <i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>And here is a list of functions / classes that might be helpful in this project:</p>
+<ul>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/table/table_heap.h"><code>TableHeap</code></a>: <code>MakeIterator</code>, <code>GetTuple</code>, <code>GetTupleMeta</code>, <code>UpdateTupleMeta</code>, <code>UpdateTupleInPlace</code>, <code>MakeIterator</code>, <code>MakeEagerIterator</code> (and for <a href="#task3.6">Task #3.6</a> and beyond, everything with <code>Lock</code>).</li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/table/tuple.h"><code>Tuple</code></a>: <code>SetRid</code>, <code>GetRid</code>, additional <code>Tuple</code> constructors, <code>Empty</code>, <code>IsTupleContentEqual</code>, <code>GetValue</code>.</li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/type/value.h"><code>Value</code></a>: <code>ValueFactory::Get____</code>, <code>ValueFactory::GetNullValueByType</code>, <code>CompareExactlyEquals</code>.</li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/catalog/schema.h"><code>Schema</code></a>: <code>GetColumn</code>, <code>GetColumnCount</code>.</li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/concurrency/transaction_manager.h"><code>TransactionManager</code></a>: <code>UpdateUndoLink</code>, <code>GetUndoLink</code>, <code>GetUndoLog</code>, <code>GetUndoLogOptional</code>, <code>UpdateTupleAndUndoLink</code>, <code>GetTupleAndUndoLink</code></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/concurrency/transaction.h"><code>Transaction</code></a>: All member functions are important, as well as the <code>UndoLink</code> and <code>UndoLog</code> structs.</li>
+</ul>
+<p>You will likely need to frequently map an optional value to something else. You can use the following syntax to write more concise code (monadic operations): <code>auto x = opt.has_value() ? operation(*opt) : std::nullopt;</code>.</p>
+<p>You can also use C++14 tuple unpacking syntax: <code>auto [meta, tuple] = iter-&gt;GetTuple();</code>.</p>
+<p>The correctness of this project depends on the correctness of your implementation of <a href="../project1">Project #1</a> and <a href="../project2">Project #2</a>. You can get a full score in this project without a complete implementation of <a href="../project3">Project #3</a>, but this is because you will need to rewrite most of the access method executors you already implemented based on MVCC storage. Additionally, a working implementation of the optimizer rule that transforms a sequential scan into an index scan is required for <a href="#task4.2">Task 4.2</a>. Finally, a working aggregation executor from <a href="../project3">Project #3</a> is required to complete the leaderboard test in this project.</p>
+<p>We do <u>not</u> provide solutions for previous projects.</p>
+<!-- ********************************************************************** -->
+<!-- Task #1 - Timestamps                                                  -->
+<!-- ********************************************************************** -->
+<h2 class="task" id="task1">Task #1 - Timestamps</h2>
+
+<p>In BusTub, each transaction is assigned two timestamps: a <em>read</em> timestamp and <em>commit</em> timestamp. We will walk through how those timestamps are assigned. In this task, you will need to implement this on the transaction manager so that it can assign timestamps correctly to transactions.</p>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Timestamp Allocation                      -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<div class="question">
+<h3 id="task1.1">1.1 Timestamp Allocation</h3>
+<p>When a transaction begins, it is assigned a read timestamp that is equal to the commit timestamp of the most recently committed transaction. At a high level, you can think of this as recording the timestamp of the latest atomic write into the database. The read timestamp determines what data can be safely and correctly read by a transaction. That is, the read timestamp determines the latest version of a tuple that the current transaction can see.</p>
+<p>When a transaction commits, it is assigned a monotonically-increasing commit timestamp. The commit timestamp determines the serialization order of the transactions. Since these commit timestamps are unique, we can also uniquely identify committed transactions by their commit timestamp.</p>
+<p>Here is an example of a table heap and version chain after several writes / updates to 4 tuples in the table heap (A, B, C, D):</p>
+<p><a href="img/1-1-ts.png"><img src="img/1-1-ts.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p>In this diagram, A1 refers to the first version of tuple A, and A3 refers to third version of tuple A. A4 refers to the fourth version of tuple A, and it is also the most recent or "true" version of tuple A. B4 and C4 are actually the third version of tuples B and C respectively, and we are only notating it like this for the sake of the explanation below.</p>
+<p>The timestamps (<code>ts=#</code>) refer to the commit timestamps of the transactions that each of the tuples belong to. So [A1, B1, C1] belong to the transaction with commit timestamp = 1 (which we can shorthand refer to as transaction 1), and [A3, B3, D3] belong to the transaction with commit timestamp = 3 (transaction 3). The most recent committed transaction in this diagram is the transaction with commit timestamp = 4 with [A4, B4, C4].</p>
+<p>Suppose we have a transaction with an assigned read timestamp of 3. This means our transaction started <em>after</em> transaction 3 committed and <em>before</em> transaction 4 committed. Thus, our transaction is only be able to observe [A3, B3, C2, D3].</p>
+<p>For [A, B, C], our transaction cannot observe [A4, B4, C4] because those version of the tuples all have a timestamp of 4 (which is in the future relative to our read timestamp of 3). Our transaction needs to traverse the undo logs for each tuple and read the first version it encounters that has a version less than or equal to 3. For A and B, the first versions it encounters are A3 and B3. For C, the first version encountered is C2. For D, since the current version of the tuple already has a timestamp of 3, it is safe to read directly.</p>
+<p>Another example is if our read timestamp was 2, then our transaction would see only [A2, B1, C2], since D was only created at timestamp 3 (which is in the future relative to our read timestamp 2).</p>
+<p>You will need to assign the transactions with the correct read timestamp and commit timestamp in this task. See <code>TransactionManager::Begin</code> and <code>TransactionManager::Commit</code> in <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/concurrency/transaction_manager.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/concurrency/transaction_manager.h</tt> <i class="fas fa-external-link-alt"></i></a> for more information. We have already provided the starter code for <code>TransactionManager::Abort</code>, and you do not need to change anything in <code>Abort</code> in order to get full points for Task #1.</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Watermark                                 -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task1.2">1.2 Watermark</h3>
+<p>The <strong>watermark</strong> is the lowest read timestamp among all transactions that have not yet committed or aborted. If there is no such a transaction, the watermark is the latest commit timestamp. The easiest way of computing the watermark is to iterate over all transactions in the transaction manager map and find the minimum <code>read_ts</code> among all in-progress transactions.</p>
+<p>However, this simple strategy is inefficient. In this task, you will need to implement an algorithm in <code>O(log N)</code> time complexity that computes the watermark. Please refer to <code>watermark.h</code> and <code>watermark.cpp</code> for more information. You will also need to call <code>Watermark::AddTxn</code> and <code>Watermark::RemoveTxn</code> when a transaction starts / commits / aborts.</p>
+<p>There are many ways to do this. The reference solution implements an amortized <code>O(1)</code> algorithm using a hash map, and there is additionally a useful <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.cppreference.com');" href="https://en.cppreference.com/w/cpp/container">container</a> in the C++ standard library that might make an <code>O(log N)</code> implementation easy.</p>
+<p>You should pass all test cases in the <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/test/txn/txn_timestamp_test.cpp"><code>TxnTimestampTest</code></a> suite at this point.</p>
+</div>
+<!-- ********************************************************************** -->
+<!-- Task #2 - Storage Format and Sequential Scan                           -->
+<!-- ********************************************************************** -->
+
+<h2 class="task" id="task2">Task #2 - Storage Format and Sequential Scan</h2>
+
+<p>BusTub stores transaction data in three places: the table heap, the transaction manager, and inside each transaction's workspace. The table heap always contains the latest tuple data. The transaction manager stores a pointer to the latest undo log for every tuple (<code>PageVersionInfo</code>). Transactions store the undo logs that they create, which record how a transaction has modified a tuple.</p>
+<p>Below is a representation of the same diagram as above, but with the <code>PageVersionInfo</code> struct included and the undo logs located in a specific transaction's workspace. The dotted lines in the diagram are not pointers, but rather are logical connections via the transaction manager.</p>
+<p><a href="img/2-1-storage-format.png"><img src="img/2-1-storage-format.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>To retrieve a tuple at any given read timestamp, you will need to (1) fetch all modifications (aka. undo logs) that happened after the given timestamp, and (2) roll back those modifications (“undo” the undo logs) from the latest version of the tuple to recover the past version of that tuple.</p>
+<p>This is similar to the delta table storage model that we covered in the lectures, except that there is no physical “delta table” to store the delta records. Instead, these records are stored within the workspace of each transaction (not being persisted on the disk) so as to simplify the implementation.</p>
+<h3>Data Structures &amp; Helper Functions</h3>
+
+<p>This section is an introduction to guide you through the data structures you will need for tuple reconstruction and further operations. We would recommend reading this introduction together with the starter code. You come back to this section if you encounter any problems or confusion in other tasks.</p>
+<p>The DBMS stores <code>Tuple</code> and <code>TupleMeta</code> data in <code>TableHeap</code> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/storage/table_heap.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/storage/table_heap.h</tt> <i class="fas fa-external-link-alt"></i></a>). You can call helper functions like <code>GetTuple</code> or <code>GetTupleMeta</code> to get that data, <code>UpdateTupleInPlace</code> to update tuple for single-threaded test cases, and <code>InsertTuple</code> to insert tuples into the table heap (these functions are defined in <code>table_heap.h</code>). You may notice that there are also functions like <code>UpdateTupleInPlaceWithLockAcquired</code>, which are functions you will use for the concurrent tasks.</p>
+<p>The transaction header (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/concurrency/transaction.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/concurrency/transaction.h</tt> <i class="fas fa-external-link-alt"></i></a>) contains the classes and objects used to track a transaction's runtime behavior and state.</p>
+<p>The <code>UndoLog</code> struct stores the information about the modification / deletion of a tuple by a transaction. <a href="#task2.1">Task 2.1</a> introduces the format of <code>UndoLog</code> in detail. The DBMS can reconstruct tuples based on these <code>UndoLog</code>s. Each transaction stores a vector of <code>UndoLog</code>s deltas of every tuple that the transaction has modified. For example, if txn1 updates tuple 1 and tuple 2, txn1 will store an UndoLog for both tuple 1 and tuple 2. The transaction will record both the delta between the previous versions of tuple 1 and tuple 2 as well as txn1's version of them. Your implementation should call <code>ModifyUndoLog</code> to modify an existing <code>UndoLog</code> and <code>AppendUndoLog</code> to append new <code>UndoLog</code>s (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/concurrency/transaction.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/concurrency/transaction.h</tt> <i class="fas fa-external-link-alt"></i></a>). By storing all of the <code>UndoLog</code> of a single transaction together, we can easily make updates to these modified tuples and their version info when the transaction commits or aborts.</p>
+<p>The <code>UndoLink</code> struct is the pointer to the <code>UndoLog</code>. We use <code>UndoLink</code> to link all the <code>UndoLog</code> for each tuple together. They are defined as below:</p>
+<pre class="shadow-sm p-2">
+/** Represents a link to a previous version of this tuple */
+struct UndoLink {
+  /* Previous version can be found in which txn */
+  txn_id_t prev_txn_{INVALID_TXN_ID};
+  /* The log index of the previous version in `prev_txn_` */
+  int prev_log_idx_{0};
+};
+</pre>
+
+<p>An <code>UndoLink { prev_txn_: txn5, prev_log_idx_: i }</code> points to the <code>i</code>th <code>UndoLog</code> in txn5's <code>undo_logs_</code>s buffer. You can get the target <code>UndoLog</code> from given <code>UndoLink</code> by calling <code>GetUndoLog</code> and <code>GetUndoLogOptional</code> (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/concurrency/transaction_manager_impl.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/concurrency/transaction_manager_impl.cpp</tt> <i class="fas fa-external-link-alt"></i></a>). If the <code>prev_txn_</code> in the <code>UndoLink</code> has an invalid transaction id, it means that the <code>UndoLink</code> is invalid and it does not point to any valid <code>UndoLog</code>, so you only want to use <code>GetUndoLog</code> when you know the <code>UndoLink</code> is valid, otherwise you can use <code>GetUndoLogOptional</code>.</p>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Reconstruction                            -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task2.1">2.1 Tuple Reconstruction</h3>
+<p>In this task, you will implement the tuple reconstruction algorithm via the <code>ReconstructTuple</code> function, defined in <code>execution_common.cpp</code>. During this project, you will likely find that many functionalities can be shared by different components in the system. You can define helper functions in <code>execution_common.cpp</code>.</p>
+<p><code>ReconstructTuple</code> takes four inputs:</p>
+<ol>
+<li>A tuple schema.</li>
+<li>A base tuple.</li>
+<li>Metadata (both stored in the table heap).</li>
+<li>A list of undo logs in order of most recent modification to oldest modification.</li>
+</ol>
+<p>Here is an example of reconstructing a tuple:</p>
+<p><a href="img/2-2-undo-log.png"><img src="img/2-2-undo-log.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>Base tuples (under "latest version in table heap") always store a value for every column in their schema (or in other words, they are complete and valid tuples). Undo logs, however, only contain the columns that were changed by an operation. Undo logs also have an <code>is_delete</code> flag that represents the deletion of the entire tuple.</p>
+<p>Both the base tuple metadata and the undo logs will have <code>is_delete</code> flags, and they will not always be equal. In task 4.2, you will have to "insert" a tuple into an existing RID, and therefore you will need this <code>is_delete</code> flag in your <code>UndoLog</code> to perform this kind of operation (imagine inserting and deleting the same exact tuple in a cycle). An example of the <code>is_delete</code> flag works is illustrated below. <strong>Make sure you understand that these undo logs are going <em>backwards</em> in time.</strong> As an exercise, try to figure out the sequence of operations that could have led to this specific version chain:</p>
+<p><a href="img/2-2-undo-log-with-del.png"><img src="img/2-2-undo-log-with-del.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p><code>ReconstructTuple</code> should apply all modifications provided to the function <em>without</em> looking at the timestamp in the metadata or undo logs. It does not need to access data other than the ones provided in the function parameter list. In other words, make sure you are not passing too many undo logs to <code>ReconstructTuple</code>.</p>
+<p>Below is an illustration of the structure of <code>UndoLog</code>:</p>
+<p><a href="img/2-4-undo-log-format.png"><img src="img/2-4-undo-log-format.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p><code>UndoLog</code> represents a partial modification to some tuple (at some point in time determined by the <code>ts_</code> field). The <code>modified_fields_</code> member in <code>UndoLog</code> is a vector of <code>bool</code> that has the same length as the number of columns in the table schema. If one of the booleans is set to <code>true</code>, it indicates that the corresponding field in the tuple has been updated by that <code>UndoLog</code>. For example, if the 3rd element (index 2) of the <code>modified_fields_</code> vector is set to <code>true</code>, then that means the third column of the tuple was updated.</p>
+<p>The <code>tuple_</code> field contains the partial <code>Tuple</code>, and it should have the same number of values / columns as the <code>modified_fields_</code> vector has <code>true</code>s. To retrieve a value from the partial tuple, you will need to construct a partial <code>Schema</code> based on the table schema and the modified fields. You can then use that partial <code>Schema</code> to extract values out of the partial <code>Tuple</code>.</p>
+<p>The timestamp (<code>ts_</code>) is the <em>commit</em> timestamp that this <code>UndoLog</code> corresponds to. We also store a link to the next <code>UndoLog</code> (<code>prev_version_</code> is stored via an <code>UndoLink</code>). If an <code>UndoLog</code> is the last in the version chain, TxnId (which corresponds to <code>prev_txn_</code> inside <code>UndoLink</code> in the code) will be set to <code>INVALID_TXN</code>. You can use the <code>prev_version_.IsValid()</code> helper to check this quickly. As a reminder, you do <strong>not</strong> need to use or even examine the timestamp (<code>ts_</code>) field and the previous version (<code>prev_version_</code>) field in <code>ReconstructTuple</code>, as <code>prev_version_</code> should only be used by the caller of <code>ReconstructTuple</code> to figure out what <code>UndoLog</code>s to place in the input vector.</p>
+<p>In the example above, we are storing tuples with four columns. This specific <code>UndoLog</code> represents a modification of fields 2 and 3. Try to write out pseudocode (on paper) of how to reconstruct the past tuple with these 2 specific fields changed back. Then, try to generalize that algorithm for any type of input tuple, any number of fields modified, and for any number of undo logs. Once you've done that, you can write <code>ReconstructTuple</code>!</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Sequential Scan                           -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task2.2">2.2 Sequential Scan (Tuple Retrieval)</h3>
+<p>In this task, you will need to rewrite your sequential scan executor from <a href="../project3">Project #3</a> to support retrieving data from the past (based on the read timestamp of a transaction).</p>
+<p>For every tuple that your new sequential scan executor scans from the table heap, it should retrieve all of the undo logs for that tuple up to the transaction read timestamp, reconstruct the past tuple version, and then output that past tuple. You will need to implement the <code>CollectUndoLogs</code> helper function in <code>execution_common.cpp</code>. This function returns all of the undo logs you need to reconstruct the tuple with respect to the given transaction's read timestamp.</p>
+<p>Given the current transaction's read timestamp, there are three cases you will need to handle:</p>
+<ol>
+<li>The tuple in the table heap is the most recent data relative to the read timestamp. You can figure this out by checking the timestamp in the tuple's metadata. In this case, no undo needs to be performed, and <code>CollectUndoLogs</code> should return an empty vector.</li>
+<li>The tuple in the table heap has either been modified by another uncommitted transaction, or it is newer than the transaction read timestamp. In this case, you will need to iterate the version chain to collect all undo logs that are after the read timestamp.</li>
+<li>The tuple in the table heap contains modifications by the current transaction. In other words, we are reading a tuple that we ourselves have modified. An explanation of this case is below.</li>
+</ol>
+<p>To support case 3 without making changes to the structure of our timestamps (which are just <code>int64_t</code>), we will use the higher bits of the timestamps as tags to represent "temporary" timestamps. In BusTub, a commit timestamp is valid if it is in between 0 and <code>TXN_START_ID - 1</code>. <code>TXN_START_ID</code> is defined as the <em>second</em> most significant bit of a 64-bit integer (<code>1 &lt;&lt; 62</code>).</p>
+<p>If the second most significant bit of a timestamp is set to 1 (<code>&amp; 1 &lt;&lt; 62</code>), it means that the tuple has been modified by a transaction and that transaction has not been committed yet. We call this timestamp a “temporary transaction timestamp”, which is computed via <code>TXN_START_ID + txn_human_readable_id = temp_txn_id</code>. We adopt this methodology to distinguish between a committed tuple with a commit timestamp and an uncommitted tuple under some specific transaction ID. <code>UndoLog</code>s should never contain temporary transaction timestamps (we will explain in later sections).</p>
+<p><em>The reason we do not use the actual most significant bit (<code>1 &lt;&lt; 63</code>) is so that we can continue to compare temporary timestamps in a straightforward way with <code>&lt;</code> and <code>&gt;</code>. Setting the most significant bit would cause timestamps to be negative.</em></p>
+<p>The first transaction ID in BusTub is <code>TXN_START_ID</code>, and IDs are monotonically increasing. <strong>Make sure you understand that transaction IDs are <em>not</em> the same as commit timestamps, even though both are monotonically increasing.</strong> Since <code>TXN_START_ID</code> is a large number that is hard to interpret, we will generate a human-readable id by stripping the highest bit when logging and debugging. You should not need to manually calculate the temporary timestamp for uncommitted transactions, and you can use the existing helper function <code>GetTransactionTempTs</code> to return temporary timestamp for this transaction (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/include/concurrency/transaction.h" target="_bustub" class="filepath" title="View Source Code"><tt>src/include/concurrency/transaction.h</tt> <i class="fas fa-external-link-alt"></i></a>).</p>
+<p>We will use the notation <code>txn***</code>, where <code>***</code> is a human-readable ID, for representing transaction IDs. For example, <code>txn42</code> represents the transaction with ID <code>TXN_START_ID + 42</code>, or the transaction with a human-readable ID of 42. Suppose that the current transaction has a human-readable ID of 3, and it scans a base tuple with timestamp <code>TXN_START_ID + 3</code>. The transaction then knows that it itself was the most recent modifier of the tuple. Handling this sub-case of case 3 is equivalent to handling case 1. Think about what should happen if it sees the temporary transaction timestamp of a <em>different</em> uncommitted transaction.</p>
+<h4 id="examples">Examples</h4>
+<p>Suppose <code>txn9</code> updates tuple A, which means tuple A's timestamp will be set to <code>TXN_START_ID + 9</code>. When <code>txn9</code> eventually commits, tuple A's timestamp will be replaced with <code>txn9</code>'s <em>commit</em> timestamp. In code, this will look like the following:</p>
+<ul>
+<li><code>txn9</code> modifies tuple A.</li>
+<li><code>txn9</code> uses <code>GetTransactionTempTs</code> to set tuple A's timestamp to <code>TXN_START_ID + 9</code>.</li>
+<li>When <code>txn9</code> commits, it replaces tuple A's timestamp with its new commit timestamp via <code>GetCommitTs</code>.</li>
+<li>Other transactions can use tuple A's timestamp to distinguish between whether it has been modified by a committed or uncommitted transaction.</li>
+<li>You can do this by simply comparing the timestamp with <code>TXN_START_ID</code>.</li>
+</ul>
+<hr>
+<p>Here's our final example for <code>SeqScanExecutor</code>. To make our illustration easier to understand, <code>TXN_START_ID</code> in the below example will be <code>1000</code> instead of (<code>1 &lt;&lt; 62</code>). Therefore, <code>1009</code> represents the temporary transaction timestamp where the transaction has an ID of 9 (<code>TXN_START_ID + 9 = 1009</code> in this example).</p>
+<p>Let's take a look at the following example, where we traverse the version chain to collect the undo logs to construct the tuples that the user requests:</p>
+<p><a href="img/2-3-seqscan.png"><img src="img/2-3-seqscan.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>Suppose we have a transaction with ID 9 and read timestamp of 3. <code>txn9</code> has not yet committed (due to the presence of the temporary transaction timestamp <code>1009</code>). The result of a sequential scan in <code>txn9</code> of the table should be: [(A, 9), (B, 9), (C, 2), (D, 9)]. For all of the tuples except (C, 2), transaction 9 was the one that already modified them, so it does not need to traverse the undo logs. However, (C, 2) has a commit timestamp of 4, which is greater than our read timestamp of 3. Transaction 9 then knows to traverse the undo logs to find the first version of this tuple that has a commit timestamp less than or equal to 3.</p>
+<p>Consider some other transaction that has a read timestamp of 4. The result of a sequential scan of this transaction will be: [(A, 3), (B, 3), (C, 4)]. For (A, 3) and (B, 3), the table heap contains a pending update from <code>txn9</code>, so the transaction will need to traverse the version chain to get the last update before/at timestamp 4. (C, 4) is the latest update at read timestamp 4. (D, 9) is a pending update by transaction 9, and since it does not have a version chain, we do not need to return it. In general, if there are no previous versions of a tuple at a given read timestamp, then the transaction should treat it as if the tuple does not exist.</p>
+<hr>
+<p>These example are oversimplified compared with the test cases. You will also need to think about <code>NULL</code> data and data types other than integers when implementing <code>SeqScanExecutor</code>.</p>
+<p>Once you have finished implementing <code>CollectUndoLogs</code> and <code>ReconstructTuple</code>, it should be clear how to finish the MVCC version of <code>SeqScanExecutor</code> using these two functions. The base tuple, tuple metadata, and the first undo link belonging to the tuple can be obtained via <code>GetTupleAndUndoLink</code>.</p>
+<p>Our test cases will manually set up some transactions and the table heap content. You do not need to implement the insert executor to test your sequential scan implementation. At this point, you should pass all test cases in <code>TxnScanTest</code>.</p>
+</div>
+<!-- ********************************************************************** -->
+<!-- Task #3 - MVCC Executors                                               -->
+<!-- ********************************************************************** -->
+<h2 class="task" id="task3">Task #3 - MVCC Executors</h2>
+
+<p>In this section, you will need to implement the data modification executors. This includes the insert executor, delete executor, and update executor. Starting from this task, your implementation will not be compatible with Project #3, as we only support schemas of fixed-sized data types.</p>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Insert                                    -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<div class="question">
+<h3 id="task3.1">3.1 Insert Executor</h3>
+<p>Your insert executor implementation should be similar to the one in <a href="../project3">Project #3</a>. You can create a new tuple in the table heap, and you will need to correctly construct the tuple's metadata. The timestamp in the table heap should be set to the transaction temporary timestamp, as described in <a href="#task2.2">Task 2.2</a>. You should also add the RID to the write set via <code>AppendWriteSet</code> at this point. Here is a simple illustration of <code>txn9</code> inserting (D, 3) into the table:</p>
+<p><a href="img/3-1-insert.png"><img src="img/3-1-insert.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>We have provided the helper functions <code>UpdateTupleInPlace</code> and <code>UpdateUndoLink</code> to update the tuple in the table heap and the undo link respectively. These functions mimic an atomic compare-and-swap operation, where you will need to provide a <code>check</code> function. The pseudo code for the two functions are as below:</p>
+<pre class="shadow-sm p-2">
+UpdateUndoLink(rid, new_undo_link, check_function) {
+  take the table heap lock / undo link lock
+  retrieve the data from table heap / undo link
+  call user-provided check function, if check failed, return false
+  update the data and return true
+}
+</pre>
+<p>All test cases for this task are single-threaded, and therefore you can simply pass a <code>nullptr</code> to the <code>check</code> parameter to skip the check and use <code>UpdateTupleInPlace</code> and <code>UpdateUndoLink</code> separately. For the future concurrent test cases, you will need to get / update both the <code>Tuple</code> and the <code>UndoLink</code> atomically so that other transactions cannot change another transaction's intermediate result. Consider the following scenario:</p>
+<ol>
+<li><code>txn1</code> calls <code>GetTuple</code> to check whether it can update a tuple.</li>
+<li><code>txn2</code> modifies the tuple and its <code>UndoLink</code>.</li>
+<li><code>txn1</code> then calls <code>GetUndoLink</code> and gets the incorrect <code>UndoLink</code>.</li>
+<li><code>txn1</code> updates the tuple and <code>UndoLink</code> based on incorrect information.</li>
+</ol>
+<p>In this example, you might want to use <code>UpdateTupleAndUndoLink</code> and <code>GetTupleAndUndoLink</code> to get/set atomically (<a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/src/concurrency/transaction_manager_impl.cpp" target="_bustub" class="filepath" title="View Source Code"><tt>src/concurrency/transaction_manager_impl.cpp</tt> <i class="fas fa-external-link-alt"></i></a>). Starting at <a href="#task4.2">Task 4.2</a>, you may need to implement the <code>check</code> logic to detect write-write conflicts when there are multiple threads updating a tuple and its metadata / <code>UndoLink</code> concurrently.</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Commit                                    -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task3.2">3.2 Commit</h3>
+<p>Only one transaction is allowed to execute the <code>Commit</code> function at a time, and you should ensure this by using the <code>commit_mutex_</code> in the transaction manager. In this task, you will need to extend your <code>Commit</code> implementation in the transaction manager with transaction commit logic. Here is some rough pseudocode:</p>
+<ol>
+<li>Take the commit mutex.</li>
+<li>Obtain a commit timestamp (you will likely need to do a <code>.load() + 1</code> instead of <code>.fetch_add(1)</code> here, think about why in relation to <code>Begin</code>).</li>
+<li>Iterate through every tuple that has been modified by this transaction (via the write set) and set the timestamp of the base tuples to the commit timestamp. You will need to maintain the write set in all modification executors (insert, update, delete).</li>
+<li>Set the transaction to the <code>COMMITTED</code> state.</li>
+<li>Update the commit timestamp of the transaction.</li>
+<li>Update <code>last_committed_ts_</code> (you can do the <code>.fetch_add(1)</code> here).</li>
+</ol>
+<p><a href="img/3-2-commit.png"><img src="img/3-2-commit.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>You should have implemented most of the above logic as a part of task 1, so you will just need to add the iterating table logic.</p>
+<h4 id="txnmgrdbg"><code>TxnMgrDbg</code></h4>
+<p><strong>At this point, we <em>strongly</em> recommend that you implement the debug function <code>TxnMgrDbg</code>. This should print out the table heap content and the version chain for each tuple. If you come to us without this function written, we will ask you to implement it first.</strong></p>
+<p>Our test cases will call your debug function after each important operation and you can print anything you want to examine the version chain. This debug function will be incredibly helpful in debugging your implementation for future tests. An example debug function can be seen in our reference solution running in the <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/bustub/">BusTub Web Shell</a> with the command <code>\dbgmvcc {table_name}</code> (you can find the developer console on Chrome by pressing F12).</p>
+<details>
+<summary>
+Our debug function is prettier than what yours needs to be. Your version can look like this (taken from <tt>CollectUndoLogTest</tt> in <tt>txn_scan_test</tt>):
+</summary>
+<pre class="small">
+RID=0/0 ts=1 tuple=(1, 1.000000, &lt;NULL&gt;)
+RID=0/1 ts=2 tuple=(2, 2.000000, &lt;NULL&gt;)
+  txn1@0 (1, 1.000000, _) ts=1
+RID=0/2 ts=3 tuple=(3, 3.000000, &lt;NULL&gt;)
+  txn3@0 (2, 2.000000, _) ts=2
+  txn1@1 (1, 1.000000, _) ts=1
+RID=0/3 ts=3 tuple=(3, 3.000000, &lt;NULL&gt;)
+RID=0/4 ts=4 tuple=(4, 4.000000, &lt;NULL&gt;)
+  txn4@0 (3, 3.000000, _) ts=3
+RID=0/5 ts=4 &lt;del marker&gt; tuple=(2, 2.000000, &lt;NULL&gt;)
+  txn4@1 (2, 2.000000, _) ts=2
+RID=0/6 ts=4 tuple=(4, 4.000000, &lt;NULL&gt;)
+  txn4@2 &lt;del&gt; ts=2
+  txn1@2 (1, 1.000000, &lt;NULL&gt;) ts=1
+RID=0/7 ts=txn2 tuple=(100, 100.000000, &lt;NULL&gt;)
+RID=0/8 ts=txn2 tuple=(100, 100.000000, &lt;NULL&gt;)
+  txn2@0 (1, 1.000000, _) ts=1
+RID=0/9 ts=txn5 tuple=(400, 400.000000, &lt;NULL&gt;)
+  txn5@0 (4, 4.000000, _) ts=4
+  txn1@3 (1, 1.000000, _) ts=1
+</pre>
+</details>
+<p><br></p>
+<details>
+<summary>On the BusTub Web Shell, <tt>\dbgmvcc</tt> looks like this:</summary>
+<pre class="small">
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 0      │ ts = 1                                   │ (1, 1.000000, &lt;NULL&gt;)                                  │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 1      │ ts = 2                                   │ (2, 2.000000, &lt;NULL&gt;)                                  │
+│ ──────────────── │ ──────────────────────────────────────── │ ────────────────────────────────────────────────────── │
+│                  │ ts = 1           │ txn 1 @ [0]           │ (1, 1.000000, _)                                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 2      │ ts = 3                                   │ (3, 3.000000, &lt;NULL&gt;)                                  │
+│ ──────────────── │ ──────────────────────────────────────── │ ────────────────────────────────────────────────────── │
+│                  │ ts = 2           │ txn 3 @ [0]           │ (2, 2.000000, _)                                       │
+│                  │ ts = 1           │ txn 1 @ [1]           │ (1, 1.000000, _)                                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 3      │ ts = 3                                   │ (3, 3.000000, &lt;NULL&gt;)                                  │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 4      │ ts = 4                                   │ (4, 4.000000, &lt;NULL&gt;)                                  │
+│ ──────────────── │ ──────────────────────────────────────── │ ────────────────────────────────────────────────────── │
+│                  │ ts = 3           │ txn 4 @ [0]           │ (3, 3.000000, _)                                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 5      │ ts = 4                                   │ &lt;DELETED&gt; (2, 2.000000, &lt;NULL&gt;)                        │
+│ ──────────────── │ ──────────────────────────────────────── │ ────────────────────────────────────────────────────── │
+│                  │ ts = 2           │ txn 4 @ [1]           │ (2, 2.000000, _)                                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 6      │ ts = 4                                   │ (4, 4.000000, &lt;NULL&gt;)                                  │
+│ ──────────────── │ ──────────────────────────────────────── │ ────────────────────────────────────────────────────── │
+│                  │ ts = 2           │ txn 4 @ [2]           │ &lt;deleted&gt;                                              │
+│                  │ ts = 1           │ txn 1 @ [2]           │ (1, 1.000000, _)                                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 7      │ ts = txn 2                               │ (100, 100.000000, &lt;NULL&gt;)                              │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 8      │ ts = txn 2                               │ (100, 100.000000, &lt;NULL&gt;)                              │
+│ ──────────────── │ ──────────────────────────────────────── │ ────────────────────────────────────────────────────── │
+│                  │ ts = 1           │ txn 2 @ [0]           │ (1, 1.000000, _)                                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ RID = 0 / 9      │ ts = txn 5                               │ (400, 400.000000, &lt;NULL&gt;)                              │
+│ ──────────────── │ ──────────────────────────────────────── │ ────────────────────────────────────────────────────── │
+│                  │ ts = 4           │ txn 5 @ [0]           │ (4, 4.000000, _)                                       │
+│                  │ ts = 1           │ txn 1 @ [3]           │ (1, 1.000000, _)                                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+</pre>
+</details>
+<p><br></p>
+<h4 id="interactive-testing">Interactive Testing</h4>
+<p>Here is an example of using the <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/bustub/">BusTub Web Shell</a> to compare your implementation against ours.</p>
+<pre class="shadow-sm p-2">
+make -j`nproc` shell &amp;&amp; ./bin/bustub-shell
+bustub&gt; CREATE TABLE t1(v1 int, v2 int);
+bustub&gt; INSERT INTO t1 VALUES (1, 1), (2, 2), (3, 3);
+bustub&gt; \dbgmvcc t1 -- call your `TxnMgrDbg` function to dump the version chain
+bustub&gt; BEGIN;
+txn?&gt; INSERT INTO t1 VALUES (4, 4);
+txn?&gt; \txn -1
+bustub&gt; SELECT * FROM t1; -- the newly-inserted row should not be visible to other txns
+bustub&gt; \txn ? -- use the id you see before
+txn?&gt; COMMIT;
+</pre>
+<p>You can also use the BusTub Netcat shell to start an interactive session with transactions.
+You will need to install <code>nc</code> (netcat) in order to use this interactive shell.</p>
+<pre class="shadow-sm p-2">
+make -j`nproc` nc-shell &amp;&amp; ./bin/bustub-nc-shell
+bustub&gt; CREATE TABLE t1(v1 int, v2 int);
+bustub&gt; INSERT INTO t1 VALUES (1, 1), (2, 2), (3, 3);
+bustub&gt; \dbgmvcc t1 -- call your `TxnMgrDbg` function to dump the version chain
+# in another terminal
+nc 127.0.0.1 23333
+bustub&gt; INSERT INTO t1 VALUES (4, 4);
+# in yet another terminal
+nc 127.0.0.1 23333
+bustub&gt; SELECT * FROM t1; -- the newly-inserted row should not be visible to this txn
+bustub&gt; COMMIT;
+</pre>
+<p>We provide the reference solution running in your browser in the <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/bustub/">BusTub Web Shell</a>.</p>
+<p>Starting from this task, all of our test cases are written in SQL. As long as your SQL query result matches the reference output, you will get full points for a test case. We do not check the exact content of your version chain, but we will check for the <em>number</em> of <code>UndoLog</code>s and <em>number</em> of table heap tuples to ensure you are maintaining the version chain correctly and efficiently. We will also use your <code>ReconstructTuple</code> to verify the correctness of your generated <code>UndoLog</code>s.</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Undo Logs                                 -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task3.3">3.3 Generate Undo Log</h3>
+<p>Before implementing the update and delete executors, you will need to implement <code>GenerateNewUndoLog</code> and <code>GenerateUpdatedUndoLog</code>. Given the original base tuple and the modified target tuple, you should return the <code>UndoLog</code> that should be stored in the transaction making the modification.</p>
+<p>Make sure you understand the difference between <code>GenerateNewUndoLog</code> and <code>GenerateUpdatedUndoLog</code>. Suppose a transaction updates a tuple several times. We expect only one <code>UndoLog</code> for every update within a specific transaction. <code>GenerateNewUndoLog</code> is used for every first modification of each tuple. After that, <code>GenerateUpdatedUndoLog</code> is used to consolidate modifications into one <code>UndoLog</code>.</p>
+<p>There are three cases to consider:</p>
+<ol>
+<li>Update: In this case, generate the <code>UndoLog</code> based on base tuple and target tuple. If this is not the first update within this transaction, combine it with the original <code>UndoLog</code> via <code>GenerateUpdatedUndoLog</code>. <strong>A transaction should hold at most <em>one</em> undo log for each RID. If a transaction needs to update a tuple twice, it should only update the base tuple and its current undo log.</strong></li>
+<li>Delete: In this case, you need to store the entire tuple in the <code>UndoLog</code> so that the entire tuple can be reconstructed. Think about how you would achieve this with several modifications within a transaction.</li>
+<li>Insert: The insertion you implemented in Task 3.1 always creates a new tuple in the table heap with a new RID. In other words, you never need a <code>UndoLog</code> for an insertion. However, in Task 4.2, you might have to insert a tuple back into a deleted tuple. You will know it's an insert case when the <code>base_tuple</code> is a <code>nullptr</code>.</li>
+</ol>
+<p>You will find <code>Tuple::IsTupleContentEqual</code> and <code>Value::CompareExactlyEquals</code> useful when computing the <code>UndoLog</code>.</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Update / Delete                           -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task3.4">3.4 Update &amp; Delete Executor</h3>
+<p>In this task, you will need to implement the logic that actually generates <code>UndoLog</code>s and updates the table heap base tuples. The update and delete executors are quite similar.</p>
+<p>Before updating or deleting a tuple, you will need to check for write-write conflicts. There are a few cases to be aware of. If a tuple is being modified by an uncommitted transaction, no other transactions are allowed to modify it. If they do, there will be a write-write conflict and the transaction conflicting with a previous transaction should be <em>aborted</em>. Another write-write conflict case is when a transaction A deletes a tuple and commits, and another transaction B that starts before A deletes the same tuple after transaction A has committed. The transaction state should be set to TAINTED when a write-write conflict is detected, and you will need to throw an <code>ExecutionException</code> in order to mark the SQL statement as failed. <code>ExecuteSqlTxn</code> will return <code>false</code> if there is an execution exception. At this point, we do not require you to implement the actual abort logic. The test cases in this task will not call the <code>Abort</code> function.</p>
+<p>Your update executor should be implemented as a pipeline breaker: it should first store all tuples from the child executor to a local buffer before writing any updates. After that, it should pull the tuples from the local buffer, compute the updated tuple, and then perform the updates on the table heap.</p>
+<p>At this point, all test cases are single-threaded, and therefore you do not need to think hard about race conditions that might occur during the update / delete process. The only condition for detecting write-write conflict is to check the timestamp of the base tuple metadata.</p>
+<p><a href="img/3-4-write-conflict.png"><img src="img/3-4-write-conflict.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>Let's go through the example above, where we show the 3 different cases you will need to handle before making any changes.</p>
+<ul>
+<li>In case (1), <code>txn10</code> has deleted the (A, 2) tuple and has not committed yet. Suppose <code>txn9</code> has a read timestamp of 3. <code>txn9</code> can then still read the old version of the tuple (A, 2).</li>
+<li>In case (2), if any other transactions other than <code>txn9</code> try to update / delete this B tuple, they will need to abort. For example, if <code>txn10</code> eventually needs to update / delete the tuple, <code>txn10</code> should be aborted with a write-write conflict.</li>
+<li>In case (3), there was some other transaction that updated (C, 2) to (C, 4) with a commit timestamp of 4. <code>txn9</code> can read an old version of the tuple (C, 2). Again, if <code>txn9</code> eventually needs to update / delete the tuple, <code>txn9</code> should be aborted with a write-write conflict, because there is a <em>newer</em> update that happens after the transaction read timestamp.</li>
+<li>There is also a 4th case, where a transaction wants to update a modification it made itself (self modification). If a tuple has already been modified by the current transaction, you should not regard this as write-write conflict.</li>
+</ul>
+<p>After checking the write-write conflict (you should write a helper function for that), you can proceed with implementing the update / delete logic:</p>
+<ul>
+<li>Create the undo log for the modification by <code>GenerateNewUndoLog</code> or <code>GenerateUpdatedUndoLog</code>.</li>
+<li>Update the next undo link of the tuple to point to the new undo log.</li>
+<li>Update the base tuple and metadata in the table heap (this step can be done with the previous step atomically using <code>UpdateTupleAndUndoLink</code>).</li>
+</ul>
+<p>Here's an example illustrating a delete:</p>
+<p><a href="img/3-4-delete.png"><img src="img/3-4-delete.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>Here's an example illustrating an update:</p>
+<p><a href="img/3-4-update.png"><img src="img/3-4-update.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p><strong>Make sure you understand these diagrams before you start implementing your executors. If you have any questions, please ask us for clarifications!</strong></p>
+<p>In the example below, <code>txn9</code> first updates the tuple to (A, 4), then to (A, 5), then to (B, 5), then to (A, 5), and then finally deletes it. Throughout the process, <code>txn9</code> keeps exactly one <code>UndoLog</code> for the tuple. When we update (B, 5) to (A, 5), we could have gone all the way back to the beginning of the transaction to compute the partial update (_, 5) (since combining all of the deltas gets you from (A,3) to (A, 5)). However, we recommend simply adding modifications to the existing <code>UndoLog</code> (so that it has the full change (A, 5)), which will make it easier to handle concurrency issues. In other words, make sure you only add / update data in the undo log, and do not remove data.</p>
+<p><a href="img/3-4-update-2.png"><img src="img/3-4-update-2.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>In this next example, <code>txn9</code> inserts a tuple, makes several modifications, and then removes it. In this case, you can directly modify the table heap tuple without generating any undo logs.</p>
+<p><a href="img/3-4-update-3.png"><img src="img/3-4-update-3.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>We have set the commit timestamp to 0 at the end because this tuple is inserted by <code>txn9</code> and removed by <code>txn9</code>, which means that it never actually existed. If the version chain <em>did</em> contain undo logs, it should be set to the actual commit timestamp instead of 0 so that the undo logs can be accessed with a transaction with lower read timestamp. You could also just ignore this case and follow the usual commit logic. As long as you can read the correct data at each timestamp, this does not matter until <a href="#task4.4">Task #4.4</a>.</p>
+<hr>
+<p>In this project, we will always use fixed-sized types, and therefore <code>UpdateTupleInPlace</code> should always succeed without throwing an exception.</p>
+<p>Putting everything together for update / deletes, you should:</p>
+<ul>
+<li>Get the RID from the child executor.</li>
+<li>Generate the updated tuple.</li>
+<li>For self-modification, update the table heap tuple, and optionally the undo log in the current transaction if there is one.</li>
+<li>Otherwise, generate the undo log, and link them together.</li>
+</ul>
+<p>At this point, you should pass everything in the <code>TxnExecutorTest</code> test besides the garbage collection test case.</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- GC                                        -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task-35-stop-the-world-garbage-collection">Task 3.5 Stop-the-world Garbage Collection</h3>
+<p>In the code we have given you, once we have added the transaction into the transaction map, we never remove it. We do this because transactions with a lower read timestamp might need to read the undo logs stored in the previous committed or aborted transactions. However, imagine if we have had thousands or even millions of transactions. It is likely that many of the past transactions have been completely overwritten by more recent ones, and we no longer need to store their undo logs. In this task, you will need to implement a simple garbage collection strategy that removes unused transactions.</p>
+<p>Garbage collection is triggered manually when <code>GarbageCollection</code> is called. The test cases will only call this function when all transactions are paused. Therefore, you do not need to worry too much about race conditions when doing garbage collection. In <a href="#task1">Task 1</a>, you have already implemented an algorithm to compute the watermark (the lowest read timestamp in the system). In this task, you will need to remove all transactions that do not contain any undo logs visible to a transaction with the lowest read timestamp.</p>
+<p>You will need to traverse the table heap and the version chain to identify undo logs that are still accessible by a transaction with the lowest read timestamp (make sure that you understand this: an undo log that is invisible to this transaction should be invisible to <em>all</em> transactions). If a transaction is committed / aborted, and does not contain any undo logs visible to a transaction with the lowest read timestamp, you can simply remove it from the transaction map.</p>
+<p>The example below illustrates the case where the watermark timestamp is 3 and we have <code>txn1</code>, <code>txn2</code>, and <code>txn9</code> committed. <code>txn1</code>'s undo logs are no longer accessible because every undo log with commit timestamp 1 has been overwritten by updates with commit timestamps less than or equal to 3. Thus we can directly remove <code>txn1</code>. <code>txn2</code>'s undo log for tuple (A, 2) is not accessible, but its undo log for tuple (C, 2) <em>is</em> still accessible because there has been no additional updates, so we cannot remove it right now.</p>
+<p><a href="img/3-5-garbage-collection.png"><img src="img/3-5-garbage-collection.png" class="mx-auto d-block border rounded p-2" width="800" style="max-width: 100%;" /></a></p>
+<p>After removing <code>txn1</code>, there will be dangling pointers to a removed undo log, as indicated in dashed lines. You DO NOT need to update the previous undo log to modify the dangling pointer and make it an invalid pointer, and it is fine to leave it there for this project. <strong>If everything in your implementation is correct, your sequential scan executor should never even attempt to dereference these dangling pointers, as they are below the watermark.</strong> However, we still recommend you to add some asserts in your code to ensure this will never happen.</p>
+<p>At this point, you should pass the <code>TxnExecutorTest</code>.</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Abort                                     -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task3.6">3.6 Abort</h3>
+<p>Before this task, transactions that go into the <code>TAINTED</code> state will cause other transactions to abort on the write-conflicting tuples. In this task, you are required to implement the abort logic, so that we can continue modifying the tuples when any of the transactions aborts. Recall that we detect write-write conflicts by checking if there is an ongoing modification to a tuple. When aborting a transaction, we should revert this change, so that other transactions can write to the tuple.</p>
+<p>You can choose which design you want to implement in this task.</p>
+<p><strong>Implementation #1</strong></p>
+<p><a href="img/5-abort-2.png"><img src="img/5-abort-2.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p>In this example, we are going to abort <code>txn9</code>. You can simply undo the tuple and set the table heap to the original value. This is easier to implement and will leave your version chain with two items with timestamp 3. Your sequential scan / index scan executor should correctly handle this situation after the transaction is aborted.</p>
+<p>With this implementation, aborted transactions will have undo logs in the version chain, and cannot be immediately reclaimed in garbage collection.</p>
+<p><strong>Implementation #2</strong></p>
+<p><a href="img/5-abort.png"><img src="img/5-abort.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p>In this example, aborting <code>txn9</code> will atomically link the undo link to the previous version and update the table heap. You will need to use <code>UpdateTupleAndUndoLink / GetTupleAndUndoLink</code> to update / read tuples and undo links atomically. With this implementation, you do not need to wait until the watermark before removing the aborted transaction from the transaction map.</p>
+<p>If the transaction inserts a fresh new tuple without undo logs, the abort process simply sets it to a deletion marker with <code>ts = 0</code>. The commit timestamp in BusTub starts from 1, and therefore setting it to 0 will be safe.</p>
+<p>You do not need to revert index modifications. Anything added to the index will stay there and will not be removed. You also do not need to actually remove a tuple from the table heap. If you need to revert an insertion, simply set it to a deletion marker.</p>
+<p>You should allow multiple threads aborting in parallel. That is, do <u>not</u> take the <code>commit_mutex</code> or any other locks <strong>throughout the whole function</strong>.</p>
+</div>
+<!-- ********************************************************************** -->
+<!-- Task #4 - MVCC Executors                                               -->
+<!-- ********************************************************************** -->
+
+<h2 class="task" id="task4">Task #4 - Primary Key Index</h2>
+
+<p>BusTub supports primary key indexes, which can be created in the following way:</p>
+<pre class="shadow-sm p-2">
+CREATE TABLE t1(v1 int PRIMARY KEY);
+CREATE TABLE t1(v1 int, v2 int, PRIMARY KEY(v1, v2));
+</pre>
+
+<p>When the primary key is specified in a <code>CREATE TABLE</code> statement, BusTub will automatically create an index with its <code>is_primary_key</code> property set to <code>true</code>. In BusTub, a table can have at most one primary key index. Primary key indexes ensure the uniqueness of the primary key. In this task, you will need to handle primary key indexes in your MVCC executors. The test cases will not create secondary indexes using <code>CREATE INDEX</code>, and thus you do not need to maintain secondary indexes in this task.</p>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Inserts                                   -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task4.1">4.1 Index Insert</h3>
+<p>You will need to modify your insert executor to correctly handle the primary key index. At the same time, you will also need to think about the case where multiple transactions are inserting the same primary key from multiple threads. Inserting into an index can be done with the following steps:</p>
+<ol>
+<li>First, check if the tuple already exists in the index. If it exists, abort* the transaction.<ul>
+<li>This only applies to <a href="#task4.1">Task 4.1</a>. If you are going to implement <a href="#task4.2">Task 4.2</a>, then it is possible that the index points to a deleted tuple, and in this case, you should <em>not</em> abort.</li>
+<li>You only need to set the transaction state to <code>TAINTED</code> in <a href="#task4">Task 4</a>. <code>TAINTED</code> means that the transaction is about to be aborted, but the data has not been cleaned up yet. You do not need to implement the actual abort process until <a href="#task3.6">Task #3.6</a>. The tainted transaction will leave some tuple in the table heap, and you do not need to clean it up. When another transaction inserts into the same place and detects a write-write conflict, it should still be regarded as a conflict. After setting the transaction to <code>TAINTED</code> state, you will also need to throw an <code>ExecutionException</code> so that <code>ExecuteSql</code> will return <code>false</code> and the test case will know that the transaction / SQL was aborted.</li>
+</ul>
+</li>
+<li>Next, create a tuple on the table heap with a temporary transaction timestamp.</li>
+<li>After that, insert the tuple into the index. Your index should return <code>false</code> if the unique key constraint is violated.</li>
+</ol>
+<p>Between steps (1) and (3), it is possible that other transactions are doing the same thing. A new entry could be created in the index before the current transaction could create it. In this case, you will need to abort the transaction, and there will be a tuple in the table heap that is not referenced by any entry in the index.</p>
+<p>In this example, let us go through <code>txn9</code> attempting to insert A, B, and C separately (assuming the only column of the tuple is the primary key). Assume that A already exists in the index, and C has been inserted by an uncommitted transaction. We have removed the <code>PageVersionInfo</code> structure in the diagram for clarity.</p>
+<p><a href="img/4-1-insert-index.png"><img src="img/4-1-insert-index.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<ul>
+<li>Inserting A: the key already exists in the index, violating the uniqueness requirement for primary key, thus aborting the transaction.</li>
+<li>Inserting B: as there is no conflict in the index, first create a tuple in the table heap, and then insert the RID of the newly-created tuple into the index.</li>
+<li>Inserting C: we assume here that there is another <code>txn10</code> also trying to insert C. <code>txn9</code> first detects no conflict in the index and creates a tuple in the table heap. Then, in the background, <code>txn10</code> does (2) and (3), creating a tuple and updating the index. When <code>txn9</code> tries inserting into the index in step (4), there will be a unique key violation reported by the index, and therefore <code>txn9</code> should go into the <code>TAINTED</code> state.</li>
+</ul>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-exclamation-triangle fa-lg p-1 pe-lg-2"></i>
+    You do <u>not</u> need to implement the MVCC index scan executor at this point. Our test case will use range queries instead of equal queries to avoid the sequential scan to index scan rule being invoked, so that sequential scans will not be converted to index scans.
+</p>
+<p>Once you finish this, you should pass the first concurrent test case in this project, where we test if your implementation works correctly when multiple threads insert the same key.</p>
+</div>
+<!-- <div class="warning p-2 row justify-content-center align-items-center my-3 bg-secondary rounded">
+    <div class="col-md-auto px-0 mb-2 mb-md-0 d-flex justify-content-center fs-2">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x text-danger"></i>
+            <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+        </span>
+    </div>
+    <div class="col text-light fw-bold">
+        At this point, you should have received 80 points. There is only one concurrent test and one hidden test case at the 80-point boundary. You may want to take a break before continuing to the remaining tasks, as they involve more complex concurrent scenarios and hidden test cases.
+    </div>
+</div> -->
+
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Index + Delete + Updates                  -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task4.2">4.2 Index Scan, Delete, &amp; Update</h3>
+<p>In this task, you will need to add index support for the delete and update executors, as well as the MVCC index scan executor.</p>
+<p>Once an entry is created in the index, it will always point to the same RID and will NOT be removed even if a tuple is marked deleted. We do this so that an earlier transaction can still access the history with the index scan executor. To support this, you will need to revisit your insert executor. Consider the case that the insert executor inserts into a tuple which has been removed by the delete executor. Your implementation should update the deleted tuple instead of creating a new entry, because an index entry always points to the same RID once created. You will need to correctly handle the write-write conflict detection and unique constraint detection.</p>
+<p>In this example, tuple (B, 2) has been deleted by a transaction with commit timestamp 3. We DO NOT remove the entry from the index when a tuple is deleted, and therefore the index may point to a deletion marker, and will ALWAYS point to the same RID once it is there. When <code>txn9</code> inserts (B, 3) into the table with the insert executor, it should NOT create a new tuple. Instead, it should update the deletion marker to the inserted tuple, as if it were an update.</p>
+<p><a href="img/4-2-update-index.png"><img src="img/4-2-update-index.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p>You will also need to think about other race conditions at this point. For example, if multiple transactions are updating the <code>UndoLink</code> at the same time. You should correctly abort some of them and let <em>exactly</em> one of them proceed without losing any data. Starting from this task, you will need to use the atomic helper function <code>UpdateTupleAndUndoLink/GetTupleAndUndoLink</code> and pass in the <code>check</code> function to avoid race conditions.</p>
+<p>You should observe in the above example, there will be a small amount of time when the table heap contains a (deleted) tuple with the same timestamp as the first undo log. Your sequential scan executor should also handle this case correctly after you have implemented updates and deletes.</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Primary Key Updates                       -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task4.3">4.3 Primary Key Updates</h3>
+<p>You will need to handle when the primary key gets updated. In this case, the update should be implemented as a delete on the original key and an insert on the new key.</p>
+<p>Let us go through the case where <code>txn9</code> is executing <code>UPDATE table SET col1 = col1 + 1</code> in order, where <code>col1</code> is the primary key. <code>txn9</code> first inserts (2, B) (along with any tuples that have new primary keys) into the table:</p>
+<p><a href="img/4-3-update-pk.png"><img src="img/4-3-update-pk.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p>Now we start updating the table with <code>col1 = col1 + 1</code>, where we delete all tuples that will be updated:</p>
+<p><a href="img/4-3-update-pk-2.png"><img src="img/4-3-update-pk-2.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p>Next, we insert the updated tuple back to the table with new primary keys:</p>
+<p><a href="img/4-3-update-pk-3.png"><img src="img/4-3-update-pk-3.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p>Finally, we commit the changes:</p>
+<p><a href="img/4-3-update-pk-4.png"><img src="img/4-3-update-pk-4.png" class="mx-auto d-block border rounded p-2" width="600" style="max-width: 100%;" /></a></p>
+<p>That's all there is to it!</p>
+</div>
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Serializable Verification                 -->
+<!-- ::::::::::::::::::::::::::::::::::::::::: -->
+
+<div class="question">
+<h3 id="task4.4">4.4 Serializable Verification</h3>
+<p>If a transaction runs in serializable isolation level, you will need to verify if it satisfies the serializability when committing the transaction. We use OCC backward validation for serializable verification. The verification method we talked about in the lecture only applies to a static database. In BusTub, you will need to consider newly-inserted and deleted records. To complete the serializable verification, you will need to store the scan filter (aka. scan predicate) in the transaction each time the <em>sequential scan executor</em> or the <em>index scan executor</em> are called. You will also need to track the write set correctly. With all the information, we can do serializable verification by checking if the scan predicate (read set) intersects with the write set of transactions that starts after the current transaction starts, as follows when we commit a transaction:</p>
+<ol>
+<li>You do not need to verify a read-only transaction.</li>
+<li>Collect all transactions that commits <em>after</em> the read timestamp of the current transaction. We call these “conflict transactions”.</li>
+<li>Collect all RIDs that are modified by conflict transactions.</li>
+<li>For each tuple, iterate through its version chain to verify if the current transaction reads any “phantom”. You can collect all undo logs up to the transaction read timestamp. Then, replay it one by one to check the intersection.</li>
+<li>For each update in the version chain,<ul>
+<li>For insert, you should check if the new tuple satisfies any of the scan predicates of the current transaction. If yes, abort.</li>
+<li>For delete, you should check if the deleted tuple satisfies any of the scan predicates of the current transaction. If yes, abort.</li>
+<li>There is an edge case where a transaction inserts and then removes a tuple, which leaves a delete marker in the table heap. This should be regarded as a no-op instead of a delete.</li>
+<li>For update, you should check both the “before image” and the “after image”. If any of them overlaps with any of the scan predicates of the current transaction, abort.<ul>
+<li>Consider the case that a transaction modifies a tuple but then reverts it back, which leaves an undo log that updates some columns to the same value. In this case, you should still process it as an identical update instead of ignoring it, and abort the transaction if necessary.</li>
+<li>However, if there are two transactions, where the first one modifies the value from X to Y, and then, the second one, Y to X, you should still detect the conflicts that X is changed, if there is a txn3 starting before txn1 starts and committing after txn2 commits.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>If a transaction needs to be aborted in the commit phase, you should directly go through the abort logic to revert the changes, and set the transaction status to ABORTED instead of TAINTED.</p>
+<p>This verification method is inefficient because (1) only one transaction can enter the verification process (2) we loop over all write sets of possible-conflicting transactions and evaluate scan predicates on that. You may consider implementing parallel verification, or precision locking (attribute-level checking instead of checking the record), in leaderboard tests.</p>
+<p>To test your implementation using BusTub shell,</p>
+<pre class="shadow-sm p-2">
+./bin/bustub-shell
+bustub&gt; set global_isolation_level=serializable;
+</pre>
+<p>For BusTub Netcat shell,</p>
+<pre class="shadow-sm p-2">
+./bin/bustub-nc-shell --serializable
+</pre>
+</div>
+<!-- **************************************************** -->
+<!-- Leaderboard                                          -->
+<!-- **************************************************** -->
+<h2 class="task" id="terrier_bench">Leaderboard Benchmark - T-NET, the Terrier NFT Exchange Network</h2>
+
+<p>In a galaxy far, far away, there is a universe in which <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.wikipedia.org');" href="https://en.wikipedia.org/wiki/Jack_Russell_Terrier">Jack Russell terriers</a> live in a highly-civilized society. We say that the society is highly civilized, except that NFTs (non-fungible tokens) are becoming increasingly popular. One day, the terriers decide to find a database system to track their NFTs, and BusTub is one of their candidate systems.</p>
+<p><strong>Benchmark #1 - Token Transfer over T-NET / Snapshot Isolation</strong></p>
+<p>Terriers transfer their NFTs over T-NET. T-NET works like bank transfers: one terrier can initiate a transfer of a number of NFTs to another terrier. For this scenario, the transactions will be running in snapshot isolation mode.</p>
+<pre class="shadow-sm p-2">
+CREATE TABLE terriers(terrier int primary key, token int);
+-- each transaction: transfer A tokens from X to Y
+UPDATE terriers SET token = token + A WHERE terrier = X;
+UPDATE terriers SET token = token - A WHERE terrier = Y;
+</pre>
+
+<p><strong>Benchmark #2 - Trading-Network over T-NET / Serializable</strong></p>
+<p>When transferring NFTs on T-NET, terriers will be charged for transfer fees. The transfer fees will be waived if two terriers are on the same trading network. The network is represented by an integer ID.</p>
+<pre class="shadow-sm p-2">
+CREATE TABLE terriers(terrier int primary key, token int, network int);
+-- each transaction: transfer A tokens from X to Y
+X_network = SELECT network FROM terriers WHERE terrier = X;
+Y_network = SELECT network FROM terriers WHERE terrier = Y;
+UPDATE terriers SET token = token + A * 0.97 WHERE terrier = X; -- if X_network != Y_network
+UPDATE terriers SET token = token + A WHERE terrier = X; -- if X_network == Y_network
+UPDATE terriers SET token = token - A WHERE terrier = Y;
+</pre>
+
+<p>At the same time, terriers can invite others to join their network with a sign-on bonus:</p>
+<pre class="shadow-sm p-2">
+-- X invites Y to join the network
+A = SELECT network FROM terriers WHERE terrier = X;
+UPDATE terriers SET network = A, token = token + 1000 WHERE terrier = Y;
+</pre>
+
+<p>Terriers can also start their own network with a network registration fee.</p>
+<pre class="shadow-sm p-2">
+-- X starts a new trading network
+UPDATE terriers SET network = ?, token = token - 1000 WHERE terrier = X;
+</pre>
+
+<p>All transactions in this benchmark will run at serializable level.</p>
+<p>Due to how T-NET works, it is possible that a terrier can own a negative amount of NFTs.</p>
+<p>You might need to implement a more fine-grained garbage collection when sequential scan is running or on transaction commit / abort. The leaderboard test will not call the stop-the-world garbage collector you have implemented in <a href="#task3">Task 3</a>. Some of our test cases need to access commit_ts after commit, and therefore you can clear the undo buffer instead of removing the transaction from the map when doing fine-grained garbage collection instead of removing it as in stop-the-world garbage collection.</p>
+<p>Implementing a more efficient serializable verification (i.e., <a onclick="javascript:ga('send', 'pageview', '/outgoing/dl.acm.org');" href="https://dl.acm.org/doi/10.1145/582318.582340">precision locking</a>) might be helpful in leaderboard benchmarks. It might also be helpful to implement parallel serializable verification.</p>
+<p>You will be ranked on speed of transfers and space usage of the database system respectively. The speed of transfers is measured by the throughput of the system, and the space usage is measured by the total number of rows in table tuples and undo logs in the system. There will be a background thread collecting number of rows in the system periodically, and the space usage is computed with the maximum number of rows at any time throughout the benchmark. The final leaderboard bonus score will be computed as: <code>min{speed_rank_bonus+space_rank_bonus, leaderboard_maximum_bonus}</code>. For each ranking, you will get 25 points for the 1st place, 15 points for 2nd-10th place, and 5 points for 11th-20th place.</p>
+<h3>Leaderboard Policy</h3>
+
+<ul>
+<li>Submissions <em>with leaderboard bonus</em> are subject to manual review by TAs.<ul>
+<li>By saying "review", it means that TAs will manually look into your code, or if they are unsure whether an optimization is correct or not by looking, they will make simple modification to existing test cases to see if your leaderboard optimization <em>correctly</em> handled the specific cases that you want to optimize.</li>
+<li>One example of simple modification: change the buffer pool manager size for the benchmark.</li>
+</ul>
+</li>
+<li>Your optimization should not affect correctness and should be reasonable. You can optimize for specific cases, but it should work for all inputs in your optimized cases.<ul>
+<li>Allowed: only handling 3-table join reordering (see <a href="/fall2022/project3">Fall 2022 Project #3</a>).</li>
+<li>Allowed: optimize for leaf node size &gt; 100 in <a href="../project2">Project #2</a>.</li>
+<li>Disallowed: compare the plan with the leaderboard test and convert it to ValueExecutor with the output table in <a href="../project3">Project #3</a>. That’s because your optimization should work for all table contents. Hardcoding the answer will yield wrong result in some cases.</li>
+<li>You are <u>not</u> allowed to stall the system so that your system has a super low throughput while having a low space usage (there are only a few updates). You are not allowed to use a global lock to serialize all transactions in order to reduce the number of write-write conflicts. We will dump some data at the end of benchmark, and TAs will look into the data to find such violations. Your performance should be reasonable compared with reference solution in order to get a bonus for the space usage rank.</li>
+</ul>
+</li>
+<li>You should not try detecting whether your submission is running leaderboard test by using side information.<ul>
+<li>Unless we allow you to do so.</li>
+<li>Disallowed: use <code>#ifdef NDEBUG</code>, etc.</li>
+</ul>
+</li>
+<li>Submissions with obvious correctness issues will not be assigned leaderboard bonus.</li>
+</ul>
+<!-- -   You cannot use late days for leaderboard tests. **For this project, you may use late days for bonus tasks.** -->
+<ul>
+<li>If you are unsure about whether an optimization is reasonable, you should post on Piazza or visit any TA's office hour.</li>
+</ul>
+<!--
+Side notes comparing with HyPer/Umbra:
+
+* Singly-linked list instead of doubly-linked as in HyPer, GC less efficient.
+* Over-simplified serializable verification implementation. For HyPer, it creates a predicate space and checks if the undo log overlaps with the predicate space. BusTub simply reconstructs the tuple up to the read timestamp and evaluate the predicate one by one.
+* We do not GC index and table heap tuple, we don’t either support var-sized tuple.
+* We do not store multiple undo logs for the same tuple in one txn.
+* We have a separate write set (RID) apart from undo logs.
+  -->
+
+<!-- ========================================================================= -->
+<!-- INSTRUCTIONS                                                              -->
+<!-- ========================================================================= -->
+<h1 id="instructions">Instructions</h1>
+
+<p>See the <a href="../project0/#instructions">Project #0 instructions</a> for how to create your private repository and set up your development environment.</p>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-exclamation-triangle fa-lg p-1 pe-lg-2"></i>
+    You must pull the latest changes from the upstream BusTub repository for test files and other supplementary files we provide in this project.
+</p>
+
+<!-- **************************************************** -->
+<!-- Formatting                                           -->
+<!-- **************************************************** -->
+
+<h2 id="formatting">Formatting</h2>
+<p>Your code must follow the <a onclick="javascript:ga('send', 'pageview', '/outgoing/google.github.io');" href="https://google.github.io/styleguide/cppguide.html">Google C++ Style Guide</a>.
+We use <a onclick="javascript:ga('send', 'pageview', '/outgoing/clang.llvm.org');" href="https://clang.llvm.org/">Clang</a> to automatically check the quality of your source code.
+Your project grade will be <u><b>zero</b></u> if your submission fails any of these checks.</p>
+<p>Execute the following commands to check your syntax.
+The <code>format</code> target will automatically correct your code.
+The <code>check-lint</code> and <code>check-clang-tidy-p4</code> targets will print errors and instruct you how to fix it to conform to our style guide.</p>
+<pre class="shadow-sm p-2">
+$ make format
+$ make check-lint
+$ make check-clang-tidy-p4
+</pre>
+
+<!-- **************************************************** -->
+<!-- Memory Leaks                                         -->
+<!-- **************************************************** -->
+
+<h2 id="memory-leaks">Memory Leaks</h2>
+<p>For this project, we use <a onclick="javascript:ga('send', 'pageview', '/outgoing/clang.llvm.org');" href="https://clang.llvm.org/docs/AddressSanitizer.html">LLVM Address Sanitizer (ASAN) and Leak Sanitizer (LSAN)</a> to check for memory errors. To enable ASAN and LSAN, configure CMake in debug mode and run tests as you normally would. If there is memory error, you will see a memory error report. Note that macOS <strong>only supports address sanitizer without leak sanitizer</strong>.</p>
+<p>In some cases, address sanitizer might affect the usability of the debugger. In this case, you might need to disable all sanitizers by configuring the CMake project with:</p>
+<pre class="shadow-sm p-2">
+$ cmake -DCMAKE_BUILD_TYPE=Debug -DBUSTUB_SANITIZER= ..
+</pre>
+
+<!-- **************************************************** -->
+<!-- Hints                                                -->
+<!-- **************************************************** -->
+
+<h2 id="development-hints">Development Hints</h2>
+<p>You can use <code>BUSTUB_ASSERT</code> for assertions in debug mode. The statements within <code>BUSTUB_ASSERT</code> will NOT be executed in release mode.
+If you have something to assert in all cases, use <code>BUSTUB_ENSURE</code> instead.</p>
+<p>We encourage you to use a graphical debugger to debug your project if you are having problems.</p>
+<p>If you are having compilation problems, running <code>make clean</code> does not completely reset the compilation process. You will need to delete your build directory and run <code>cmake ..</code> again before you rerun <code>make</code>.</p>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-question-circle fa-lg p-1 pe-lg-2"></i>
+    Post all of your questions about this project on Piazza. Do <u>not</u> email the TAs directly with questions.
+</p>
+
+<!-- ========================================================================= -->
+<!-- GRADING RUBRIC                                                            -->
+<!-- ========================================================================= -->
+<h1 id="grading">Grading Rubric</h1>
+<p>Each project submission will be graded based on the following criteria:</p>
+<ol>
+    <li> Does the submission successfully execute all of the test cases and produce the correct answer? </li>
+    <li> Does the submission execute without any memory leaks? </li>
+    <li> Does the submission follow the code formatting and style policies?</li>
+</ol>
+
+<h4 id="points-distribution">Points distribution</h4>
+<ul>
+<li>Until task 4.1: If you implement the MVCC protocol correctly, you will get a total of 75 points. There will be only one concurrent test case up to the 75 point boundary.</li>
+<li>Task 4.2, 4.3, 4.4: To further get a total of 100 points, you will likely need to spend as much time finishing all tasks of the 75 points boundary.</li>
+</ul>
+<p>Late days are <u>not</u> allowed for leaderboard tests.</p>
+<!-- ========================================================================= -->
+<!-- LATE POLICY                                                               -->
+<!-- ========================================================================= -->
+<h1 id="submission">Late Policy</h1>
+
+<p>See the <a href="../syllabus.html#late-policy">late policy</a> in the syllabus.</p>
+<!-- ========================================================================= -->
+<!-- SUBMISSION                                                                -->
+<!-- ========================================================================= -->
+<h1 id="submission">Submission</h1>
+<p>After completing the assignment, you can submit your implementation to Gradescope:</p>
+<ul>
+<li><b><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.gradescope.com');" href="https://www.gradescope.com/courses/935004">https://www.gradescope.com/courses/935004</a></b></li>
+</ul>
+<p>Running <code>make submit-p4</code> in your <code>build/</code> directory will generate a <code>zip</code> archive called <code>project4-submission.zip</code> under your project root directory that you can submit to Gradescope.</p>
+<p>Remember to resolve all style issues before submitting:</p>
+<pre class="shadow-sm p-2">
+make format
+make check-clang-tidy-p4
+</pre>
+
+<!-- ========================================================================= -->
+<!-- COLLABORATION POLICY
+<!-- ========================================================================= -->
+<h1 id="collaboration">Collaboration Policy</h1>
+
+<ul>
+<li>Every student has to work individually on this assignment.</li>
+<li>Students are allowed to discuss high-level details about the project with others.</li>
+<li>Students are <strong>not</strong> allowed to copy the contents of a white-board after a group meeting with other students.</li>
+<li>Students are <strong>not</strong> allowed to copy the solutions from another colleague.</li>
+</ul>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-exclamation-triangle fa-lg p-1 pe-lg-2"></i>
+    <b>WARNING:</b> All of the code for this project must be your own. You may not copy source code from other students or other sources that you find on the web. Plagiarism <b>will not</b> be tolerated. See CMU's <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.cmu.edu');" href="https://www.cmu.edu/policies/student-and-student-life/academic-integrity.html">Policy on Academic Integrity</a> for additional information.
+</p>
+        </div>
+        <!-- END: main -->
+    </main>
+
+<!-- Footer -->
+<footer class="footer mt-auto bg-black">
+  <div class="container">
+    <div class="row pt-3 pb-2">
+      <div class="col-4 my-auto">
+        <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu" title="Carnegie Mellon Database Group"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmu-db-group.svg" class="cmudb-logo" /></a>
+      </div>
+      <div class="col-8 float-end">
+
+            <div class="dropdown float-end justify-content-end">
+              <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-book"></i> Archives
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                    <li class=""> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2025/" class="dropdown-item" target="_archive1" title="View Previous Course Website">Spring 2025 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2024/" class="dropdown-item" target="_archive2" title="View Previous Course Website">Fall 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2024/" class="dropdown-item" target="_archive3" title="View Previous Course Website">Spring 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2023/" class="dropdown-item" target="_archive4" title="View Previous Course Website">Fall 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2023/" class="dropdown-item" target="_archive5" title="View Previous Course Website">Spring 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2022/" class="dropdown-item" target="_archive6" title="View Previous Course Website">Fall 2022 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2021/" class="dropdown-item" target="_archive7" title="View Previous Course Website">Fall 2021 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2020/" class="dropdown-item" target="_archive8" title="View Previous Course Website">Fall 2020 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2019/" class="dropdown-item" target="_archive9" title="View Previous Course Website">Fall 2019 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2018/" class="dropdown-item" target="_archive10" title="View Previous Course Website">Fall 2018 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2017/" class="dropdown-item" target="_archive11" title="View Previous Course Website">Fall 2017 <i class="fa fa-external-link"></i></a>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</footer>    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6CTRQK4NY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-T6CTRQK4NY');
+    </script>
+    <!-- End Google Analytics Code -->
+
+<!--     <script src="js/bootstrap.bundle.min.js"></script> -->
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

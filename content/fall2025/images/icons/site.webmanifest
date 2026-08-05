@@ -1,0 +1,19 @@
+{
+    "name": "",
+    "short_name": "",
+    "icons": [
+        {
+            "src": "https://15445.courses.cs.cmu.edu/fall2025/images/icons/android-chrome-192x192.gif",
+            "sizes": "192x192",
+            "type": "image/gif"
+        },
+        {
+            "src": "https://15445.courses.cs.cmu.edu/fall2025/images/icons/android-chrome-512x512.gif",
+            "sizes": "512x512",
+            "type": "image/gif"
+        }
+    ],
+    "theme_color": "#010000",
+    "background_color": "#010000",
+    "display": "standalone"
+}

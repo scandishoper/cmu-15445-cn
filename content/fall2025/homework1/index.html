@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="https://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+        <meta name="author" content="Andy Pavlo" />
+        <meta name="description" content="Overview The first homework is to construct a set of SQL queries for analyzing a dataset that will be provided to you. For this, you will look into Lahman Database. This homework is an opportunity to: (1) learn basic and certain advanced SQL features, and (2) get familiar with using …" />
+    
+    <meta name="keywords" content="" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link href="https://15445.courses.cs.cmu.edu/fall2025/css/style.css" rel="stylesheet" />
+<!--     <link href="https://15445.courses.cs.cmu.edu/fall2025/css/pygment.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <meta property="og:site_name" content="CMU 15-445/645" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Homework #1 - SQL - CMU 15-445/645 :: Intro to Database Systems (Fall 2025)"/>
+    <meta property="og:url" content="https://15445.courses.cs.cmu.edu/fall2025/homework1/index.html"/>
+    <meta property="article:published_time" content="2025-08-28" />
+    <meta property="og:description" content="Overview The first homework is to construct a set of SQL queries for analyzing a dataset that will be provided to you. For this, you will look into Lahman Database. This homework is an opportunity to: (1) learn basic and certain advanced SQL features, and (2) get familiar with using …" />
+        <meta property="og:image"
+              content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@CMUDB">
+        <meta name="twitter:creator" content="@CMUDB">
+    <meta name="twitter:domain" content="https://15445.courses.cs.cmu.edu/fall2025">
+            <meta property="twitter:image"
+                  content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+    <meta property="twitter:label1" content="Semester" />
+    <meta property="twitter:data1" content="Fall 2025" />
+        
+    
+<!--     <link href="https://db.cs.cmu.edu/favicon.png" rel="icon"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/apple-touch-icon.gif">
+    <link rel="icon" type="image/gif" sizes="32x32" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-32x32.gif">
+    <link rel="icon" type="image/gif" sizes="16x16" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-16x16.gif">
+    <link rel="manifest" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#c41230">
+    <meta name="theme-color" content="#010000">
+
+
+    <title>Homework #1 - SQL | CMU 15-445/645 :: Intro to Database Systems (Fall 2025) </title>
+</head>
+
+<body class="min-vh-100 d-flex flex-column h-100">
+    <!-- BEGIN: header -->
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg bg-black navbar-dark" aria-label="Navigation Menu">
+    <div class="container">
+      <a class="navbar-brand" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025" title="CMU 15-445/645"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmudb-icon-white.svg" width="24"> CMU 15-445/645</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav me-auto mb-0 text-uppercase">
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/assignments.html">Assignments</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/faq.html">FAQ</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/schedule.html">Schedule</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/syllabus.html">Syllabus</a>
+              </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-0 text-uppercase">
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Youtube" onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5" target="_yt"><i class="fab fa-youtube"></i> Youtube</a>
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Piazza" onclick="javascript:ga('send', 'pageview', '/outgoing/piazza.com');" href="https://piazza.com/cmu/fall2025/15445645" target="_pz"><i class="fas fa-comments"></i> Piazza</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>    <!-- END: header -->
+
+    <main class="flex-shrink-0 page">
+        <!-- BEGIN: banner -->
+<!-- Empty space -->
+<!--<div class="container mt-5">
+    <div class="row">
+    </div>
+</div>-->
+        <!-- END: banner -->
+        <!-- BEGIN: main -->
+        <div class="container main-content rounded-5 mb-0 mb-lg-5 mt-0 mt-sm-3 mt-md-4 mt-lg-5 py-3 py-md-5 px-md-5 shadow-sm bg-light content">
+<h1 class="page-header mb-3 mb-md-4"><i class="fas database"></i> <span class="text-uppercase">Homework #1 - SQL</span>
+    <span class="fw-normal fs-6 float-end mt-2 text-muted published d-none d-lg-inline" style="font-family: sans; letter-spacing: normal; text-shadow: none;">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-08-28 13:00:17.763452-04:00">Last Updated: Aug 28, 2025</time>
+    </span>
+</h1>
+<div class="row pb-3 d-block d-lg-none">
+    <div class="col-12 text-start text-muted published">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-08-28 13:00:17.763452-04:00">Last Updated: Aug 28, 2025</time>
+    </div>
+</div>
+<h1 id="overview">Overview</h1>
+<p>The first homework is to construct a set of SQL queries for analyzing a dataset that will be provided to you. For this, you will look into <a onclick="javascript:ga('send', 'pageview', '/outgoing/sabr.org');" href="https://sabr.org/lahman-database/">Lahman Database</a>. This homework is an opportunity to: (1) learn basic and certain advanced SQL features, and (2) get familiar with using a full-featured DBMS <a onclick="javascript:ga('send', 'pageview', '/outgoing/duckdb.org');" href="https://duckdb.org">DuckDB</a> that can be useful for you in the future.</p>
+<p>This is a single-person project that will be completed individually (i.e., no groups).</p>
+<!-- START homework1 -->
+<!-- AUTO-GENERATED BY GENERATE-SCHEDULE SCRIPT -->
+<!-- ANY MODIFICATIONS WILL BE OVERWRITTEN -->
+<ul>
+<li><b>Release Date:</b> Aug 27, 2025</li>
+<li><b>Due Date:</b> Sep 07, 2025 @ 11:59pm</li>
+</ul>
+<!-- END homework1 -->
+
+<h1 id="specification">Specification</h1>
+<p>The homework contains six questions in total and is graded out of 100 points. For each question, you will need to construct a SQL query that fetches the desired data. Your answer for each question should contain only one statement. It will likely take you approximately six hours to complete the questions.</p>
+<h2 id="placeholder-folder">Placeholder Folder</h2>
+<p>Create the placeholder submission folder with the empty SQL files that you will use for each question:</p>
+<pre class="shadow-sm p-2">
+$ mkdir placeholder
+$ cd placeholder
+$ touch q1_sample.duckdb.sql \
+        q2_hr.duckdb.sql \
+        q3_mvp.duckdb.sql \
+        q4_award.duckdb.sql \
+        q5_hof.duckdb.sql \
+        q6_upsert.duckdb.sql</pre>
+
+<p>After filling in the queries, you can compress the folder by running the following command:</p>
+<pre class="shadow-sm p-2">
+$ zip -j submission.zip placeholder/*.sql
+</pre>
+
+<p>The <code>-j</code> flag lets you compress all the SQL queries in the zip file without path information. The grading scripts will <b><u>not</u></b> work correctly unless you do this.</p>
+<h1 id="instructions">Instructions</h1>
+<ol>
+   <li class="pb-3">
+   Download the <a onclick="javascript:ga('send', 'pageview', '/downloads/../files/lahman-cmudb2025.db.gz');" href="../files/lahman-cmudb2025.db.gz">database dump file</a>:
+   <pre class="shadow-sm p-2">$ wget <a onclick="javascript:ga('send', 'pageview', '/downloads/../files/lahman-cmudb2025.db.gz');" href="../files/lahman-cmudb2025.db.gz">https://15445.courses.cs.cmu.edu/fall2025/files/lahman-cmudb2025.db.gz</a></pre>
+   Check its MD5 checksum to ensure that you have correctly downloaded the file:
+   <pre class="shadow-sm p-2">
+$ md5sum lahman-cmudb2025.db.gz
+a4fb302c11f80030f26bb6bb59d68cac  lahman-cmudb2025.db.gz</pre>
+
+   <li class="pb-3">
+   Unzip the database from the provided database dump by running the following commands on your shell. Note that the database file be <b>40MB</b> after you decompress it.
+   <pre class="shadow-sm p-2">$ tar zxf lahman-cmudb2025.db.gz</pre>
+</ol>
+
+<p>Then follow the instructions below to install DuckDB.</p>
+<h2 id="duckdb">DuckDB</h2>
+<!-- ### Command Line (Recommended) -->
+
+<p>Please follow the <a onclick="javascript:ga('send', 'pageview', '/outgoing/duckdb.org');" href="https://duckdb.org/docs/installation/">instructions</a> to install DuckDB for the command line environment.</p>
+<ol>
+
+   We can directly load the dataset when we start DuckDB:
+<pre class="shadow-sm p-2">
+$ duckdb lahman-cmudb2025.db
+DuckDB v1.3.2 (Ossivalis) 0b83e5d2f6
+Enter ".help" for usage hints.
+⚪◗ </pre>
+
+   <li class="pb-3">
+   You can check the contents of the database by running the <code>.tables</code> command on the DuckDB terminal. You should see <b>11 tables</b>. The output should look like this:
+<pre class="shadow-sm p-2">
+⚪◗ .tables
+appearances     collegeplaying  leagues         schools
+awardsmanagers  divisions       managers        teams
+awardsplayers   halloffame      people
+</pre>
+
+</ol>
+
+<h2 id="check-the-schema">Check the schema</h2>
+<p>Get familiar with the schema (structure) of the tables (what attributes do they contain, what are the primary and foreign keys). Run the <code>DESCRIBE $TABLE_NAME;</code> command on the <code>duckdb</code> terminal for each table. The output should look like the example below for each table.</p>
+<h3 id="appearances">appearances</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE appearances
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ yearID      │ SMALLINT    │ NO      │ PRI     │ NULL    │ NULL    │
+│ teamID      │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ lgID        │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ playerID    │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ G_all       │ SMALLINT    │ YES     │ NULL    │ NULL    │ NULL    │
+│ G_batting   │ SMALLINT    │ YES     │ NULL    │ NULL    │ NULL    │
+│ HR          │ SMALLINT    │ YES     │ NULL    │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+
+<p>Contains details for player appearances. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+2004|SFN|NL|aardsda01|11|11|0
+</pre>
+<p>The important fields are
+<code>G_all</code> (11) which describes the number of games played,
+<code>G_batting</code> (11) which describes the number of games batted,
+and <code>HR</code> (0) which describes the number of home runs hit.</p>
+<h3 id="awardsmanagers">awardsmanagers</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE awardsmanagers
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ playerID    │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ awardID     │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ yearID      │ SMALLINT    │ NO      │ PRI     │ NULL    │ NULL    │
+│ lgID        │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+
+<p>Contains details of awards given to managers. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+mccarjo99│TSN Manager of the Year│1936│ML
+</pre>
+
+<h3 id="awardsplayers">awardsplayers</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE awardsplayers
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ playerID    │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ awardID     │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ yearID      │ SMALLINT    │ NO      │ PRI     │ NULL    │ NULL    │
+│ lgID        │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+
+<p>Contains details of awards given to players. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+bondto01│Pitching Triple Crown│1877│NL
+</pre>
+
+<h3 id="collegeplaying">collegeplaying</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE collegeplaying
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ playerID    │ VARCHAR     │ NO      │ NULL    │ NULL    │ NULL    │
+│ schoolID    │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ yearID      │ SMALLINT    │ YES     │ NULL    │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+
+<p>Contains details of which players played for which school in a given year. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+aardsda01│pennst│2001
+</pre>
+
+<h3 id="divisions">divisions</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE divisions
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ divID       │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ lgID        │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ division    │ VARCHAR     │ NO      │ NULL    │ NULL    │ NULL    │
+│ active      │ VARCHAR     │ NO      │ NULL    │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+
+<p>Contains information about divisions. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+E|AL|AL East|Y
+</pre>
+
+<h3 id="halloffame">halloffame</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE halloffame
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ playerID    │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ yearid      │ SMALLINT    │ NO      │ PRI     │ NULL    │ NULL    │
+│ inducted    │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+
+<p>Contains details of hall of fame players. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+abbotji01|2005|N
+</pre>
+
+<h3 id="leagues">leagues</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE leagues
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ lgID        │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ league      │ VARCHAR     │ NO      │ NULL    │ NULL    │ NULL    │
+│ active      │ VARCHAR     │ NO      │ NULL    │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+<p>Contains information about leagues. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+ML|Major League|Y
+</pre>
+
+<h3 id="managers">managers</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE managers
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ playerID    │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ yearID      │ SMALLINT    │ NO      │ PRI     │ NULL    │ NULL    │
+│ teamID      │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ lgID        │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ inseason    │ SMALLINT    │ NO      │ PRI     │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+<p>Contains details about managers. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+actama99│2007│WAS│NL│1
+</pre>
+
+<h3 id="people">people</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE people
+┌──────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name  │ column_type │  null   │   key   │ default │  extra  │
+│   varchar    │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├──────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ ID           │ INTEGER     │ NO      │ NULL    │ NULL    │ NULL    │
+│ playerID     │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ birthYear    │ INTEGER     │ YES     │ NULL    │ NULL    │ NULL    │
+│ birthMonth   │ INTEGER     │ YES     │ NULL    │ NULL    │ NULL    │
+│ birthDay     │ INTEGER     │ YES     │ NULL    │ NULL    │ NULL    │
+│ birthCountry │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ birthState   │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ birthCity    │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ deathYear    │ INTEGER     │ YES     │ NULL    │ NULL    │ NULL    │
+│ deathMonth   │ INTEGER     │ YES     │ NULL    │ NULL    │ NULL    │
+│ deathDay     │ INTEGER     │ YES     │ NULL    │ NULL    │ NULL    │
+│ deathCountry │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ deathState   │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ deathCity    │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ nameFirst    │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ nameLast     │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ nameGiven    │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+├──────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┤
+</pre>
+<p>Contains details about players. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+1│aardsda01│ … │David│Aardsma│David Allan
+</pre>
+<p>For us, the important fields are <code>playerID</code> (e.g., aardsda01),
+<code>nameFirst</code> (e.g., David),
+<code>nameLast</code> (e.g., Aardsma),
+and <code>nameGiven</code> (e.g., David Allan).</p>
+<h3 id="schools">schools</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE schools
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ schoolID    │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ name_full   │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ city        │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ state       │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ country     │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+<p>Contains details about schools. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+abilchrist│Abilene Christian University│Abilene│TX│USA
+</pre>
+
+<h3 id="teams">teams</h3>
+<pre class="shadow-sm p-2">
+⚪◗ DESCRIBE teams
+┌─────────────┬─────────────┬─────────┬─────────┬─────────┬─────────┐
+│ column_name │ column_type │  null   │   key   │ default │  extra  │
+│   varchar   │   varchar   │ varchar │ varchar │ varchar │ varchar │
+├─────────────┼─────────────┼─────────┼─────────┼─────────┼─────────┤
+│ yearID      │ SMALLINT    │ NO      │ PRI     │ NULL    │ NULL    │
+│ lgID        │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ teamID      │ VARCHAR     │ NO      │ PRI     │ NULL    │ NULL    │
+│ franchID    │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ divID       │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ teamRank    │ SMALLINT    │ YES     │ NULL    │ NULL    │ NULL    │
+│ name        │ VARCHAR     │ YES     │ NULL    │ NULL    │ NULL    │
+│ attendance  │ INTEGER     │ YES     │ NULL    │ NULL    │ NULL    │
+└─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
+</pre>
+
+<p>The table contains details about teams. For example, this is a row from the table:</p>
+<pre class="shadow-sm p-2">
+1884│UA│ALT│ALT│NULL│10│Altoona Mountain City│NULL
+</pre>
+
+<h3 id="sanity-check">Sanity Check</h3>
+<p>Count the number of rows in the table</p>
+<pre class="shadow-sm p-2">
+D select count(*) from appearances;
+┌──────────┐
+│ count(1) │
+│  int64   │
+├──────────┤
+│  115355  │
+└──────────┘
+</pre>
+
+<p>
+The following figure illustrates the schema of these tables:
+<a href="img/schema2025.png"><img src="img/schema2025.png" class="img-fluid mx-auto d-block border-1 rounded p-2" width="800" /></a>
+</p>
+
+<h2 id="construct-the-sql-queries">Construct the SQL Queries</h2>
+<p>It's time to start constructing the SQL queries and put them into the placeholder files. You can start with using SQLite.</p>
+<div class="question">
+   <h3>Q1 [0 points]</h3>
+   <p>The purpose of this query is to make sure that the formatting of your output matches exactly the formatting of our auto-grading script.
+
+   <p><b>File:</b> <tt class="filepath">q1_sample.duckdb.sql</tt>
+   <p><b>Details:</b>
+   List all active divisions ordered alphabetically.
+
+   <p class="mb-0"><b>Answer</b>: Here's the correct SQL query and expected output:
+   <pre class="shadow-sm p-2">
+D SELECT DISTINCT division FROM divisions WHERE active = 'Y' ORDER BY division;
+AL Central
+AL East
+AL West
+NL Central
+NL East
+NL West
+</pre>
+
+   <p>You should put this SQL query into the appropriate file (<tt class="filepath">q1_sample.duckdb.sql</tt>)
+   in the submission directory (<tt class="filepath">placeholder</tt>).
+</div>
+
+<div class="question" markdown=0>
+   <h3>Q2 [20 points]</h3>
+   <p>Find ten people with the highest home-runs (HR) in any single appearance, irrespective of year or team. Only consider people who have played at some point for a school in <code>PA</code>. Order the results from most to least home runs, and then by <b>first name</b> alphabetically.
+
+   <p><b>File:</b> <tt class="filepath">q2_hr.duckdb.sql</tt>
+
+   <p><b>Hints:</b> The <code>||</code> might be useful for constructing the name field. The name should be assembled as <code>{FIRST} ({GIVEN}) {LAST}</code>. A player's highest home-runs in any appearance can be found by aggregating over all years and teams of a given player's <code>appearances</code>.
+
+   <p class="mb-0">Your output should look like this:
+   <pre class="shadow-sm p-2">name|max_hr_appearance</pre>
+
+   <p>Your first row should look like this:
+   <pre class="shadow-sm p-2">Bobby (Robert Leigh) Higginson|30</pre>
+</div>
+
+<div class="question">
+   <h3>Q3 [20 points]</h3>
+   <p>Find ten (player, team) pairs where the player won the <code>Gold Glove</code> award in an active league after 1999 and batted in more games than the player's team's average since 1999. Order by the number of distinct award-winning years from most to least, and then by given name alphabetically.</p>
+
+   <p><b>File:</b> <tt class="filepath">q3_mvp.duckdb.sql</tt>
+
+   <p><b>Hints:</b> Only consider awardID that matches <code>Gold Glove</code>. The team average can be computed by taking the average over the batted games by each team player's <code>appearances</code> since 1999. You might find <a onclick="javascript:ga('send', 'pageview', '/outgoing/duckdb.org');" href="https://duckdb.org/docs/stable/sql/expressions/subqueries.html#correlated-subqueries">Correlated Subqueries</a> in DuckDB useful.
+
+   <p class="mb-0">Your output should look like this:
+   <pre class="shadow-sm p-2">nameGiven|teamID|distinct_years</pre>
+
+   <p class="mb-0">Your first row should look like this:
+   <pre class="shadow-sm p-2">Ichiro|SEA|10</pre>
+</div>
+
+<div class="question">
+   <h3>Q4 [30 points]</h3>
+   <p>Consider the event <code>E</code>: for a given (team, year), the team has more than 5 distinct players win an award and some manager has won an award in the same year. For all active leagues, find the teams where the event <code>E</code> has happened more than once. Order the results by the number of event <code>E</code> occurrences from most to least, and then by team name alphabetically.</p>
+
+   <p><b>File:</b> <tt class="filepath">q4_award.duckdb.sql</tt>
+
+   <p><b>Hints:</b> You might find <a onclick="javascript:ga('send', 'pageview', '/outgoing/duckdb.org');" href="https://duckdb.org/docs/stable/sql/expressions/subqueries.html#correlated-subqueries">Correlated Subqueries</a> and <a onclick="javascript:ga('send', 'pageview', '/outgoing/duckdb.org');" href="https://duckdb.org/docs/stable/sql/query_syntax/with.html">CTEs</a> in DuckDB useful. Consider breaking the problem into sub-problems and combining their results.
+
+   <p class="mb-0">Your output should look like this:
+   <pre class="shadow-sm p-2">league|team_name|distinct_years</pre>
+
+   <p class="mb-0">One of the rows in the output looks like the following:
+   <pre class="shadow-sm p-2">National League|Atlanta Braves|3</pre>
+</div>
+
+<div class="question">
+   <h3>Q5 [20 points]</h3>
+   <p>Find 10 Hall of Fame players who were inducted. For each inducted player, find the earliest teammate that they appeared with. If there are multiple teammates, pick the first teammate ordered by the teammate's constructed name alphabetically. Order by the hall of fame player's constructed name alphabetically.</p>
+
+   <p><b>File:</b> <tt class="filepath">q5_hof.duckdb.sql</tt>
+
+   <p><b>Details:</b> To find a player's teammates, find <code>appearances</code> where both players were playing for the same team in the same year.
+
+   <p><b>Hints:</b> You might find <a onclick="javascript:ga('send', 'pageview', '/outgoing/duckdb.org');" href="https://duckdb.org/docs/sql/query_syntax/from.html#lateral-joins">Lateral Joins</a> in DuckDB useful. All names should be assembled as <code>{FIRST} ({GIVEN}) {LAST}</code>.
+
+   <p class="mb-0">Your output should look like this:
+   <pre class="shadow-sm p-2">hof_player_name|earliest_teammate_name|earliest_teammate_year</pre>
+
+   <p class="mb-0">Your first row should look like this:
+   <pre class="shadow-sm p-2">Addie (Adrian) Joss|Bill (William Henry) Bernhard|1902</pre>
+</p>
+</div>
+
+<div class="question">
+   <h3>Q6 [10 points]</h3>
+   <p>The league director wants you to insert new records into the <code>teams</code> table. For all teams in 2024, insert a new record using the <code>franchID</code> as the <code>teamID</code>. If the insert fails due to a conflict, set the existing record's <code>attendance</code> to -1.
+
+   <p><b>File:</b> <tt class="filepath">q6_upsert.duckdb.sql</tt>
+
+   <p><b>Details:</b> We will evaluate by selecting all teams in 2024 from the table and sorting by each column in order.
+   <pre class="shadow-sm p-2">SELECT yearID, lgID, teamID, franchID, teamRank, attendance
+FROM teams
+WHERE yearID = 2024
+ORDER BY lgID, teamID, franchID, teamRank, attendance;</pre>
+
+   <p><b>Hints</b> Consider how you might be able to insert and update existing rows in a single statement.
+
+
+   <p class="mb-0">After running the select statement, the following two rows should exist:
+   <pre class="shadow-sm p-2">2024|AL|HOU|HOU|1|-1
+2024|AL|KCA|KCR|2|1658347</pre>
+  </p>
+</div>
+
+<!-- ========================================================================= -->
+<!-- GRADING RUBRIC                                                            -->
+<!-- ========================================================================= -->
+<h1 id="grading">Grading Rubric</h1>
+
+<p>Each submission will be graded based on whether the SQL queries fetch the expected sets of tuples from the database. Only one statement is allowed in each SQL query. Note that your SQL queries will be auto-graded by comparing their outputs (i.e. tuple sets) to the correct outputs. For your queries, the <strong>order</strong> of the output columns is important; their names are not.</p>
+<!-- ========================================================================= -->
+<!-- LATE POLICY                                                               -->
+<!-- ========================================================================= -->
+<h1 id="submission">Late Policy</h1>
+
+<p>See the <a href="../syllabus.html#late-policy">late policy</a> in the syllabus.</p>
+<!-- ========================================================================= -->
+<!-- SUBMISSION                                                                -->
+<!-- ========================================================================= -->
+<h1 id="submission">Submission</h1>
+<!--<b>You can submit on Gradescope now, but we are currently setting up the autograder. We will post on Piazza when the autograder is up.</b>-->
+
+<p>We use the Autograder from Gradescope for grading in order to provide you with immediate feedback. After completing the homework, you can submit your compressed folder <code>submission.zip</code> (only one file) to Gradescope:</p>
+<ul>
+<li><b><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.gradescope.com');" href="https://www.gradescope.com/courses/1074751">https://www.gradescope.com/courses/1074751</a></b></li>
+</ul>
+<p><b>Important:</b> Use the Gradescope course code announced on Piazza.</p>
+<p>We will be comparing the output files using a function similar to <code>diff</code>. You can submit your answers as many times as you like. </p>
+<!-- ========================================================================= -->
+<!-- COLLABORATION POLICY                                                      -->
+<!-- ========================================================================= -->
+<h1 id="collaboration-policy">Collaboration Policy</h1>
+<ul>
+<li>Every student has to work individually on this assignment.</li>
+<li>Students are allowed to discuss high-level details about the project with others.</li>
+<li>Students are <strong>not</strong> allowed to copy the contents of a white-board after a group meeting with other students.</li>
+<li>Students are <strong>not</strong> allowed to copy the solutions from another colleague.</li>
+</ul>
+<p class="bg-danger text-white p-2 rounded">
+    <i class="trigger fa fa-exclamation-triangle fa-lg"></i>
+    <b>WARNING:</b> All of the code for this project must be your own. You may not copy source code from other students or other sources that you find on the web. Plagiarism <b>will not</b> be tolerated. See CMU's <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.cmu.edu');" href="http://www.cmu.edu/policies/documents/Academic%20Integrity.htm">Policy on Academic Integrity</a> for additional information.
+</p>
+        </div>
+        <!-- END: main -->
+    </main>
+
+<!-- Footer -->
+<footer class="footer mt-auto bg-black">
+  <div class="container">
+    <div class="row pt-3 pb-2">
+      <div class="col-4 my-auto">
+        <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu" title="Carnegie Mellon Database Group"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmu-db-group.svg" class="cmudb-logo" /></a>
+      </div>
+      <div class="col-8 float-end">
+
+            <div class="dropdown float-end justify-content-end">
+              <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-book"></i> Archives
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                    <li class=""> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2025/" class="dropdown-item" target="_archive1" title="View Previous Course Website">Spring 2025 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2024/" class="dropdown-item" target="_archive2" title="View Previous Course Website">Fall 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2024/" class="dropdown-item" target="_archive3" title="View Previous Course Website">Spring 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2023/" class="dropdown-item" target="_archive4" title="View Previous Course Website">Fall 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2023/" class="dropdown-item" target="_archive5" title="View Previous Course Website">Spring 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2022/" class="dropdown-item" target="_archive6" title="View Previous Course Website">Fall 2022 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2021/" class="dropdown-item" target="_archive7" title="View Previous Course Website">Fall 2021 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2020/" class="dropdown-item" target="_archive8" title="View Previous Course Website">Fall 2020 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2019/" class="dropdown-item" target="_archive9" title="View Previous Course Website">Fall 2019 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2018/" class="dropdown-item" target="_archive10" title="View Previous Course Website">Fall 2018 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2017/" class="dropdown-item" target="_archive11" title="View Previous Course Website">Fall 2017 <i class="fa fa-external-link"></i></a>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</footer>    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6CTRQK4NY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-T6CTRQK4NY');
+    </script>
+    <!-- End Google Analytics Code -->
+
+<!--     <script src="js/bootstrap.bundle.min.js"></script> -->
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="https://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+        <meta name="author" content="Andy Pavlo" />
+        <meta name="description" content="Do not post your project on a public Github repository. Overview All the programming projects this semester will be written on the BusTub database management system. This system is written in C++. To make sure that you have the necessary C++ background, you must complete a simple programming assignment to …" />
+    
+    <meta name="keywords" content="" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+    <link href="https://15445.courses.cs.cmu.edu/fall2025/css/style.css" rel="stylesheet" />
+<!--     <link href="https://15445.courses.cs.cmu.edu/fall2025/css/pygment.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha512-ZYg+hQvLlM0W9C3P6vTpes5LmJ66G2EsroxDNzwD6qiulckldb29eD9I672HL2X+LH5nRhY1sQqZLJGB+aUUPg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <meta property="og:site_name" content="CMU 15-445/645" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Project #0 - C++ Primer - CMU 15-445/645 :: Intro to Database Systems (Fall 2025)"/>
+    <meta property="og:url" content="https://15445.courses.cs.cmu.edu/fall2025/project0/index.html"/>
+    <meta property="article:published_time" content="2025-08-26" />
+    <meta property="og:description" content="Do not post your project on a public Github repository. Overview All the programming projects this semester will be written on the BusTub database management system. This system is written in C++. To make sure that you have the necessary C++ background, you must complete a simple programming assignment to …" />
+        <meta property="og:image"
+              content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+
+    <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@CMUDB">
+        <meta name="twitter:creator" content="@CMUDB">
+    <meta name="twitter:domain" content="https://15445.courses.cs.cmu.edu/fall2025">
+            <meta property="twitter:image"
+                  content="https://15445.courses.cs.cmu.edu/fall2025/images/twitter-card.jpg"/>
+    <meta property="twitter:label1" content="Semester" />
+    <meta property="twitter:data1" content="Fall 2025" />
+        
+    
+<!--     <link href="https://db.cs.cmu.edu/favicon.png" rel="icon"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/apple-touch-icon.gif">
+    <link rel="icon" type="image/gif" sizes="32x32" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-32x32.gif">
+    <link rel="icon" type="image/gif" sizes="16x16" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/favicon-16x16.gif">
+    <link rel="manifest" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="https://15445.courses.cs.cmu.edu/fall2025/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#c41230">
+    <meta name="theme-color" content="#010000">
+
+
+    <title>Project #0 - C++ Primer | CMU 15-445/645 :: Intro to Database Systems (Fall 2025) </title>
+</head>
+
+<body class="min-vh-100 d-flex flex-column h-100">
+    <!-- BEGIN: header -->
+<header>
+  <nav class="navbar fixed-top navbar-expand-lg bg-black navbar-dark" aria-label="Navigation Menu">
+    <div class="container">
+      <a class="navbar-brand" onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025" title="CMU 15-445/645"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmudb-icon-white.svg" width="24"> CMU 15-445/645</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav me-auto mb-0 text-uppercase">
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/assignments.html">Assignments</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/faq.html">FAQ</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/schedule.html">Schedule</a>
+              </li>
+              <li class="nav-item px-xl-4 px-lg-1">
+                <a class="nav-link " onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2025/syllabus.html">Syllabus</a>
+              </li>
+        </ul>
+
+        <ul class="navbar-nav ms-auto mb-0 text-uppercase">
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Youtube" onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/playlist?list=PLSE8ODhjZXjYMAgsGH-GtY5rJYZ6zjsd5" target="_yt"><i class="fab fa-youtube"></i> Youtube</a>
+          <li class="nav-item px-xl-l"> <a class="nav-link" title="Piazza" onclick="javascript:ga('send', 'pageview', '/outgoing/piazza.com');" href="https://piazza.com/cmu/fall2025/15445645" target="_pz"><i class="fas fa-comments"></i> Piazza</a>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>    <!-- END: header -->
+
+    <main class="flex-shrink-0 page">
+        <!-- BEGIN: banner -->
+<!-- Empty space -->
+<!--<div class="container mt-5">
+    <div class="row">
+    </div>
+</div>-->
+        <!-- END: banner -->
+        <!-- BEGIN: main -->
+        <div class="container main-content rounded-5 mb-0 mb-lg-5 mt-0 mt-sm-3 mt-md-4 mt-lg-5 py-3 py-md-5 px-md-5 shadow-sm bg-light content">
+<h1 class="page-header mb-3 mb-md-4"><i class="fas fa-database"></i> <span class="text-uppercase">Project #0 - C++ Primer</span>
+    <span class="fw-normal fs-6 float-end mt-2 text-muted published d-none d-lg-inline" style="font-family: sans; letter-spacing: normal; text-shadow: none;">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-08-26 11:45:45.171617-04:00">Last Updated: Aug 26, 2025</time>
+    </span>
+</h1>
+<div class="row pb-3 d-block d-lg-none">
+    <div class="col-12 text-start text-muted published">
+        <i class="fa fa-calendar"></i>
+        <time datetime="2025-08-26 11:45:45.171617-04:00">Last Updated: Aug 26, 2025</time>
+    </div>
+</div>
+<p class="warning bg-danger text-white p-2 rounded fw-bold">
+    <i class="trigger fa fa-exclamation-triangle fa-lg p-1 pe-lg-2"></i>
+    Do <u>not</u> post your project on a public Github repository.
+</p>
+
+<!-- ========================================================================= -->
+<!-- OVERVIEW                                                                  -->
+<!-- ========================================================================= -->
+
+<h1 id="overview">Overview</h1>
+<p>All the programming projects this semester will be written on the <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub">BusTub</a> database management system. This system is written in C++. To make sure that you have the necessary C++ background, you must complete a simple programming assignment to assess your knowledge of basic C++ features. You will not be given a grade for this project, but you <b>must complete the project with a perfect score</b> before being allowed to proceed in the course. Any student unable to complete this assignment before the deadline will be asked to drop the course.</p>
+<p>All of the code in this programming assignment must be written in C++. The projects will be specifically written for C++17, but we have found that it is generally sufficient to know C++11. If you have not used C++ before, here are some resources to help: </p>
+<ul>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/15445-bootcamp">15-445 Bootcamp</a>, which contains several small examples to
+  get you familiar with C++11 features.</li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.learncpp.com');" href="https://www.learncpp.com/">Learncpp</a> is a useful resource that includes quizzes to test your knowledge. </li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/en.cppreference.com');" href="https://en.cppreference.com/w/">cppreference</a> has more detailed documentation of language internals.</li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/cmu.primo.exlibrisgroup.com');" href="https://cmu.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991019600108604436&amp;context=L&amp;vid=01CMU_INST:01CMU&amp;search_scope=MyInst_and_CI&amp;isFrbr=true&amp;tab=Everything&amp;lang=en">A Tour of C++</a> and <a onclick="javascript:ga('send', 'pageview', '/outgoing/cmu.primo.exlibrisgroup.com');" href="https://cmu.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991019578256104436&amp;context=L&amp;vid=01CMU_INST:01CMU&amp;search_scope=MyInst_and_CI&amp;tab=Everything&amp;lang=en">Effective Modern C++</a> are also digitally available from the CMU library.</li>
+</ul>
+<p>If you are using VSCode, we recommend you to install <a onclick="javascript:ga('send', 'pageview', '/outgoing/marketplace.visualstudio.com');" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools">CMake Tools</a>, <a onclick="javascript:ga('send', 'pageview', '/outgoing/marketplace.visualstudio.com');" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack">C/C++ Extension Pack</a> and <a onclick="javascript:ga('send', 'pageview', '/outgoing/marketplace.visualstudio.com');" href="https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd">clangd</a>. After that, follow this tutorial to learn how to use the visual debugger in VSCode: <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=G9gnSGKYIg4">Debug a C++ project in VS Code</a>.</p>
+<p>If you are using CLion, we recommend you to follow this tutorial: <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=5wGsRdumueU">CLion Debugger Fundamentals</a>.</p>
+<p>If you prefer to use <code>gdb</code> for debugging, there are many tutorials available to teach you how to use <code>gdb</code>. Here are some that we have found useful:</p>
+<ul>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.cs.cmu.edu');" href="https://www.cs.cmu.edu/~gilpin/tutorial/">Debugging Under Unix: gdb Tutorial</a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.techbeamers.com');" href="http://www.techbeamers.com/how-to-use-gdb-top-debugging-tips/">GDB Tutorial: Advanced Debugging Tips For C/C++ Programmers</a></li>
+<li><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=PorfLSr3DDI">Give me 15 minutes &amp; I'll change your view of GDB</a> [VIDEO]</li>
+</ul>
+<p>This is a single-person project that will be completed individually (i.e. no groups).</p>
+<!-- START project0 -->
+<!-- AUTO-GENERATED BY GENERATE-SCHEDULE SCRIPT -->
+<!-- ANY MODIFICATIONS WILL BE OVERWRITTEN -->
+<ul>
+<li><b>Release Date:</b> Aug 25, 2025</li>
+<li><b>Due Date:</b> Sep 07, 2025 @ 11:59pm</li>
+</ul>
+<!-- END project0 -->
+
+<!-- ========================================================================= -->
+<!-- PROJECT SPECIFICATION                                                     -->
+<!-- ========================================================================= -->
+
+<h1 id="project-specification">Project Specification</h1>
+<p>Consider the following scenario: you are the administrator of a popular blog website, and you've been receiving reports on certain accounting spamming excessively. To map out overall network usage and detect potential DDoS attacks, you want a real-time approach to count how often each IP address appears in the incoming request stream. However, the stream is huge, which makes traditional data structures either too slow or too memory-hungry. This is where the <b>Count–Min Sketch</b> comes in!</p>
+<p><a onclick="javascript:ga('send', 'pageview', '/outgoing/en.wikipedia.org');" href="https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch">Count-min sketch</a> (CM Sketch) is a <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.wikipedia.org');" href="https://en.wikipedia.org/wiki/Randomized_algorithm">probablistic</a> data structure that approximates frequency counts of items in a stream using sublinear memory. It maintains a compact 2-dimensional array of counters addressed by d independently seeded hash functions. Each update increments one cell per row, and a query returns the minimum of those counters. Moreover, count-min sketch is mergeable, meaning that the sum of two sketches is equivalent to constructing a single sketch over the concatenation of the corresponding input streams. Count-min sketch is widely used for network traffic monitoring, streaming analytics, and database system optimization.</p>
+<p>Count-min sktech is based on the following parameters:</p>
+<ul>
+<li><code>width (w)</code> – Number of columns in the hash matrix; each hash maps an item to an index in [0, w-1]. Larger w ⇒ smaller additive error.</li>
+<li><code>depth (d)</code> – Number of rows / independent hash functions. Larger d ⇒ lower probability of a bad overestimate.</li>
+<li><code>hash family / seeds</code> – A way to derive d pairwise-independent hash functions (e.g., by seeding a base hash differently for each row).</li>
+</ul>
+<p>To explain how this data structure functions, let follow the example at the beginning and consider the following input stream: <code>["24.156.99.202", "172.217.22.14", "64.104.78.227", "24.156.99.202"]</code>. Let's use a count-min sketch with width 4 and depth 3. For each of the 3 rows, hash the string (using that row’s seed) to produce an integer, reduce it modulo 4 to get a column index, and increment the counter at (row, column).</p>
+<p>First, initialize the hash matrix (3 rows × 4 columns) with all zeros:</p>
+<div class="codehilite"><pre class="shadow-sm p-2"><span></span><code><span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span>
+</code></pre></div>
+
+<p>Now process the stream. We first insert "24.156.99.202". Assume the following hash positions (mod 4):</p>
+<ul>
+<li>hash1 → 2</li>
+<li>hash2 → 0</li>
+<li>hash3 → 3</li>
+</ul>
+<p>We update the cells accordingly:</p>
+<div class="codehilite"><pre class="shadow-sm p-2"><span></span><code><span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">1</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">1</span>
+</code></pre></div>
+
+<p>Next, we insert "172.217.22.14" and increment counters at the hash positions below:</p>
+<ul>
+<li>hash1 → 1</li>
+<li>hash2 → 0    (collision with the first item in row 1)</li>
+<li>hash3 → 2</li>
+</ul>
+<p>Update:</p>
+<div class="codehilite"><pre class="shadow-sm p-2"><span></span><code><span class="mf">0</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">2</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">1</span>
+</code></pre></div>
+
+<p>Now we insert "64.104.78.227":</p>
+<ul>
+<li>hash1 → 3</li>
+<li>hash2 → 1</li>
+<li>hash3 → 2    (collision with the second item in row 3)</li>
+</ul>
+<p>The table becomes:</p>
+<div class="codehilite"><pre class="shadow-sm p-2"><span></span><code><span class="mf">0</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">1</span>
+<span class="mf">2</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="mf">1</span>
+</code></pre></div>
+
+<p>Finally, repeat "24.156.99.202" (same hash positions as before: 2, 0, 3). Increment those cells again:</p>
+<div class="codehilite"><pre class="shadow-sm p-2"><span></span><code><span class="mf">0</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="mf">1</span>
+<span class="mf">3</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">0</span>
+<span class="mf">0</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="mf">2</span>
+</code></pre></div>
+
+<p>Now, let's estimate the frequency of "24.156.99.202". Let's look up the same columns used when inserting that key:</p>
+<ul>
+<li>Row 0, col 2 → <strong>2</strong></li>
+<li>Row 1, col 0 → <strong>3</strong></li>
+<li>Row 2, col 3 → <strong>2</strong></li>
+</ul>
+<p>The estimate is the minimum across rows:</p>
+<div class="codehilite"><pre class="shadow-sm p-2"><span></span><code>Estimate(&quot;24.156.99.202&quot;) = min(2, 3, 2) = 2
+</code></pre></div>
+
+<p>Why take the minimum? Each row’s counter can be inflated by collisions with other items, but the minimum across independent hash rows gives the tightest upper bound on the true frequency.</p>
+<h3 id="resources">Resources</h3>
+<p>To understand more about Count-min sketch and why they work,</p>
+<ul>
+<li>A <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.youtube.com');" href="https://www.youtube.com/watch?v=mPxslXpg8wA">visual walkthrough</a> illustrating the inner workings of the count-min sketch.</li>
+<li>A <a onclick="javascript:ga('send', 'pageview', '/outgoing/youtu.be');" href="https://youtu.be/IgyU0iFIoqM?t=515">comprehensive overview</a> of count-min sketch and its practical applications (the full video also covers Bloom Filter and HyperLogLog, two other widely applied data structures for large-scale data processing).</li>
+<li>A concise <a onclick="javascript:ga('send', 'pageview', '/downloads/cs286/papers/countmin-latin2004.pdf');" href="https://dsf.berkeley.edu/cs286/papers/countmin-latin2004.pdf">paper</a> analyzing the time and space bounds of the data structure.</li>
+</ul>
+<!-- **************************************************** -->
+<!-- Task # Count-min Sketch                                  -->
+<!-- **************************************************** -->
+<!-- <h2 id="task1">Task # - Implementing Count-min Sketch</h2> -->
+
+<!-- ========================================================================= -->
+<!-- INSTRUCTIONS                                                              -->
+<!-- ========================================================================= -->
+<h1 id="instructions">Instructions</h1>
+<p>You will have to complete the following task for this project:</p>
+<!-- **************************************************** -->
+<!-- Task # Count-min Sketch                                  -->
+<!-- **************************************************** -->
+<h2 id="task1">Task #1</h2>
+
+<p>Implement a basic Count-min sktech data structure supporting insertion, count estimation, and merging.</p>
+<p>In <code>count_min_sketch.h</code>, following functions are to be implemented:</p>
+<ul>
+<li><code>CountMinSketch(width, depth)</code>: constructor, creates a count-min sketch with <code>width</code> columns (buckets) and <code>depth</code> rows (hash functions).</li>
+<li><code>CountMinSketch(&amp;&amp;other)</code>: move constructor, transfers ownership of sketch resources from another instance.</li>
+<li><code>operator=(&amp;&amp;other)</code>: move assignment, moves sketch resources from another instance to this one.</li>
+<li><code>Insert(item)</code>: inserts the specified item into the count-min sketch. <strong>this is expected to be thread-safe</strong></li>
+<li><code>Count(&amp;item)</code>: returns the estimated frequency of the item.</li>
+<li><code>Clear()</code>: resets the data structure from previous streams.</li>
+<li><code>Merge(&amp;other)</code>: creates a new sketch by combining counter values from two compatible sketches.</li>
+<li><code>TopK(k, &amp;candidates)</code>: practical usage of count-min sketch--given the <code>candidates</code> that have been stored in the count-min sktech, return the <code>k</code> candidates with the most estimated counts.</li>
+</ul>
+<p>Feel free to design your helper functions to assist with the implementation.</p>
+<h2 id="important">Important Information</h2>
+
+<ul>
+<li>
+<p>For constructing hash functions for the matrix, please use the seeded hash function <code>"common/util/hash_util.h"</code> from the bustub repository. <b>Please refrain from using hash functions from external libraries or implementing your own, since this might influence whether you pass the test suite we provide!</b></p>
+</li>
+<li>
+<p>The test suite includes parallel tests. However, <strong>we ONLY expect thread-safe implementation for <code>Insert(item)</code></strong>. In other words, your implementation must correctly handle scenarios where multiple threads simultaneously perform insertions into multiple count-min sketches.</p>
+</li>
+<li>
+<p>You may notice the last test compares the performance of your implementation for <code>Insert(item)</code> against one that is strictly sequential. <strong>You could only pass this test if the relative speedup of your implementation is larger than <code>1.2</code>. We expect you NOT to use only a single global latch to guard the whole data structure.</strong> If you do so, the contention ratio will be effectively around <code>1.0</code>. There are many ways to do this. As a hint, try thinking of ways to break down the latch granularity or, even better, not to use a latch at all (you may find <a onclick="javascript:ga('send', 'pageview', '/outgoing/en.cppreference.com');" href="https://en.cppreference.com/w/cpp/atomic/atomic/compare_exchange.html">compare_exchange</a> helpful if you aim for the latter). If you find this difficult to reason about, try passing other tests with a global latch first before attempting to optimize for this one. </p>
+</li>
+</ul>
+<h2 id="creating-your-own-project-repository">Creating Your Own Project Repository</h2>
+<p>If the below <code>git</code> concepts (e.g., repository, merge, pull, fork) do not make sense to you, please spend some time <a onclick="javascript:ga('send', 'pageview', '/outgoing/guides.github.com');" href="https://guides.github.com/introduction/git-handbook/">learning git</a> first.</p>
+<p>Follow the <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub#cloning-this-repository">instructions</a> to setup your own PRIVATE repository and your own development branch. If you have previuosly forked the repository through the GitHub UI (by clicking Fork), PLEASE DO NOT PUSH ANY CODE TO YOUR PUBLIC FORKED REPOSITORY! Make sure your repository is PRIVATE before you <code>git push</code> any of your code.</p>
+<p>If the instructor makes any changes to the code, you can merge the changes to your code by keeping your private repository connected to the CMU-DB master repository. Execute the following commands to add a remote source:</p>
+<pre class="shadow-sm p-2">
+$ git remote add public https://github.com/cmu-db/bustub.git
+</pre>
+
+<p>You can then pull down the latest changes as needed during the semester:</p>
+<pre class="shadow-sm p-2">
+$ git fetch public
+$ git merge public/master
+</pre>
+
+<h2 id="setting-up-your-development-environment">Setting Up Your Development Environment</h2>
+<p>First install the packages that BusTub requires:</p>
+<pre class="shadow-sm p-2">
+# Linux
+$ sudo build_support/packages.sh
+# macOS
+$ build_support/packages.sh
+</pre>
+
+<p>See the <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/cmu-db/bustub/blob/master/README.md">README</a> for additional information on how to setup different OS environments.</p>
+<p>To build the system from the commandline, execute the following commands:</p>
+<pre class="shadow-sm p-2">
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_BUILD_TYPE=Debug ..
+$ make -j`nproc`
+</pre>
+
+<p>We recommend always configuring CMake in debug mode. This will enable you to output debug messages and check for memory leaks (more on this in below sections).</p>
+<h2 id="testing">Testing</h2>
+<p>You can test the individual components of this assignment using our testing framework. We use <a onclick="javascript:ga('send', 'pageview', '/outgoing/github.com');" href="https://github.com/google/googletest">GTest</a> for unit test cases. You can disable tests in GTest by adding a <code>DISABLED_</code> prefix to the test name. To run the tests from the command-line:</p>
+<pre class="shadow-sm p-2">
+$ cd build
+$ make -j$(nproc) count_min_sketch_test
+$ ./test/count_min_sketch_test
+</pre>
+
+<p>In this project, there are no hidden tests. In the future, the provided tests in the starter code are only a subset of the all the tests that we will use to evaluate and grade your project. You should write additional test cases on your own to check the complete functionality of your implementation.</p>
+<p class="bg-danger text-white p-2 rounded">
+    <i class="trigger fa fa-question-circle fa-lg"></i>
+    Make sure that you remove the <tt>DISABLED_</tt> prefix from the test names otherwise they will <u><b>not</b></u> run!
+</p>
+
+<h2 id="formatting">Formatting</h2>
+<p>Your code must follow the <a onclick="javascript:ga('send', 'pageview', '/outgoing/google.github.io');" href="https://google.github.io/styleguide/cppguide.html">Google C++ Style Guide</a>. We use <a onclick="javascript:ga('send', 'pageview', '/outgoing/clang.llvm.org');" href="https://clang.llvm.org/">Clang</a> to automatically check the quality of your source code. Your project grade will be <u><b>zero</b></u> if your submission fails any of these checks.</p>
+<p>Execute the following commands to check your syntax. The <code>format</code> target will automatically correct your code. The <code>check-lint</code> and <code>check-clang-tidy</code> targets will print errors that you must manually fix to conform to our style guide.</p>
+<pre class="shadow-sm p-2">
+$ make format
+$ make check-clang-tidy-p0
+</pre>
+
+<h2 id="memory-leaks">Memory Leaks</h2>
+<p>For this project, we use <a onclick="javascript:ga('send', 'pageview', '/outgoing/clang.llvm.org');" href="https://clang.llvm.org/docs/AddressSanitizer.html">LLVM Address Sanitizer (ASAN) and Leak Sanitizer (LSAN)</a> to check for memory errors. To enable ASAN and LSAN, configure CMake in debug mode and run tests as you normally would. If there is memory error, you will see a memory error report. Note that macOS <strong>only supports address sanitizer without leak sanitizer</strong>.</p>
+<p>In some cases, address sanitizer might affect the usability of the debugger. In this case, you might need to disable all sanitizers by configuring the CMake project with:</p>
+<pre class="shadow-sm p-2">
+$ cmake -DCMAKE_BUILD_TYPE=Debug -DBUSTUB_SANITIZER= ..
+</pre>
+
+<h2 id="development-hints">Development Hints</h2>
+<p>You can use <code>BUSTUB_ASSERT</code> for assertions in debug mode. Note that the statements within <code>BUSTUB_ASSERT</code> will NOT be executed in release mode.
+If you have something to assert in all cases, use <code>BUSTUB_ENSURE</code> instead.</p>
+<p>We will test your implementation in release mode. To compile your solution in release mode,</p>
+<pre class="shadow-sm p-2">
+$ mkdir build_rel && cd build_rel
+$ cmake -DCMAKE_BUILD_TYPE=Release ..
+</pre>
+
+<p class="bg-danger text-white p-2 rounded">
+    <i class="trigger fa fa-question-circle fa-lg"></i>
+    Post all of your questions about this project on Piazza.
+    Do <u><b>not</b></u> email the TAs directly with questions.
+</p>
+
+<p class="bg-danger text-white p-2 rounded">
+    <i class="trigger fa fa-question-circle fa-lg"></i>
+    TAs will <u><b>not</b></u> look into your code or help you debug in this project.
+</p>
+
+<!--<p class="warning bg-info">
+    <i class="trigger fa fa-question-circle fa-lg"></i>
+    The instructor and TAs will <b><u>not</u></b> teach you how to debug your code.
+</p>-->
+
+<!-- ========================================================================= -->
+<!-- GRADING RUBRIC                                                            -->
+<!-- ========================================================================= -->
+<h1 id="grading">Grading Rubric</h1>
+
+<p>In order to pass this project, you must ensure your code follows the following guidelines:</p>
+<ol class="default">
+    <li> Does the submission successfully execute all of the test cases and produce the correct answer?
+    <li> Does the submission execute without any memory leaks?
+    <li> Does the submission follow the code formatting and style policies?
+</ol>
+
+<p>Note that we will use additional test cases to grade your submission that are more complex than the sample test cases that we provide you
+in future projects.</p>
+<!-- ========================================================================= -->
+<!-- LATE POLICY                                                               -->
+<!-- ========================================================================= -->
+<h1 id="submission">Late Policy</h1>
+
+<p>There are no late days for this project.</p>
+<!-- ========================================================================= -->
+<!-- SUBMISSION                                                                -->
+<!-- ========================================================================= -->
+<h1 id="submission">Submission</h1>
+
+<p>You will submit your implementation to Gradescope:</p>
+<ul>
+<li><b><a onclick="javascript:ga('send', 'pageview', '/outgoing/www.gradescope.com');" href="https://www.gradescope.com/courses/1074751">https://www.gradescope.com/courses/1074751</a></b></li>
+</ul>
+<p>Run this command in <code>build</code> directory and it will create a <code>zip</code> archive called <code>project0-submission.zip</code> that you can submit to Gradescope.</p>
+<pre class="shadow-sm p-2">
+$ make submit-p0
+</pre>
+
+<p>Although you are allowed submit your answers as many times as you like, you should <u><b>not</b></u> treat Gradescope as your only debugging tool. Most students submit their projects near the deadline, and thus Gradescope will take longer to process the requests. You may not get feedback in a timely manner to help you debug problems. Furthermore, the output from Gradescope is unlikely to be as informative as the output from a debugger (like <code>gdb</code>), provided you invest some time in learning to use it.</p>
+<p class="bg-danger text-white p-2 rounded">
+    <i class="trigger fa fa-question-circle fa-lg"></i>
+    CMU students should use the Gradescope course code announced on Piazza.
+</p>
+
+<!-- ========================================================================= -->
+<!-- COLLABORATION POLICY                                                      -->
+<!-- ========================================================================= -->
+
+<h1 id="collaboration-policy">Collaboration Policy</h1>
+<ul>
+<li>Every student must work individually on this assignment.</li>
+<li>Students are allowed to discuss high-level details about the project with others.</li>
+<li>Students are <strong>not</strong> allowed to copy the contents of a white-board after a group meeting with other students.</li>
+<li>Students are <strong>not</strong> allowed to copy solutions from another person.</li>
+<li>Students are allowed to use generative AI to help with development but they are ultimately responsible for their work.</li>
+</ul>
+<p class="bg-danger text-white p-2 rounded">
+    <i class="trigger fa fa-exclamation-triangle fa-lg"></i>
+    <b>WARNING:</b> All of the code for this project must be your own. You may not copy source code from other students or other sources that you find on the web. Plagiarism <b>will not</b> be tolerated. See CMU's <a onclick="javascript:ga('send', 'pageview', '/outgoing/www.cmu.edu');" href="https://www.cmu.edu/policies/student-and-student-life/academic-integrity.html">Policy on Academic Integrity</a> for additional information.
+</p>
+        </div>
+        <!-- END: main -->
+    </main>
+
+<!-- Footer -->
+<footer class="footer mt-auto bg-black">
+  <div class="container">
+    <div class="row pt-3 pb-2">
+      <div class="col-4 my-auto">
+        <a onclick="javascript:ga('send', 'pageview', '/outgoing/db.cs.cmu.edu');" href="https://db.cs.cmu.edu" title="Carnegie Mellon Database Group"><img src="https://15445.courses.cs.cmu.edu/fall2025/images/cmu-db-group.svg" class="cmudb-logo" /></a>
+      </div>
+      <div class="col-8 float-end">
+
+            <div class="dropdown float-end justify-content-end">
+              <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-book"></i> Archives
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                    <li class=""> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2025/" class="dropdown-item" target="_archive1" title="View Previous Course Website">Spring 2025 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2024/" class="dropdown-item" target="_archive2" title="View Previous Course Website">Fall 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2024/" class="dropdown-item" target="_archive3" title="View Previous Course Website">Spring 2024 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2023/" class="dropdown-item" target="_archive4" title="View Previous Course Website">Fall 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/spring2023/" class="dropdown-item" target="_archive5" title="View Previous Course Website">Spring 2023 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2022/" class="dropdown-item" target="_archive6" title="View Previous Course Website">Fall 2022 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2021/" class="dropdown-item" target="_archive7" title="View Previous Course Website">Fall 2021 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2020/" class="dropdown-item" target="_archive8" title="View Previous Course Website">Fall 2020 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2019/" class="dropdown-item" target="_archive9" title="View Previous Course Website">Fall 2019 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2018/" class="dropdown-item" target="_archive10" title="View Previous Course Website">Fall 2018 <i class="fa fa-external-link"></i></a>
+                    <li class="border-top"> <a onclick="javascript:ga('send', 'pageview', '/outgoing/15445.courses.cs.cmu.edu');" href="https://15445.courses.cs.cmu.edu/fall2017/" class="dropdown-item" target="_archive11" title="View Previous Course Website">Fall 2017 <i class="fa fa-external-link"></i></a>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+</footer>    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6CTRQK4NY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', 'G-T6CTRQK4NY');
+    </script>
+    <!-- End Google Analytics Code -->
+
+<!--     <script src="js/bootstrap.bundle.min.js"></script> -->
+
+<!--     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
