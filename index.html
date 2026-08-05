@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CMU 15-445 中文课程内容阅读站">
+  <meta name="color-scheme" content="light dark">
+  <title>CMU 15-445 中文学习站</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="返回首页">
+      <span class="brand-mark">DB</span>
+      <span>
+        <strong>CMU 15-445</strong>
+        <small>中文学习站</small>
+      </span>
+    </a>
+
+    <div class="header-actions">
+      <label class="search" for="search-input">
+        <span class="sr-only">搜索课程内容</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+        <input id="search-input" type="search" placeholder="搜索标题…" autocomplete="off">
+      </label>
+      <button id="theme-toggle" class="icon-button" type="button" aria-label="切换深浅色主题" title="切换主题">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.42-.03-.83-.08-1.23A7 7 0 0 1 13.23 3.08C12.83 3.03 12.42 3 12 3Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="课程目录">
+      <div class="sidebar-heading">
+        <span>课程内容</span>
+        <span id="article-count" class="count">0</span>
+      </div>
+      <nav id="course-nav" class="course-nav"></nav>
+    </aside>
+
+    <main id="reader" class="reader" tabindex="-1">
+      <section id="empty-state" class="empty-state" aria-live="polite">
+        <div class="empty-icon" aria-hidden="true">∅</div>
+        <h1>暂无可发布的课程内容</h1>
+        <p>当前压缩包中未检测到 Markdown、图片或其他课程正文，因此这里没有擅自补充任何内容。</p>
+        <p class="muted">阅读站框架已经就绪。</p>
+      </section>
+      <article id="article" class="article" hidden></article>
+    </main>
+  </div>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
